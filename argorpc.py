@@ -3,7 +3,7 @@ from urllib import urlencode, urlopen
 
 ARGO_PREFIX = 'http://localhost:1996/bbsapi/'
 
-def argo_http(api, param=None, session=None):
+def argo_http(api, param=None, session=None, fromhost=None):
 
     '''Make a http post request of `ARGO_PREFIX`
 
@@ -17,6 +17,8 @@ def argo_http(api, param=None, session=None):
         args = {}
     if param :
         args.update(param)
+    if fromhost :
+        args['fromhost'] = fromhost
 
     # parase data
     text = urlopen(
@@ -30,10 +32,11 @@ def argo_http(api, param=None, session=None):
 
 class ArgoRPCClicent :
 
-    def __init__(self, session=None):
+    def __init__(self, session=None, fromhost=None):
         if session is None:
             session = {}
         self._session = session
+        self._fromhost = fromhost
 
 all_api = [
     'test',
@@ -53,7 +56,8 @@ for _api in all_api :
     def closure():
         api = _api
         def inner(self, **param):
-            return argo_http(api, param, session=self._session)
+            return argo_http(api, param, session=self._session,
+                             fromhost=self._fromhost)
         inner.func_name = api
         ArgoRPCClicent.__dict__[api] = inner
     closure()
