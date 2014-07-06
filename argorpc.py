@@ -1,7 +1,9 @@
 from json import loads as json_parse
 from urllib import urlencode, urlopen
+from codecs import open as csopen
 
 ARGO_PREFIX = 'http://localhost:1996/bbsapi/'
+ROOT_FMT = '/home/bbs/bbs_home/%s'
 
 def argo_http(api, param=None, session=None, fromhost=None):
 
@@ -37,6 +39,10 @@ class ArgoRPCClicent :
             session = {}
         self._session = session
         self._fromhost = fromhost
+
+def read_bbsfile(path):
+    return csopen(ROOT_FMT % path,
+                  encoding="gbk", errors='ignore').read(20000)
 
 all_api = [
     'test',
