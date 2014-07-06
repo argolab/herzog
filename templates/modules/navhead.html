@@ -1,0 +1,24 @@
+<div class="navhead {% if navhead_img %}navhead1{% endif %}"
+  {% if navhead_img %}
+  <img class="navhead-img" src="{{navhead_img}}" title="{{navhead_title}}"/>
+  {% endif %}
+  <div class="navhead-tabs">
+    <ul>
+      {% for urlname, params, title, text in site.navhead %}
+      <li{% if url_for(urlname, **params) == current_url %}
+            class="current"{% endif %}>
+        <a href="{{url_for(urlname, **params)}}" title="{{title}}">
+          {{text}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="navhead-dropdown-group">
+    <button class="navhead-dropdown-btn">看版导航</button>
+    <div class="navhead-dropdown">
+    </div>
+  </div>
+</div>
+      
+  
+  

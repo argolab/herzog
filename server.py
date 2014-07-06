@@ -7,6 +7,13 @@ import config
 
 app = Flask(__name__)
 
+def _j(name):
+    return json.load(open('devdata/%s.json' % name))
+
+@app.context_processor
+def inject_site_config():
+    return dict(site=config.site, user=_j('user'))
+
 def get_client():
     if not hasattr(g, 'cc'):
         g.cc = argorpc.ArgoRPCClicent(session,
@@ -15,16 +22,16 @@ def get_client():
 
 @app.template_filter('postHtml')
 def post_html(text):
-    return text.replace('\n', '<br>')    
+    return text.replace('\n', '<br>')
 
 @app.route('/')
-def index():
-    return render_template('fresh.html', **json.load(open('devdata/fresh.json')))
+def fresh():
+    return render_template('fresh.html', **_j('fresh'))
 
 @app.route('/v/topten')
 def topten():
     return render_template('topten.html',
-                           **json.load(open('devdata/topten.json')))
+                           **_j('topten'))
 
 @app.route('/b/<boardname>')
 def board(boardname):
@@ -33,7 +40,7 @@ def board(boardname):
 @app.route('/r/<int:topicid>')
 def topic(topicid):
     return render_template('topic.html',
-                           **json.load(open('devdata/topic.json')))
+                           **_j('topic'))
 
 @app.route('/u/<userid>')
 def user(userid):
