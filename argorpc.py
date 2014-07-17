@@ -5,6 +5,8 @@ from codecs import open as csopen
 ARGO_PREFIX = 'http://localhost:1996/bbsapi/'
 ROOT_FMT = '/home/bbs/bbs_home/%s'
 
+_HOME_FMT = ROOT_FMT % 'home/%s/%s/%s'
+
 def argo_http(api, param=None, session=None, fromhost=None):
 
     '''Make a http post request of `ARGO_PREFIX`
@@ -40,9 +42,13 @@ class ArgoRPCClicent :
         self._session = session
         self._fromhost = fromhost
 
-def read_bbsfile(path):
+def getbbsfile(path):
     return csopen(ROOT_FMT % path,
-                  encoding="gbk", errors='ignore').read(20000)
+                  encoding="gbk", errors='ignore')
+
+def getuserfile(userid, filename):
+    return csopen(_HOME_FMT % (userid[0].upper(), userid, filename),
+                  encoding='gbk', errors='ignore')
 
 all_api = [
     'test',
