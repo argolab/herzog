@@ -1,13 +1,60 @@
-from app import app
+from app import (
+    app, request, render_template,
+    jsonify, getclient, getuserfile,
+    json, session
+)
 
-@app.route('/login')
+@app.route('/ajax/login', methods=["POST"])
 def login():
-    return render_template('login.html')
+    userid = request.form.get('userid', None)
+    password = request.form.get('password', None)
+    if not userid or not password :
+        return jsonify(error=1, msg="Need userid, password param")
+    cli = getclient()
+    ret = cli.do_login(id=userid, pw=password)
+    if ret.get('success') :
+        return jsonify(success=1, msg='Login success.')
+    else :
+        return jsonify(ret)
 
-@app.route('/t/logout', methods=['POST'])
+@app.route('/ajax/logout', methods=['POST'])
 def logout():
-    return 1
-    
-@app.route('/t/setting')
+    ret = getclient().do_logout()
+    if ret.get('success') :
+        session.clear()
+        return jsonify(ret)
+    return jsonify(ret)
+
+@app.route('/ajax/setting', methods=["POST"])
 def setting():
-    return 1
+    if not session.get('utmpuserid') :
+        return jsonify(error=1, msg="No login")
+    userid = session.get('utmpuserid')
+
+    if request.form.get('!clear!') :
+        getuserfile(userid, 'setting.json', mode='w').write('{}')
+        return jsonify(success=1, error='clear setting success!')
+    
+    try :
+        data = json.load(getuserfile(userid, 'setting.json', 'r'))
+    except :
+        data = {}
+
+    data.update(request.form)
+
+    ds = json.dumps(data)
+    if len(data) > 4096 :
+        return jsonify(error=1, msg="Save too many value to dict!")
+    getuserfile(userid, 'setting.json', 'w').write(ds)
+    return jsonify(success=1, msg='Update setting success!')
+
+def getusersetting():
+    # may by form is array ? (name:[key])
+    if not session.get('utmpuserid') :
+        return None
+    try :
+        return json.load(getuserfile(session.get('utmpuserid'),
+                                     'setting.json'))
+    except IOError :
+        return {}
+        

@@ -1,14 +1,14 @@
 <div class="topbar">
-  <div class="topbar-box">
+  <div class="container">
     {% if user %}
     <div class="left">
       通知(<span class="notification{% if user.num_n %} hasnew{% endif %}">
-        {{-user.num_n|default(0)-}}</span>),
+        {{-user.num_n|default(0)-}}</span>) <span class="gap"> </span>
       站内信(<span class="mail{% if user.num_mail %} hasnew{% endif %}">
-        {{-user.num_mail|default(0)-}}</span>) |
+        {{-user.num_mail|default(0)-}}</span>) <span class="seq"></span>
       <a href="{{url_for('user', userid=user.userid)}}"
-         title="到 {{user.userid}} 的个人首页">
-        {{user.userid}}</a>, 此刻我们在此相聚
+         title="到 {{user.userid}} 的个人首页" class="topbar-userid">
+        {{user.userid}}</a> , 此刻我们在此相聚
     </div>
     <div class="right">
       <ul class="linklist">

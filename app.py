@@ -8,7 +8,6 @@ from flask import (
     render_template,
     flash,
     session,
-    g,
     jsonify
 )
 import json

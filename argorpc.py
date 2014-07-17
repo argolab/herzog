@@ -42,25 +42,25 @@ class ArgoRPCClicent :
         self._session = session
         self._fromhost = fromhost
 
-def getbbsfile(path):
-    return csopen(ROOT_FMT % path,
+def getbbsfile(path, mode='r'):
+    return csopen(ROOT_FMT % path, mode=mode,
                   encoding="gbk", errors='ignore')
 
-def getuserfile(userid, filename):
+def getuserfile(userid, filename, mode='r'):
     return csopen(_HOME_FMT % (userid[0].upper(), userid, filename),
-                  encoding='gbk', errors='ignore')
+                  mode=mode, encoding='gbk', errors='ignore')
 
 all_api = [
-    'test',
-    'do_test',
-    'do_login', 
+    'test',        
+    'do_test', 
+    'do_login',  #(id, pw) 
     'do_logout',
-    'utmpnum',
-    'queryuser',
-    'listmails',
-    'showmail',
-    'do_sendmail',
-    'do_delmail', 
+    'utmpnum',   #(id)
+    'queryuser', #(queryuser)
+    'listmails', #(start, lines)
+    'showmail',  #(start)
+    'do_sendmail', #(userid, title, backup, signature, usesignature, randomsig, yext, filenum)
+    'do_delmail', #(start, :filename)
 ]
 
 for _api in all_api :

@@ -2,4 +2,31 @@
 
 {% block doc %}
 {% include 'modules/navhead.html' %}
+<div class="fresh">
+  <h2 class="page-title">新鲜发言</h2>
+  {% for bs in boards %}
+  <div class="fresh-board">
+    <div class="fresh-boardname part-left">
+      在 {{ bs.boardtext }} 版有人说：
+    </div>
+    <ul id="board-{{bs.boardname}}" class="fresh-posts part-right">
+      {% for p in bs.posts %}
+      <li{% if loop.index >= 3 %} class="hidden"{% endif %}>
+        <a title="阅读 {{p.title}} " class="fresh-href"
+           href="{{url_for('topic', topicid=p.topicid)}}">
+          <span class="icon-p{{p.level}}{% if p.unread %}-u{% endif %}"></span>
+          <span class="fresh-title">{{p.title}}</span>
+          <span class="fresh-time">{{p.time}}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% if bs.posts|length > 3 %}
+    <a href="#" class="open-hidden" data-targetid="board-{{bs.boardname}}">
+      查看 {{bs.boardtext}} 版被折叠的话题
+    </a>
+    {% endif %}
+  </div>
+  {% endfor %}    
+</div>
 {% endblock %}
