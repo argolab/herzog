@@ -2,8 +2,8 @@ from json import loads as json_parse
 from urllib import urlencode, urlopen
 from codecs import open as csopen
 
-ARGO_PREFIX = 'http://localhost:1996/bbsapi/'
-ROOT_FMT = '/home/bbs/bbs_home/%s'
+ARGO_PREFIX = u'http://localhost:1996/bbsapi/'
+ROOT_FMT = u'/home/bbs/bbs_home/%s'
 
 _HOME_FMT = ROOT_FMT % 'home/%s/%s/%s'
 
@@ -57,10 +57,10 @@ all_api = [
     'do_logout',
     'utmpnum',   #(id)
     'queryuser', #(queryuser)
-    'listmails', #(start, lines)
+    'listmails', #(num, limit)
     'showmail',  #(start)
-    'do_sendmail', #(userid, title, backup, signature, usesignature, randomsig, yext, filenum)
-    'do_delmail', #(start, :filename)
+    'do_sendmail', #(userid, title, backup, signature, usesignature, randomsig, text, filenum)
+    'do_delmail', #(filenum, :filename)
 ]
 
 for _api in all_api :

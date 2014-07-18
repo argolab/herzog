@@ -4,11 +4,11 @@ herzog
 a fresh and green argobbs 
 
 ```
-[ ]mail.py:@app.route('/l/')
-[ ]mail.py:@app.route('/ajax/mail/send')
-[ ]mail.py:@app.route('/ajax/mail/reply')
-[ ]mail.py:@app.route('/ajax/mail/del')
-[ ]mail.py:@app.route('/ajax/mail/list')
+[1]mail.py:@app.route('/l/')
+[1]mail.py:@app.route('/ajax/mail/send')
+[1]mail.py:@app.route('/ajax/mail/reply')
+[1]mail.py:@app.route('/ajax/mail/del')
+[1]mail.py:@app.route('/ajax/mail/list')
 
 [ ]notice.py:@app.route('/n/')
 [ ]notice.py:@app.route('/ajax/notice/list')
@@ -33,6 +33,6 @@ a fresh and green argobbs
 [1]user.py:@app.route('/u/<userid>')
 
 [1]userself.py:@app.route('/login')
-[1]userself.py:@app.route('/t/logout', methods=['POST'])
+[1]userself.py:@app.route('/t/logout')
 [1]userself.py:@app.route('/t/setting')
 ```

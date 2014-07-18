@@ -1,0 +1,17 @@
+{% for m in mails %}
+<div>
+  time: {{m.date}} <br/>
+  sender: {{m.sender}} <br/>
+  filename: {{m.filename}} <br/>
+  num: {{m.num}} <br/>
+  title : {{m.title}} <br/>
+  <br/>
+</div>
+{% endfor %}
+nonext: {{ nonext }} <br/>
+noprev: {{ noprev }} <br/>
+page : {{ page }} <br/>
+perpage : {{ perpage }} <br/>
+pgtotal : {{ pgtotal }} <br/>
+total : {{ total }} <br/>
+
