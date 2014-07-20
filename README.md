@@ -20,6 +20,7 @@ a fresh and green argobbs
 [ ]topic.py:@app.route('/t/<int:tid>')
 [ ]topic.py:@app.route('/ajax/post/fresh')
 [ ]topic.py:@app.route('/ajax/post/list')
+[ ]topic.py:@app.route('/ajax/post/read')
 [ ]topic.py:@app.route('/ajax/post/new')
 [ ]topic.py:@app.route('/ajax/post/reply')
 [ ]topic.py:@app.route('/ajax/post/mark')

@@ -61,6 +61,7 @@ all_api = [
     'showmail',  #(start)
     'do_sendmail', #(userid, title, backup, signature, usesignature, randomsig, text, filenum)
     'do_delmail', #(filenum, :filename)
+    'do_snd', #(board, title, text, :refile, :signature, :usesignature, :randomsig)
 ]
 
 for _api in all_api :

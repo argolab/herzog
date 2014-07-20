@@ -14,3 +14,9 @@ site = {
         ('board', { 'boardname' : 'Search' }, u'寻人寻物版', u'失物招领')
     )
 }
+
+DB_HOST = "localhost"
+DB_DATABASE = "herzog"
+DB_USER = "root"
+DB_PASSWORD = ""
+DB_DATABASE = "herzog"
