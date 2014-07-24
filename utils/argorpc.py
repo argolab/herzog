@@ -28,6 +28,16 @@ def argo_http(api, param=None, session=None, fromhost=None):
     text = urlopen(
         ARGO_PREFIX + api, urlencode(args)
     ).read().decode('utf-8')
+    if not text :
+        raise Exception('Empty response url[%s] params[%s]' % (
+            (ARGO_PREFIX + api), urlencode(args)))
+
+    open('rep.txt', 'w').write('%s%s\n%s\n\n%s' % (
+        ARGO_PREFIX.encode('utf-8'),
+        api.encode('utf-8'),
+        urlencode(args).encode('utf-8'),
+        text.encode('utf-8')))
+    
     if text[-1] == '!' :
         seq = text.find('\n')
         session.update(json_parse(text[seq+1:-1]))
@@ -62,6 +72,10 @@ all_api = [
     'do_sendmail', #(userid, title, backup, signature, usesignature, randomsig, text, filenum)
     'do_delmail', #(filenum, :filename)
     'do_snd', #(board, title, text, :refile, :signature, :usesignature, :randomsig)
+    'do_del', #(board, file)
+    'do_edit', #(board, title, file, text)
+    'do_man', #(board, mode, boxFILENAME, boxFILENAME, ...)
+    'showboard', #(board)
 ]
 
 for _api in all_api :

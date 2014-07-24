@@ -5,10 +5,11 @@ CREATE TABLE `herzog_topic` (
        `owner` varchar(40) NOT NULL,
        -- `realowner` varchar(40) NOT NULL, -- 匿名版
        `title` varchar(60) NOT NULL,
-       `posttime` timestamp NOT NULL ,
        `score` int(40) NOT NULL default 0,         -- 排名
+       `v` int(11) NOT NULL default 0,
        `lastreply` timestamp NOT NULL,
        `lastcomment` timestamp NOT NULL,
+       `lastupdate` timestamp NOT NULL,
 
        `replynum` int(40) NOT NULL default 0,
        `partnum` int(40) NOT NULL default 0,
@@ -46,11 +47,9 @@ CREATE TABLE `herzog_reply` (
        -- "WHERE tid= ORDER BY brid" load all reply and comment by time
 
        `replyid` int(11) unsigned NOT NULL,
-       -- "WHERE replyid=tid" is all post reply to lz
+       -- "WHERE replyid=0" is all post reply to lz
 
        `owner` varchar(40) NOT NULL,
-       `title` varchar(60) NOT NULL,
-       `posttime` timestamp NOT NULL ,
 
        `lastupdate` timestamp NOT NULL,
 
@@ -58,19 +57,20 @@ CREATE TABLE `herzog_reply` (
        `fromapp` varchar(40) NOT NULL default '',   -- 来自哪个app
 
        `flag` int(20) NOT NULL default 0,           -- 属性
-       `oldfilename` varchar(32) NOT NULL,  -- 对应的文件存储文件名
+       `oldfilename` varchar(32) NOT NULL default '',  -- 对应的文件存储文件名
 
        `content` mediumtext,
 
        PRIMARY KEY (rid),               -- FOR : ORDER BY tid
        KEY (tid),                      -- FOR : WHERE tid=
        KEY (brid),                     -- FOR : WHERE brid=
+       KEY (tid, rid),
        KEY (tid, brid),               -- FOR : WHERE tid= AND brid=
        KEY (owner)                     -- FOR : ORDER BY owner
 
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
 
-CREATE TABLE `herzog_postship` (
+CREATE TABLE `herzog_topicship` (
      `utid` int(11) unsigned NOT NULL auto_increment,
 
      `userid` varchar(20) NOT NULL,
@@ -82,4 +82,18 @@ CREATE TABLE `herzog_postship` (
       KEY (userid),
       KEY (tid),
       KEY (userid, tid)
-)ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
+
+CREATE TABLE `herzog_replyship` (
+     `utid` int(11) unsigned NOT NULL auto_increment,
+
+     `userid` varchar(20) NOT NULL,
+     `rid` int(11) unsigned NOT NULL,
+
+     `flag` int(11) unsigned NOT NULL,
+
+      PRIMARY KEY (utid),
+      KEY (userid),
+      KEY (rid),
+      KEY (userid, rid)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;

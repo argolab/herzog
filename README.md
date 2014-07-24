@@ -15,21 +15,21 @@ a fresh and green argobbs
 
 [ ]picture.py:@app.route('/ajax/image/upload')
 
-[ ]topic.py:@app.route('/')
-[ ]topic.py:@app.route('/b/<boardname>')
-[ ]topic.py:@app.route('/t/<int:tid>')
-[ ]topic.py:@app.route('/ajax/post/fresh')
+[+]topic.py:@app.route('/')
+[+]topic.py:@app.route('/b/<boardname>')
+[+]topic.py:@app.route('/t/<int:tid>')
+[+]topic.py:@app.route('/ajax/post/fresh')
 [+]topic.py:@app.route('/ajax/post/list')
-[ ]topic.py:@app.route('/ajax/post/read')
+[+]topic.py:@app.route('/ajax/post/read')
 [+]topic.py:@app.route('/ajax/post/new')
-[ ]topic.py:@app.route('/ajax/post/reply')
-[ ]topic.py:@app.route('/ajax/post/mark')
-[ ]topic.py:@app.route('/ajax/post/del')
-[ ]topic.py:@app.route('/ajax/post/up')
-[ ]topic.py:@app.route('/ajax/post/star')
-[ ]topic.py:@app.route('/ajax/post/report')
-[ ]topic.py:@app.route('/ajax/post/_addpoint')
-[ ]topic.py:@app.route('/ajax/post/_recommend')
+[+]topic.py:@app.route('/ajax/post/reply')
+[+]topic.py:@app.route('/ajax/post/mark')
+[+]topic.py:@app.route('/ajax/post/del')
+[+]topic.py:@app.route('/ajax/post/up')
+[+]topic.py:@app.route('/ajax/post/star')
+[+]topic.py:@app.route('/ajax/post/report')
+[+]topic.py:@app.route('/ajax/post/_addpoint')
+[+]topic.py:@app.route('/ajax/post/_recommend')
 
 [1]user.py:@app.route('/u/<userid>')
 
@@ -37,3 +37,8 @@ a fresh and green argobbs
 [1]userself.py:@app.route('/t/logout')
 [1]userself.py:@app.route('/t/setting')
 ```
+
+Plugins and Event
+----------------
+
+
