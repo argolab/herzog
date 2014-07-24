@@ -1,17 +1,21 @@
-from app import app
+from herzog.base import app
 
-app.config['DEBUG'] = True
+import herzog.views.test
 
-if app.config['DEBUG'] :
-    import debug
+# from app import app
 
-import topic
-import mail
-import user
-import notice
-import picture
-import userself
-import plugins.fileheader_async
+# app.config['DEBUG'] = True
+
+# if app.config['DEBUG'] :
+#     import debug
+
+# import topic
+# import mail
+# import user
+# import notice
+# import picture
+# import userself
+# import plugins.fileheader_async
 
 if __name__ == '__main__' :
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=8080, debug=True)
