@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
-from herzog.app import jsonify
-from herzog.cache import cacheup
+from herzog.base.app import jsonify
+from herzog.base.cache import cacheup
 from datetime import datetime as dt
 
 def json_success(**params):

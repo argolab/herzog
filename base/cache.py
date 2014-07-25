@@ -2,7 +2,7 @@ from functools import wraps
 
 class CacheManage(dict) :
 
-    def cacheup(self):
+    def cacheup(self, f):
         fid = id(f)
         @wraps(f)
         def wrapper(*args, **kwargs) :

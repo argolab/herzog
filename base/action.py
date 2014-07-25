@@ -39,45 +39,56 @@ class HZAction :
         return handler
 
     def guard(self, handler):
-        _insertpriority(self._guard, handler)
+        _insert_priority(self._guard, handler)
         return handler
 
     def before(self, handler):
-        _insertpriority(self._before, handler)
+        _insert_priority(self._before, handler)
         return handle
 
     def after(self, handler):
-        _insertpriority(self._after, handle)
-        return handle
+        _insert_priority(self._after, handler)
+        return handler
 
     def crash(self, handler):
-        _insertpriority(self._crash, handler)
+        _insert_priority(self._crash, handler)
         return handle
 
-    def __call__(self, ctx, *args, **kwargs) :
+    def __call__(self, *args, **kwargs) :
         try :
 
+            # ** ALWAYS TEST ALL GUARD *
+            # raise a HZActionError for stop
+            
+            p = 0
             # not check guard if is spy
             if not (self._spy and
-                    any(x(ctx, *args, **kwargs)
+                    any(x(*args, **kwargs)
                         for x in self._spy)) :
-                # cannot pass any guard, just return
-                if any(not x(ctx, *args, **kwargs)
-                       for x in self._guard) :
-                    raise self.Exception('Cannot pass guards')
+                p = 1
+
+            # cannot pass any guard, just return
+            if any(not x(*args, **kwargs)
+                   for x in self._guard) :
+                p = -1
+
+            if p < 0 :
+                raise self.Exception('Cannot pass guards')
             
             for f in self._before :
-                f(ctx, *args, **kwargs)
+                f(*args, **kwargs)
 
-            self._func(ctx, *args, **kwargs)
+            ret = self._func(*args, **kwargs)
 
             for f in self._after :
-                f(ctx, *args, **kwargs)
+                r = f(ret, *args, **kwargs)
+                if type(r) is dict :
+                    ret = r
+            return ret
 
-            return ctx
         except HZActionError as e :
             for f in self._crash :
-                f = f(ctx, e)
+                f = f(ret, e)
                 if f :
                     return f
             raise e
@@ -86,4 +97,4 @@ class HZAction :
         return '<HZAction(%d) %s>' % (id(self), self._func.func_name)
 
 def action(f) :
-    return Action(f)
+    return HZAction(f)

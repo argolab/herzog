@@ -129,13 +129,6 @@ def ajax_newpost():
         
         db = getconn()
         now = getnow()
-        tid = db.execute(
-            u" INSERT INTO herzog_topic"
-            "   (boardname, owner, title, lastupdate, lastreply,"
-            "    lastcomment, fromaddr, summary, content)"
-            "  VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
-            boardname, userid, title, now, now, now, fromaddr,
-            summary, content)
 
         trigger('success_newtopic', tid=tid, userid=request.remote_addr)
         
