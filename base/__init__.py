@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 
 from herzog.base.exception import HZError, HZActionError, FormValidError
+from herzog.base.log import logger
 from herzog.base.action import action
 from herzog.base.app import *
 from herzog.base.argorpc import getbbsfile, getuserfile

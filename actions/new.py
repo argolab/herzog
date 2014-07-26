@@ -1,4 +1,4 @@
-from herzog.base import action, getconn, HZActionError
+from herzog.base import action, getconn, HZActionError, flag
 from herzog.base.misc import dt, gen_summary
 
 @action
@@ -61,7 +61,7 @@ def comment(userid, replyid, content, fromaddr, time=None,
     db.execute(u"UPDATE herzog_topic SET lastcomment=%s WHERE tid=%s",
                time, reply.tid)
 
-    return dict(rid=rid)
+    return dict(rid=rid, tid=reply.tid)
 
 @reply.guard
 def reply_topic_exists(tid, **ps) :

@@ -71,7 +71,7 @@ class HZAction :
             
             p = 0
             # not check guard if is spy
-            if not (self._spy and
+            if (self._spy and
                     any(x(*args, **kwargs)
                         for x in self._spy)) :
                 p = 1

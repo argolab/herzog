@@ -53,6 +53,8 @@ CREATE TABLE `herzog_reply` (
 
        `lastupdate` timestamp NOT NULL,
 
+       `upvote` int(11) NOT NULL default 0,
+
        `fromaddr` varchar(20) NOT NULL default '',
        `fromapp` varchar(40) NOT NULL default '',   -- 来自哪个app
 

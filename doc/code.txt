@@ -1,0 +1,4 @@
+1           --> Wrong param
+2           --> No login
+3           --> Data error
+4           --> System error

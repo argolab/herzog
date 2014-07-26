@@ -2,7 +2,11 @@
 
 from herzog.base.app import jsonify
 from herzog.base.cache import cacheup
+from herzog.base.argorpc import getbbsfile
+from herzog.base.log import getlogger
 from datetime import datetime as dt
+
+logger = getlogger(__name__)
 
 def json_success(**params):
     return jsonify(success=1, **params)
@@ -32,12 +36,12 @@ def getsysop() :
     try :
         sysops = set(getbbsfile('etc/SYSOPS.herzog').read().split())
     except IOError :
-        print 'Cannot load sysops name. Check your BBS_HOME/etc/SYSOP.herzog file'
+        logger.warning('Cannot load sysops name. Check your BBS_HOME/etc/SYSOP.herzog file')
         sysops = set()
     return sysops
 
 def issysop(userid):
-    return x in getsysop()
+    return userid in getsysop()
 
 def gen_summary(content):
     if content :

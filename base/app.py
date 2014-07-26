@@ -6,9 +6,3 @@ import herzog.config as config
 
 app = Flask('herzog')
 app.secret_key = config.SECRET_KEY
-
-route = app.route
-
-def start_server(**kwargs):
-    import herzog.base
-    app.run(**kwargs)

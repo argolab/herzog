@@ -4,6 +4,50 @@ setting : {{setting}}
 
 <br/>
 
+<form action="/ajax/post/setv" method="POST">
+  <input type="text" name="tid" placeholder="tid" />
+  <input type="text" name="v" placeholder="5" />
+  <input type="submit" value="setv" />
+</form>
+
+<br/>
+
+<form action="/ajax/post/upvote" method="POST">
+  <input type="text" name="tid" placeholder="tid" />
+  <input type="text" name="rid" placeholder="rid" />
+  <input type="submit" value="upvote" />
+</form>
+
+<form action="/ajax/post/unvote" method="POST">
+  <input type="text" name="tid" placeholder="tid" />
+  <input type="text" name="rid" placeholder="rid" />
+  <input type="submit" value="unvote" />
+</form>
+
+<br/>
+
+<form action="/ajax/post/star" method="POST">
+  <input type="text" name="tid" placeholder="tid" />
+  <input type="text" name="rid" placeholder="rid" />
+  <input type="submit" value="star" />
+</form>
+
+<form action="/ajax/post/unstar" method="POST">
+  <input type="text" name="tid" placeholder="tid" />
+  <input type="text" name="rid" placeholder="rid" />
+  <input type="submit" value="unstar" />
+</form>
+
+<br/>
+
+<form action="/ajax/post/del" method="POST">
+  <input type="text" name="tid" placeholder="tid" />
+  <input type="text" name="rid" placeholder="rid" />
+  <input type="submit" value="del topic" />
+</form>
+
+<br/>
+
 <form action="/ajax/post/newtopic", method="POST">
   <input type="text" name="boardname" placeholder="boardname" />
   <input type="text" name="title" placeholder="title" />
