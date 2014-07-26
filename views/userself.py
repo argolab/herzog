@@ -1,60 +1,49 @@
-from app import (
-    app, request, render_template,
-    jsonify, getclient, getuserfile,
-    json, session
+from herzog.base import (
+    app, render_template, getclient, json_success,
+    session, json_error, authed, ajax_fields_error,
+    getfields, request
 )
 
 @app.route('/ajax/login', methods=["POST"])
+@ajax_fields_error
 def login():
-    userid = request.form.get('userid', None)
-    password = request.form.get('password', None)
-    if not userid or not password :
-        return jsonify(error=1, msg="Need userid, password param")
+    form = getfields(('userid', 'password'))
+    print form
     cli = getclient()
-    ret = cli.do_login(id=userid, pw=password)
+    ret = cli.do_login(id=form['userid'], pw=form['password'])
     if ret.get('success') :
-        return jsonify(success=1, msg='Login success.')
+        return json_success()
     else :
-        return jsonify(ret)
+        return json_error(3, ret['emsg'])
 
 @app.route('/ajax/logout', methods=['POST'])
 def logout():
+    authed()
     ret = getclient().do_logout()
     if ret.get('success') :
         session.clear()
-        return jsonify(ret)
-    return jsonify(ret)
+        return json_success()
+    return json_error(4, ret['emsg'])
 
-@app.route('/ajax/setting', methods=["POST"])
-def setting():
-    if not session.get('utmpuserid') :
-        return jsonify(error=1, msg="No login")
-    userid = session.get('utmpuserid')
+# @app.route('/ajax/setting', methods=["POST"])
+# def setting():
+#     if not session.get('utmpuserid') :
+#         return jsonify(error=1, msg="No login")
+#     userid = session.get('utmpuserid')
 
-    if request.form.get('!clear!') :
-        getuserfile(userid, 'setting.json', mode='w').write('{}')
-        return jsonify(success=1, error='clear setting success!')
+#     if request.form.get('!clear!') :
+#         getuserfile(userid, 'setting.json', mode='w').write('{}')
+#         return jsonify(success=1, error='clear setting success!')
     
-    try :
-        data = json.load(getuserfile(userid, 'setting.json', 'r'))
-    except :
-        data = {}
+#     try :
+#         data = json.load(getuserfile(userid, 'setting.json', 'r'))
+#     except :
+#         data = {}
 
-    data.update(request.form)
+#     data.update(request.form)
 
-    ds = json.dumps(data)
-    if len(data) > 4096 :
-        return jsonify(error=1, msg="Save too many value to dict!")
-    getuserfile(userid, 'setting.json', 'w').write(ds)
-    return jsonify(success=1, msg='Update setting success!')
-
-def getusersetting():
-    # may by form is array ? (name:[key])
-    if not session.get('utmpuserid') :
-        return None
-    try :
-        return json.load(getuserfile(session.get('utmpuserid'),
-                                     'setting.json'))
-    except IOError :
-        return {}
-        
+#     ds = json.dumps(data)
+#     if len(data) > 4096 :
+#         return jsonify(error=1, msg="Save too many value to dict!")
+#     getuserfile(userid, 'setting.json', 'w').write(ds)
+#     return jsonify(success=1, msg='Update setting success!')

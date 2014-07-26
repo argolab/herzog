@@ -54,6 +54,15 @@ class HZAction :
         _insert_priority(self._crash, handler)
         return handle
 
+    def off(self, handler) :
+        for a in [self._spy, self._guard, self._before,
+                  self._after, self._crash] :
+            for i, d in enumerate(a) :
+                if d == handler :
+                    del a[i]
+                    return
+        return False
+
     def __call__(self, *args, **kwargs) :
         try :
 
@@ -69,7 +78,7 @@ class HZAction :
 
             # cannot pass any guard, just return
             if any(not x(*args, **kwargs)
-                   for x in self._guard) :
+                   for x in self._guard) and p == 0 :
                 p = -1
 
             if p < 0 :

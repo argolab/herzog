@@ -1,0 +1,69 @@
+session : {{session}}
+<br/>
+setting : {{setting}}
+
+<br/>
+
+<form action="/ajax/post/newtopic", method="POST">
+  <input type="text" name="boardname" placeholder="boardname" />
+  <input type="text" name="title" placeholder="title" />
+  <textarea name="content"></textarea>
+  <input type="text" name="summary" placeholder="summary" />
+  <input type="submit" value="new topic" />
+</form>
+
+<br/>
+
+<form action="/ajax/post/reply", method="POST">
+  <input type="text" name="tid" placeholder="tid" />
+  <textarea name="content"></textarea>
+  <input type="submit" value="reply topic" />
+</form>
+
+<br/>
+
+<form action="/ajax/post/reply", method="POST">
+  <input type="text" name="replyid" placeholder="replyid" />
+  <textarea name="content"></textarea>
+  <input type="submit" value="comment a reply" />
+</form>
+
+<br/>
+
+<form action="/ajax/login" method="POST">
+  <input type="text" name="userid" placeholder="输入你的用户id" />
+  <input type="password" name="password" placeholder="密码..." />
+  <input type="submit" value="login" />
+</form>
+
+<br/>
+
+<form action="/ajax/logout" method="POST">
+  <input type="submit" value="logout" />
+</form>
+
+<br/>
+
+<form action="/ajax/setting" method="POST">
+  <input type="text" name="key1" placeholder="key1" />
+  <input type="text" name="key2" placeholder="key2" />
+  <input type="submit" value="update setting" />
+</form>
+    
+<br/>
+
+<form action="/ajax/mail/send" method="POST">
+  <input type="text" name="userid" placeholder="userid..." />
+  <input type="text" name="title" placeholder="title..." />
+  <textarea name="text"></textarea>
+  <input type="submit" value="send mail" />
+</form>
+  
+<br/>
+
+<form action="/ajax/mail/del" method="POST">
+  <input type="text" name="num" placeholder="filenum..." />
+  <input type="text" name="filename" placeholder="filename..." />
+  <input type="submit" value="del mail" />
+</form>
+

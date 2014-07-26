@@ -14,13 +14,13 @@ def delreply(userid, rid, **ps):
     return dict(ret=True)
 
 @deltopic.guard
-def isowner(userid, tid, **ps) :
+def isowner_topic(userid, tid, **ps) :
     return db.get(u"SELECT tid FROM herzog_topic"
                   " WHERE tid=%s AND owner=%s",
                   tid, userid) is not None
 
 @delreply.guard
-def isowner(userid, rid, **ps) :
+def isowner_reply(userid, rid, **ps) :
     return db.get(u"SELECT rid FROM herzog_reply"
                   " WHERE rid=%s AND owner=%s",
                   rid, userid) is not None

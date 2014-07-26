@@ -1,14 +1,15 @@
 #-*- coding: utf-8 -*-
 
-from herzog.base.app import g, session
+from herzog.base.exception import FormValidError
+from herzog.base.app import g, session, request
 from herzog.base.torndb import Connection
 from herzog.base.argorpc import ArgoRPCClicent
 import herzog.config as config
 
 def getclient():
     if not hasattr(g, 'cc'):
-        g.cc = argorpc.ArgoRPCClicent(session,
-                                      request.remote_addr)
+        g.cc = ArgoRPCClicent(session,
+                              request.remote_addr)
     return g.cc
 
 def getconn():
@@ -18,7 +19,10 @@ def getconn():
                           password=config.DB_PASSWORD)
     return g.db
     
-def getuserid():
-    return session.get('utmpuserid') or None
+def authed():
+    try : 
+        return session.get('utmpuserid')
+    except KeyError :
+        raise FormValidError("Please login first")
 
 

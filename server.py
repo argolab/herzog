@@ -1,7 +1,8 @@
 from herzog.base import app
 
 import herzog.views.test
-__import__("herzog.mod.firebird")
+import herzog.views.userself
+import herzog.mod.firebird
 
 # from app import app
 

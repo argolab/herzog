@@ -40,13 +40,29 @@ def issysop(userid):
     return x in getsysop()
 
 def gen_summary(content):
-    return content and ''.join(content[:400].split('\n')[:2])
+    if content :
+        if len(content) < 180 :
+            return content
+        else :
+            return ''.join(content[:180].split('\n')[:2]) + '...'
 
 def quote(text, userid):
-    return (u'\r\n\r\n【 在 %s (%s) 的大作中提到 : 】\r\n: '
-            % (userid, userid) + u'\n: '.join(text.strip().split('\n')[:5]))
+    buf = [u'\r\n\r\n【 在 %s (%s) 的大作中提到 : 】' % (userid, userid)]
+    for l in text.strip().splitlines() :
+        if len(buf) > 10 :
+            buf.append(u'..............（以下省略）')
+            break
+        if len(l) > 65 :
+            for index in range(0, len(l), 65) :
+                if len(buf) > 10 :
+                    buf.append(u'..............（以下省略）')
+                    break
+                buf.append(l[index:index+65])                    
+        else :
+            buf.append(l)
+    return u'\r\n: '.join(buf)
 
 def quote_title(title):
     if title[:4] != u'Re: ' :
-        return u'Re: ' + title[:4]
+        return u'Re: ' + title[:15]
     return title
