@@ -1,5 +1,8 @@
 from json import loads as json_parse
 from urllib import urlencode, urlopen
+from herzog.base.log import getlogger
+
+logger = getlogger(__name__)
 
 ARGO_PREFIX = u'http://localhost:1996/bbsapi/'
 ROOT_FMT = u'/home/bbs/bbs_home/%s'
@@ -24,20 +27,22 @@ def argo_http(api, param=None, session=None, fromhost=None):
         args['fromhost'] = fromhost
 
     # parase data
-    text = urlopen(
-        ARGO_PREFIX + api, urlencode(args)
-    ).read()
+    text = urlopen(ARGO_PREFIX + api, urlencode(args)).read()
+
     if not text :
         raise Exception('Empty response url[%s] params[%s]' % (
             (ARGO_PREFIX + api), urlencode(args)))
+    
+    try :
+        text = text.decode('utf-8')
+    except UnicodeEncodeError as e:
+        logger.warning("Cannot decode %r" % text)
+        raise e
 
     #TODO try to catch unicode decode error
-
-    pp = '%s%s?%s\n\n%s' % (
-        ARGO_PREFIX.encode('utf8'), api, urlencode(args), text)
-    open('rep.txt', 'wb').write(pp)
-    
-    text = text.decode('utf-8')    
+    open('rep.txt', 'wb').write(('%s%s?%s\n\n%s' % (
+        ARGO_PREFIX.encode('utf8'), api,
+        urlencode(args), text)).encode('utf8'))
     
     if text[-1] == '!' :
         seq = text.find('\n')

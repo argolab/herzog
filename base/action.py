@@ -39,6 +39,9 @@ class HZAction :
         self.Exception = Exception
         self._lt = None
 
+    def prototype(self):
+        return HZAction(self._func)
+
     def spy(self, handler):
         logger.info("Add `spy` [%s] TO [%s]", handler, self)
         self._spy.append(handle)

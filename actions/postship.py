@@ -127,11 +127,11 @@ def g_issysop(userid, *args, **ps):
     return True
 
 @a_topic.after
-def flag_newtopic(ret, userid, **ps):
+def flag_newtopic(ret, userid, *s, **ps):
     flagup(userid, flag.OWNER, tid=ret['tid'])
 
 @a_reply.after
-def flag_reply(ret, userid, tid, **ps):
+def flag_reply(ret, userid, tid, *s, **ps):
     db = getconn()
     now = getnow()
     if db.get(u"SELECT utid FROM herzog_topicship"
@@ -146,7 +146,7 @@ def flag_reply(ret, userid, tid, **ps):
     flagup(userid, flag.REPLY, tid=tid)
 
 @a_comment.after
-def flag_comment(ret, userid, replyid, **ps):
+def flag_comment(ret, userid, replyid, *s, **ps):
     db = getconn()
     now = getnow()
     if db.get(u"SELECT utid FROM herzog_topicship"

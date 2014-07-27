@@ -17,7 +17,7 @@ def save_topic_to_fs(userid, boardname, title, content,
     return True
 
 @topic.after
-def update_filename(ret, **ps):
+def update_filename_topic(ret, *s, **ps):
     db = getconn()
     db.execute(u" UPDATE herzog_topic SET oldfilename=%s WHERE tid=%s",
                g._filename, ret['tid'])
@@ -63,7 +63,7 @@ def save_comment_to_fs(userid, replyid, content, fromaddr, **ps):
 
 @reply.after
 @comment.after
-def update_filename(ret, **ps):
+def update_filename_reply(ret, *s, **ps):
     db = getconn()
     db.execute(u"UPDATE herzog_reply SET oldfilename=%s WHERE rid=%s",
                g._filename, ret['rid'])

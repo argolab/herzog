@@ -31,8 +31,8 @@ CREATE TABLE `herzog_topic` (
        KEY (score),                  -- For :  ORDER BY score
        KEY (owner),                  -- For :  WHERE owner=
        KEY (boardname, owner),      -- For :  WHERE boardname= AND owner=
-       KEY (tid, owner)            -- For :  WHERE tid= AND owner=
-
+       KEY (tid, owner),            -- For :  WHERE tid= AND owner=
+       KEY (boardname, oldfilename)
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
 
 CREATE TABLE `herzog_reply` (

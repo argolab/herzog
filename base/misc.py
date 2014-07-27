@@ -80,11 +80,13 @@ def filter_ansi(text) :
     return re_ansi.sub('', text)
 
 def getfspost(boardname, oldfilename):
-    try :
-        text = filter_ansi(getbbsfile(
-            "boards/%s/%s" % (boardname, oldfilename)).read())
-    except IOError:
-        return None
+    text = filter_ansi(getbbsfile(
+        "boards/%s/%s" % (boardname, oldfilename)).read())
+    # try :
+    #     text = filter_ansi(getbbsfile(
+    #         "boards/%s/%s" % (boardname, oldfilename)).read())
+    # except IOError:
+    #     return None
     if not text :
         logger.warning("Empty post??? [%s/%s]", boardname, oldfilename)
         return None
@@ -111,5 +113,6 @@ def getfspost(boardname, oldfilename):
     for indexj in range(index+quoteheader, len(text)) :
         if not text[indexj] or text[indexj][0] != ':' :
             break
+    # header, content, quote, tail
     return dict(title=title, owner=owner), '\n'.join(text[4:index]), \
         '\n'.join(text[index:indexj]), '\n'.join(text[indexj:])

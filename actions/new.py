@@ -20,8 +20,7 @@ def topic(userid, boardname, title, content, fromaddr, time=None,
     return dict(tid=tid)
 
 @action
-def reply(userid, tid, content, fromaddr, time=None,
-          summary=None, fromapp='', *ps) :
+def reply(userid, tid, content, fromaddr, time=None, fromapp='', *ps) :
     replyid = brid = 0
     if time is None :
         time = dt.now()
@@ -41,8 +40,7 @@ def reply(userid, tid, content, fromaddr, time=None,
     return dict(rid=rid)
 
 @action
-def comment(userid, replyid, content, fromaddr, time=None,
-            summary=None, fromapp='', *ps) :
+def comment(userid, replyid, content, fromaddr, time=None, fromapp='', *ps) :
     if time is None :
         time = dt.now()
 
