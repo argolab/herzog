@@ -1,5 +1,7 @@
 #-*- coding: utf-8 -*-
 
+import re
+
 from herzog.base.app import jsonify
 from herzog.base.cache import cacheup
 from herzog.base.argorpc import getbbsfile
@@ -70,3 +72,44 @@ def quote_title(title):
     if title[:4] != u'Re: ' :
         return u'Re: ' + title[:15]
     return title
+
+re_ansi = re.compile('\x1b[\\[\\d;]*[a-zA-Z\s]')
+re_quote = re.compile(u'\\s*【 在 .* 的大作中提到\\s*[:：]\\s*】\\s*'.encode('gbk'))
+
+def filter_ansi(text) :
+    return re_ansi.sub('', text)
+
+def getfspost(boardname, oldfilename):
+    try :
+        text = filter_ansi(getbbsfile(
+            "boards/%s/%s" % (boardname, oldfilename)).read())
+    except IOError:
+        return None
+    if not text :
+        logger.warning("Empty post??? [%s/%s]", boardname, oldfilename)
+        return None
+    if not text.startswith('\xb7\xa2\xd0\xc5\xc8\xcb:') :
+        logger.warning("Mysterious board post: [%s/%s]", boardname, oldfilename)
+        return None
+    text = text.splitlines()
+    if len(text) > 400 :
+        text = text[:400]
+    title = text[1][8:][:35]
+    owner = text[0].split(' ')[1]
+    quoteheader = 0
+    for index in range(len(text)-1, -1, -1) :
+        line = text[index].strip()
+        if not line or line == '--' or line[0] == ':' \
+           or line.startswith('\xa1\xf9') :
+            continue
+        if re_quote.search(line) :
+            index -= 1
+            quoteheader = 1
+        break
+    index +=1
+    indexj = index
+    for indexj in range(index+quoteheader, len(text)) :
+        if not text[indexj] or text[indexj][0] != ':' :
+            break
+    return dict(title=title, owner=owner), '\n'.join(text[4:index]), \
+        '\n'.join(text[index:indexj]), '\n'.join(text[indexj:])

@@ -147,14 +147,16 @@ def flag_reply(ret, userid, tid, **ps):
 
 @a_comment.after
 def flag_comment(ret, userid, replyid, **ps):
+    db = getconn()
+    now = getnow()
     if db.get(u"SELECT utid FROM herzog_topicship"
               "  WHERE userid=%s AND tid=%s AND (flag & %s >0)",
               userid, ret['tid'], flag.SPEAK) :
         db.execute(u"UPDATE herzog_topic SET lastcomment=%s"
-                   "  WHERE tid=%s", ret['tid'])
+                   "  WHERE tid=%s", now, ret['tid'])
     else :
         db.execute(u"UPDATE herzog_topic SET partnum=partnum+1"
-                   " , lastreply=%s WHERE tid=%s", ret['tid'])
-    flagup(userid, flag.COMMENT, tid=tid)
+                   " , lastreply=%s WHERE tid=%s", now, ret['tid'])
+    flagup(userid, flag.COMMENT, tid=ret['tid'])
     flagup(userid, flag.COMMENT, rid=replyid)
 

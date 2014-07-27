@@ -1,6 +1,7 @@
 from herzog.base import (
     app, render_template, request, authed, getfields,
-    ajax_fields_error, json_success, FormValidError
+    ajax_fields_error, json_success, FormValidError,
+    request
 )
 
 from herzog.actions.new import (
@@ -21,9 +22,27 @@ from herzog.actions.postship import (
     setv as a_setv
 )
 
+from herzog.actions.update import (
+    update_topic as a_updatetopic,
+    update_reply as a_updatereply
+)
+
 @app.route('/')
 def index():
     return render_template('test.html')
+
+@app.route('/ajax/post/update', methods=["POST"])
+@ajax_fields_error
+def ajax_updatepost():
+    userid = authed()
+    if request.form.get('tid') :
+        form = getfields(_require=("tid", "title", "content"))
+        form['userid'] = userid
+        return json_success(**a_updatetopic(**form))
+    else :
+        form = getfields(_require=('rid', 'content'))
+        form['userid'] = userid
+        return json_success(**a_updatereply(**form))
 
 @app.route('/ajax/post/newtopic', methods=['POST'])
 @ajax_fields_error

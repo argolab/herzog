@@ -1,6 +1,5 @@
 from json import loads as json_parse
 from urllib import urlencode, urlopen
-from codecs import open as csopen
 
 ARGO_PREFIX = u'http://localhost:1996/bbsapi/'
 ROOT_FMT = u'/home/bbs/bbs_home/%s'
@@ -27,16 +26,18 @@ def argo_http(api, param=None, session=None, fromhost=None):
     # parase data
     text = urlopen(
         ARGO_PREFIX + api, urlencode(args)
-    ).read().decode('utf-8')
+    ).read()
     if not text :
         raise Exception('Empty response url[%s] params[%s]' % (
             (ARGO_PREFIX + api), urlencode(args)))
 
-    open('rep.txt', 'w').write('%s%s\n%s\n\n%s' % (
-        ARGO_PREFIX.encode('utf-8'),
-        api.encode('utf-8'),
-        urlencode(args).encode('utf-8'),
-        text.encode('utf-8')))
+    #TODO try to catch unicode decode error
+
+    pp = '%s%s?%s\n\n%s' % (
+        ARGO_PREFIX.encode('utf8'), api, urlencode(args), text)
+    open('rep.txt', 'wb').write(pp)
+    
+    text = text.decode('utf-8')    
     
     if text[-1] == '!' :
         seq = text.find('\n')
@@ -53,12 +54,11 @@ class ArgoRPCClicent :
         self._fromhost = fromhost
 
 def getbbsfile(path, mode='r'):
-    return csopen(ROOT_FMT % path, mode=mode,
-                  encoding="gbk", errors='ignore')
+    return open(ROOT_FMT % path, mode=mode)
 
 def getuserfile(userid, filename, mode='r'):
-    return csopen(_HOME_FMT % (userid[0].upper(), userid, filename),
-                  mode=mode, encoding='gbk', errors='ignore')
+    return open(_HOME_FMT % (userid[0].upper(), userid, filename),
+                mode=mode)
 
 all_api = [
     'test',        
