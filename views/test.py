@@ -1,8 +1,10 @@
 from herzog.base import (
     app, render_template, request, authed, getfields,
     ajax_fields_error, json_success, FormValidError,
-    request
+    request, getconn
 )
+
+from herzog.base.misc import issysop
 
 from herzog.actions.new import (
     topic as a_topic,
@@ -30,6 +32,30 @@ from herzog.actions.update import (
 @app.route('/')
 def index():
     return render_template('test.html')
+
+def ktable(k) :
+    if k.startswith('from') :
+        k = '|' + k
+    elif k.startswith('last') :
+        k = '{' + k
+    if k.find('id') > 0 :
+        return '-' + str(k.find('id')) + k
+    else :
+        return k
+
+@app.route('/sql')
+def sql() :
+    userid = authed()
+    if not issysop(userid) :
+        abort(404)
+    if not request.args.get('sql', '').startswith("SELECT") :
+        abort(404)
+    ret = getconn().query(request.args['sql'])
+    if ret :
+        keys = ret[0].keys()
+        keys.sort(key=ktable)
+    return render_template('sql.html', sql=request.args['sql'],
+                           keys=keys, rows=ret)
 
 @app.route('/ajax/post/update', methods=["POST"])
 @ajax_fields_error

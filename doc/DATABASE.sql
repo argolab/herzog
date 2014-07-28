@@ -79,6 +79,7 @@ CREATE TABLE `herzog_topicship` (
      `tid` int(11) unsigned NOT NULL,
 
      `flag` int(11) unsigned NOT NULL,
+     `readtime` timestamp NOT NULL,
 
       PRIMARY KEY (utid),
       KEY (userid),
@@ -99,3 +100,26 @@ CREATE TABLE `herzog_replyship` (
       KEY (rid),
       KEY (userid, rid)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
+
+CREATE TABLE `herzog_userdata` (
+       `userid` varchar(20) NOT NULL,
+       `seenotification` timestamp NOT NULL,
+       PRIMARY KEY (userid)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
+
+CREATE TABLE `herzog_notification` (
+      `nid` int(11) unsigned NOT NULL auto_increment,
+      `userid` varchar(20) NOT NULL,
+      `t` int(11) unsigned NOT NULL,
+      `params` varchar(100) NOT NULL,
+      `s` int(11) unsigned NOT NULL,
+      `lastupdate` timestamp NOT NULL,
+      
+      PRIMARY KEY (nid),
+      KEY (userid),
+      KEY (userid, lastupdate),
+      KEY (userid, t),
+      KEY (userid, t, lastupdate),
+      KEY (userid, t, s)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
+       

@@ -1,0 +1,36 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="UTF8" />
+    <style>
+      .doc{ text-align: center; margin: 0 20px; position: relatvie; width:
+      100%;}
+      .doc table th{ padding: 10px 20px; }
+      .doc table th{ text-align: left; }
+      .doc table td div{ max-height: 100px; overflow: auto;
+      padding: 10px 20px;  font-size: 12px; }
+      .doc table tr:hover { background: #ccc; }
+    </style>    
+  </head>
+  <body>
+    <div class="doc">
+      <p>SQL:
+        <blockquote>{{sql}}</blockquote>
+      </p>
+      <table>
+        <tr>
+          {% for name in keys %}
+          <th>{{name}}</th>
+          {% endfor %}
+        </tr>
+        {% for r in rows %}
+        <tr>
+          {% for name in keys %}
+          <td><div>{{r[name]}}</div></td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>
