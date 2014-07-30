@@ -1,0 +1,115 @@
+{% extends "solo.html" %}
+
+{% block title %} {{board.boardtxt}} (board.boardname) - {{config.SITE_NAME}} {% endblock %}
+
+{% block bodycls %} boards{% endblock %}
+{% block header %}
+  <style> .board-header{ background-image: url("{{bsetting.image}}") } </style>
+{% endblock %}
+
+{% block container %}
+
+  <div class="board-header clr">
+    <div class="title">
+      <h2>{{board.boardtxt}} <small>{{board.boardname}}</small></h2>
+      <a href="#" title="点击收藏这个看版" class="btn btn-reverse"">收藏这个看版</a>
+    </div>
+  </div>
+
+  <div class="clr container">
+    
+    <div class="primary left">
+
+      <div class="board-bar clr">
+        <ul class="col1">
+          <li><a class="btn" href="#" title="点击发帖">说点啥</a></li>
+          <li><a class="btn" href="#" title="分享与讨论">分享与讨论</a></li>
+        </ul>
+        
+        <ul class="tabs">
+          <li><a class="active" href="#" title="新鲜发言">新鲜发言</a></li>
+          <li class="sep"></li>
+          <li><a href="#" title="精选文摘">精选文摘</a></li>
+          </li>
+        </ul>
+      </div>
+
+      <hr/>
+      
+      <div class="postlist">
+        {% for p in topics %}
+          <div class="topic" id="t{{p.tid}}">
+            <img class="avatar" src="{{url_for_avatar(p.owner)}}" title="{{p.owner}}"/>
+            <div class="r1">
+              由 <a href="{{url_for('user', userid=p.owner)}}" title="{{p.owner}}">{{p.owner}}</a> 发起{% if p.replynum > 0 %}， 收到 {{p.replynum}} 个回复{% endif %}{% if p.upvote > 0 %}， {{p.upvote}} 个值得一读{% endif %}
+              <span class="time">{{p.lastupdate|nicetime}}</span>            
+            </div>
+            <div class="r2">
+              <span class="icon-ci{% if p.read %}r{% elif p.partnum > 100 %}2{% elif p.partnum > 50 %}1{% else %}0{% endif %}"></span>
+              <a class="title" href="{{url_for('topic', tid=p.tid)}}" title="{{ p.title }}">
+                {{p.title}}
+              </a>
+            </div>
+          </div>
+          <hr/>
+        {% endfor %}
+        <div class="board-pager">
+          <a title="点击查看之前的话题" href="#" class="btn">之前的</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="aside right">
+      <div class="mod mod-info">
+        <img src="{{bsetting.avatar}}{{url_for_avatar('ltaoist')}}" title="{{board.boardname}}" />
+        <div class="inner">
+          <span class="boardtxt">{{board.boardtxt}}</span><span class="boardname">{{board.boardname}}</span>
+          <div class="bm">
+            版主：
+            <ul>
+              {% for u in board.bmlist.split(' ') %}
+                <li><a href="{{url_for('user', userid=u)}}" title="{{u}}">{{u}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mod mod-note">
+        呵呵，这里就是版主要说的话了。。。
+        吃饭要吃鱼肚子
+        和蛋
+        {{bsetting.note}}
+      </div>
+
+      <div class="mod mod-starit">
+        快和 {{bsetting.starnum}}1102 个小伙伴一起
+        <div class="btns">
+          <a class="btn" href="#">收藏这个看版</a>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="mod mod-ann">
+        去 <em><a title="进入精华区 href="{{url_for_ann(board.boardname)}}">精华区</a></em> 挖掘宝藏！
+      </div>
+
+      {% if bsetting.adhref %}
+        <div class="mod mod-ad">
+          <a title="广告" href="{{bsetting.adhref}}">
+            <img src="{{ bsetting.adimg }}"/>
+          </a>
+        </div>
+      {% endif %}
+
+      <div class="mod mod-link0">
+        <ul>
+          <li><a title="求助" href="#">我要求助</a></li>
+          <li><a title="投诉" href="#">我要投诉</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

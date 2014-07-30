@@ -1,4 +1,4 @@
-from app import app, getclient, render_template
+from herzog.base import app, getclient, render_template
 
 @app.route('/u/<userid>')
 def user(userid):

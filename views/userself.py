@@ -6,7 +6,7 @@ from herzog.base import (
 
 @app.route('/ajax/login', methods=["POST"])
 @ajax_fields_error
-def login():
+def ajax_login():
     form = getfields(('userid', 'password'))
     print form
     cli = getclient()

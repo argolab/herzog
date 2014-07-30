@@ -1,0 +1,210 @@
+.board-header{
+    background-position: center 0;
+    /* background-repeat: no-repeat; */
+}
+    
+.board-header .title{
+    height: 390px;
+    margin: 0 auto;
+    text-align: center;
+    background: rgba(0,0,0,.2);
+}
+
+.board-header h2{
+    padding-top: 120px;
+    color: #f0f0f0;
+    color: rgba(255, 255, 255, .8);
+    font-size: 30px;
+    text-shadow: 0 0 1px #aaa;
+}
+
+.board-header small{
+    color: rgba(255, 255, 255, .5);
+    font-size: 20px;
+}
+
+.btn{
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid #9fdca0;
+    font-size: 13px;
+    border-radius: 15px;
+    padding: 3px 18px 2px;
+}
+
+.btn:hover{
+    text-decoration:none;
+}
+
+.btn-reverse{
+    border: 1px solid transparent;
+    background-color: #9fdca0;
+    background-color: rgba(159, 220, 160, .8);
+    color: #fff;
+}
+
+.boards .primary{
+    margin-top: -100px;
+    background: #fff;
+    border-top: 4px solid #68b38c;
+    box-shadow: 0 1px 5px #ccc;
+}
+
+.board-bar{
+    margin: 30px 40px 15px;
+}
+
+.board-bar li{
+    float: left;
+    margin-right : 15px;
+}
+
+.board-bar .btn{
+    float: left;
+}
+
+.board-bar .tabs{
+    margin-left: 40px;
+    float: left;
+}
+
+.board-bar .tabs a{
+    font-size: 16px;
+    color: #c5d4d4;
+    display: block;
+    float: left;
+    padding-top: 2px;
+}
+
+.board-bar .tabs .sep{
+    border-right : 1px solid #c5d4d4;
+    height: 12px;
+    margin-top: 9px;
+}
+
+.board-bar .tabs a.active,
+.board-bar .tabs a:hover{
+    color: #78d0b5;
+    text-decoration: none;
+}
+
+.board-bar .active{
+    cursor: default;
+}
+
+.boards .topic{
+    position: relative;
+}
+
+.boards .topic .avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    left: 40px;
+    top: 5px;
+}
+
+.boards .r1,
+.boards .r2{
+    margin-left: 100px;
+}
+    
+.boards .r1{
+    font-size: 14px;
+    color: #c5d4d4;
+    padding-top: 8px;
+    line-height: 32px;
+}
+
+.boards .r1 a{
+    color: #78d0b5;
+}
+
+.boards .r2 a{
+    font-size: 16px;
+    color: #465555;
+    line-height: 40px;
+}
+
+.icon-ci0{
+    display: inline-block;
+    font-size: 16px;
+    content: "";
+    width: 10px;
+    height: 10px;
+    margin-right: 6px;
+    border: 1px solid #ccc;
+    border-radius: 100%;
+    vertical-align: middle;
+}
+
+.boards hr{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.board-pager{
+    margin: 30px 40px 40px;
+}
+
+.aside .mod-info{
+    margin-bottom: 30px;
+}
+
+.mod-info img{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.mod-info .inner{
+    margin-left: 80px;
+}
+
+.mod-info .boardtxt{
+    font-size: 18px;
+}
+
+.mod-info .boardname{
+    font-size: 14px;
+    color: #c5d4d4;
+}
+
+.mod-info .bm{
+    color: #c5d4d4;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.mod-info a{
+    color: #78d0b5;
+}    
+
+.mod-note{
+    margin-bottom: 40px;
+}
+
+.mod-starit{
+    margin-bottom: 30px;
+}
+
+.mod-starit .btns{
+    text-align: center;
+    margin: 15px 0;;
+}
+
+.mod-ann{
+    background: #eaf5ea;
+    font-size: 13px;
+    padding: 20px 1em;
+}
+
+.mod-ann em{
+    font-size: 18px;
+    margin: 0 5px;
+}
+    
+.mod-ann a{
+    color: #61af75;
