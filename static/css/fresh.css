@@ -1,0 +1,151 @@
+.fresh .primary{
+    width: 680px;
+}
+
+.fresh .aside{
+    width: 200px;
+    margin-left: 80px;
+}
+
+.mod-pageheader{
+    position: relative;
+}
+
+.mod-pageheader img{
+    width: 680px;
+}
+
+.mod-pageheader a{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.mod-title{
+    text-align: center;
+    font-size: 16px;
+    color: #36444;
+    border-bottom: 1px solid #9fdca0;
+    margin-bottom : 10px;
+    line-height: 45px;
+}
+
+.mod-goods ul{
+    margin: 0 40px
+}
+
+.mod-goods li{
+    float: left;
+    width: 120px;
+}
+
+.mod-goods a{
+    display: inline-block;
+    color: #666;
+    padding: 10px 0;
+}
+
+.mod-goods .more{
+    float: right;
+    color: #78d0b5;
+}
+
+.mod-fresh .fresh{
+    position: relative;
+    font-size: 13px;
+}
+
+.mod-fresh .boardname{
+    width: 80px;
+    position: absolute;
+    text-align: right;
+    font-size: 14px;
+    top: 15px;
+}
+
+.mod-fresh .posts{
+    margin-left: 120px;
+}
+
+.mod-fresh .post{
+    padding: 15px 0;
+    position: relative;
+}
+
+.mod-fresh .title{
+    color: #666;
+}
+
+.mod-fresh .time{
+    color: #c5d4d4;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
+
+.mod-fresh .more{
+    text-align: center;
+}
+
+.mod-fresh .more a{
+    color: #78d0b5;
+    font-size: 12px;
+}
+
+.fresh .loadmore{
+    text-align: center;
+    line-height: 40px;
+    color: #9fdca0;
+    border: 1px solid #9fdca0;
+    display: block;
+    margin-top: 20px;
+}
+
+.mod-fresh .posts-more{
+    display: none;
+}
+
+.mod-self{
+    position: relative;
+}
+
+.mod-self .avatar{
+    width: 65px;
+    height: 65px;
+    position: absolute;
+    border-radius: 100%;
+}
+
+.mod-self .userid{
+    font-size: 18px;
+    color: #3c4444;
+    margin-left: 80px;
+    padding-top: 20px;
+}    
+
+.mod-self .score{
+    font-size: 12px;
+    color: #c5d4d4;
+    margin-left: 80px;
+}
+
+.mod-self .detail{
+    margin-top: 20px;
+}
+
+.mod-self .detail span{
+    font-size: 12px;
+    color: #c5d4d4;
+    width: 65px;
+    border-right: 1px solid #ccc;
+    margin-right: 8px;;
+}    
+
+.mod-self .detail em{
+    color: #3c4444;
+    margin: 0 8px;
+}
+
+.mod-self .detail .last{
+    border-right: 0;
+}

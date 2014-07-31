@@ -3,7 +3,7 @@
 import re
 
 from herzog.base.app import jsonify
-from herzog.base.cache import cacheup
+from herzog.base.jstore import hzd
 from herzog.base.argorpc import getbbsfile
 from herzog.base.log import getlogger
 from datetime import datetime as dt
@@ -33,14 +33,8 @@ def parse_int(k, default=None):
 def getnow():
     return dt.now()
 
-@cacheup
 def getsysop() :
-    try :
-        sysops = set(getbbsfile('etc/SYSOPS.herzog').read().split())
-    except IOError :
-        logger.warning('Cannot load sysops name. Check your BBS_HOME/etc/SYSOP.herzog file')
-        sysops = set()
-    return sysops
+    return hzd.geta('site:sysop')
 
 def issysop(userid):
     return userid in getsysop()

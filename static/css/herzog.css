@@ -29,15 +29,6 @@ body{
     margin: 0 auto;
 }
 
-.primary{
-    width: 720px;
-}
-
-.aside{
-    width: 200px;
-    margin-left: 40px;
-}
-
 a{
     color: #9fdca0;
 }
@@ -51,7 +42,7 @@ hr{
 
 .mod{
     margin: 20px 0;
-    font-size: 13px;
+    /* font-size: 13px; */
 }
 
 .aside hr{

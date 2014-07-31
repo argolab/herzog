@@ -58,12 +58,11 @@ class ArgoRPCClicent :
         self._session = session
         self._fromhost = fromhost
 
-def getbbsfile(path, mode='r'):
-    return open(ROOT_FMT % path, mode=mode)
+def getbbsfile(path):
+    return ROOT_FMT % path
 
-def getuserfile(userid, filename, mode='r'):
-    return open(_HOME_FMT % (userid[0].upper(), userid, filename),
-                mode=mode)
+def getuserfile(userid, filename):
+    return _HOME_FMT % (userid[0].upper(), userid, filename)
 
 all_api = [
     'test',        

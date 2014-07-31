@@ -7,6 +7,7 @@ import herzog.views.userself
 import herzog.mod.firebird
 import herzog.views.board
 import herzog.views.user
+import herzog.views.fresh
 
 # from app import app
 

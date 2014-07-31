@@ -29,7 +29,7 @@ from herzog.actions.update import (
     update_reply as a_updatereply
 )
 
-@app.route('/')
+@app.route('/test')
 def index():
     return render_template('test.html')
 
