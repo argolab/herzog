@@ -1,55 +1,60 @@
 {% extends "solo.html" %}
 
-{% block bodycls %} fresh index{% endblock %}
+{% block bodycls %} page-fresh page-index{% endblock %}
 
 {% block container %}
 
-  <div class="container clr">
+  <div class="container">
 
-    <div class="primary left">
+    <div class="primary">
       
       {% if img %}
-        <div class="mod mod-pageheader">
-          <img src="{{ img.src }}" title="{{ img.text }}" />
-          <a href="{{img.href}}" title="{{img.text}}">{{img.text}}</a>
+        <div class="mod mod-fresh-pageheader">
+          <a href="{{img.href}}" title="{{img.text}}">
+            <img src="{{ img.src }}" title="{{ img.text }}" />
+            <span class="custom">{{img.text}}</span>
+          </a>
         </div>
       {% endif %}
       
-      <div class="mod mod-goods clr">
+      <div class="mod mod-fresh-goods">
         <div class="mod-title">
           <h3>在这里我可以干点啥？</h3>
         </div>
-        <ul class="clr">
-          {% for g in goods %}
-            <li><a href="url_for('board', boardname=g[1])" title="到 g[1] 版">{{g[0]}}</a></li>
-          {% endfor %}
-        </ul>
-        <a class="more" href="#" title="查看全部看版">> 更多有意思的...</a>
+        <div class="row">
+          <ul class="list">
+            {% for g in goods %}
+              <li><a href="url_for('board', boardname=g[1])" title="到 g[1] 版">{{g[0]}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="row">
+          <a class="more" href="#" title="查看全部看版">> 更多有意思的...</a>
+        </div>
+        <hr/>
       </div>
 
-      <hr/>
-
-      <div class="mod mod-fresh">
+      <div class="mod mod-fresh-freshlist">
         <div class="mod-title">
           <h3>阅读新鲜话题</h3>
         </div>
         {% for bs in fresh %}
-          <div class="fresh">
-            <div class="boardname">
-              {{bs.boardname}}
+          <div class="fresh item">
+            <div class="col-left">
+              <span class="boardname">{{bs.boardname}}</span>
             </div>
-            <div class="posts">
+            <div class="col-main posts">
               {% for p in bs.posts %}
                 {% if loop.index == 4 %}
                   <div class="more"><a href="#">查看被折叠的话题</a></div>
                   <div class="posts-more">
                 {% endif %}
-                <div class="post">
-                  <div>
+                <div class="post item">
+                  <div class="col-main">
                     <span></span>
-                    <a class="title" href="{{url_for('topic', tid=p.tid)}}" title="{{p.title}}">{{p.title}}</a>
+                    <a class="title text" href="{{url_for('topic', tid=p.tid)}}" title="{{p.title}}">{{p.title}}</a>
                   </div>
-                  <span class="time">{{p.lastupdate|nicetime}}</span>
+                  <span class="col-right text-alt time">{{p.lastupdate|nicetime}}</span>
                 </div>
               {% endfor %}
               <hr/>
@@ -63,50 +68,56 @@
       </div>
     </div>
 
-    <div class="aside left">
+    <div class="aside">
 
-      <div class="mod mod-self">
-        <div>
-          <img class="avatar" src="{{url_for_avatar(authed())}}" title="{{authed()}}"/>
-          <a class="userid" href=""{{url_for('user', userid=authed())}}" title="{{authed()}}">{{authed()}}</a><br/>
-          <span class="score">贡献值： <em>233</em> </span>
-        </div>
-        <div class="clr detail">
-          <span>发起 <em>1</em> </span>
-          <span>回复 <em>1</em> </span>
-          <span class="last">关注 <em>1</em> </span>
-        </div>
-        <hr/>    
-      </div>
+      <div class="widgets">
 
-      <div class="mod mod-topten">
-        <div class="mod-title">
-          <h3>看看今日十大...</h3>
+        <div class="mod mod-fresh-self">
+          <div class="col-left">
+            <img class="avatar" src="{{url_for_avatar(authed())}}" title="{{authed()}}"/>
+          </div>
+          <div class="col-main">
+            <a class="userid text" href=""{{url_for('user', userid=authed())}}" title="{{authed()}}">{{authed()}}</a><br/>
+            <span class="score text-alt">贡献值： <em>233</em> </span>
+          </div>
+          <div class="row detail text-alt">
+            <span>发起 <em class="text">1</em> </span>
+            <span>回复 <em class="text">1</em> </span>
+            <span class="last">关注 <em class="text">1</em> </span>
+          </div>
+          <hr/>    
         </div>
-        <ul>
+
+        <div class="mod mod-fresh-topten">
+          <div class="mod-title">
+            <h3>看看今日十大...</h3>
+          </div>
           {% for p in topten %}
-            <li>
-              <img src="{{url_for_avatar(p.owner)}}" title="{{p.title}}"/>
-              <a href="{{url_for('topic', tid=p.tid)}}" title="{{p.title}}">{{p.title}}</a>
-            </li>
+            <div class="outer">
+              <div class="inner">
+                <img class="custom" src="{{url_for_avatar(p.owner)}}" title="{{p.title}}"/>
+                <a class="text text-small" href="{{url_for('topic', tid=p.tid)}}" title="{{p.title}}">{{p.title}}</a>
+              </div>
+            </div>
           {% endfor %}
-        </ul>
-        <hr/>
-      </div>
-
-      {% if ad %}
-        <div class="mod mod-ad">
-          <a href="{{ad.href}}"><img src="{{ad.src}}" /></a>
+          <hr/>
         </div>
-      {% endif %}
 
-      <div class="mod mod-link0">
-        <ul>
-          <li><a title="求助" href="#">我要求助</a></li>
-          <li><a title="投诉" href="#">我要投诉</a></li>
-        </ul>
+        {% if ad %}
+          <div class="mod mod-fresh-ad">
+            <a href="{{ad.href}}"><img src="{{ad.src}}" /></a>
+          </div>
+        {% endif %}
+
+        <div class="mod mod-link0">
+          <ul>
+            <li><a title="求助" href="#">我要求助</a></li>
+            <li><a title="投诉" href="#">我要投诉</a></li>
+          </ul>
+        </div>
+        
       </div>
-      
     </div>
+  </div>
 
 {% endblock %}

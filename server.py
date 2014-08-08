@@ -4,6 +4,7 @@ import herzog.base
 import herzog.actions
 import herzog.views.test
 import herzog.views.userself
+import herzog.views.topic
 import herzog.mod.firebird
 import herzog.views.board
 import herzog.views.user

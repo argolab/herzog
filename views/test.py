@@ -57,10 +57,6 @@ def sql() :
     return render_template('sql.html', sql=request.args['sql'],
                            keys=keys, rows=ret)
 
-@app.route('/t/<int:tid>')
-def topic(tid):
-    return str(tid)
-
 @app.route('/ajax/post/update', methods=["POST"])
 @ajax_fields_error
 def ajax_updatepost():

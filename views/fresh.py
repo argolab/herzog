@@ -27,7 +27,7 @@ def fresh():
     # TODO : perm filter
     # TODO : fresh and topten
     topten = [ dict(title=t.title, tid=t.tid, owner=t.owner)
-               for t in topics ]
+               for t in topics[:10] ]
     img = hzd.get('page:fresh:image')
     goods = hzd.geta('page:fresh:goods')
     ad = hzd.geto('pgae:fresh:ad')

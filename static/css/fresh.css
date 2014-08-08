@@ -1,98 +1,112 @@
-.fresh .primary{
-    width: 680px;
+.page-fresh .primary{
+    width: 714px;
+    margin-top: 40px;
 }
 
-.fresh .aside{
-    width: 200px;
-    margin-left: 80px;
+.page-fresh .aside{
+    width: 210px;
+    margin-top: 40px;
+    margin-left: 84px;
 }
 
-.mod-pageheader{
-    position: relative;
+.page-fresh .primary hr{
+    background: transparent url('../img/hr714.png') no-repeat bottom;
 }
 
-.mod-pageheader img{
-    width: 680px;
+.page-fresh .aside hr{
+    background: transparent url("../img/hr210.png") no-repeat bottom;
+    margin: 30px 0;
+}    
+    
+
+/* mod fresh pageheader */
+
+.mod-fresh-pageheader{
+    max-height: 200px;
+    overflow: hidden;
+    margin-bottom: 35px;
 }
 
-.mod-pageheader a{
-    position: absolute;
+.mod-fresh-pageheader img{
+    width: 714px;
+}
+
+.mod-fresh-pageheader a{
+    display: block;
+}    
+
+.mod-fresh-pageheader span{
     bottom: 10px;
     right: 10px;
+    color: #ccc;
+    text-shadow: 0 0 2px #333;
 }
 
-.mod-title{
-    text-align: center;
-    font-size: 16px;
-    color: #36444;
-    border-bottom: 1px solid #9fdca0;
-    margin-bottom : 10px;
-    line-height: 45px;
+/* mod fresh goods */
+
+.mod-fresh-goods{
+    margin-bottom: 50px;
 }
 
-.mod-goods ul{
-    margin: 0 40px
-}
-
-.mod-goods li{
-    float: left;
+.mod-fresh-goods li{
     width: 120px;
 }
 
-.mod-goods a{
-    display: inline-block;
+.mod-fresh-goods .list a{
     color: #666;
-    padding: 10px 0;
+    display: inline-block;
+    line-height: 40px;
 }
 
-.mod-goods .more{
+.mod-fresh-goods .more{
     float: right;
     color: #78d0b5;
+    line-height: 40px;
 }
 
-.mod-fresh .fresh{
-    position: relative;
-    font-size: 13px;
-}
+/* mod fresh freshlist */
 
-.mod-fresh .boardname{
+.mod-fresh-freshlist .boardname{
     width: 80px;
-    position: absolute;
     text-align: right;
     font-size: 14px;
-    top: 15px;
+    margin-top: 10px;
+    display: inline-block;
 }
 
-.mod-fresh .posts{
+.mod-fresh-freshlist .posts{
     margin-left: 120px;
 }
 
-.mod-fresh .post{
-    padding: 15px 0;
-    position: relative;
+.mod-fresh-freshlist hr{
+    background: transparent url("../img/hr594.png") no-repeat bottom;
+    margin: 25px 0;
+}    
+
+.mod-fresh-freshlist .post{
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
-.mod-fresh .title{
-    color: #666;
+.mod-fresh-freshlist .time{
+    margin-right: 10px;
 }
 
-.mod-fresh .time{
-    color: #c5d4d4;
-    position: absolute;
-    right: 10px;
-    top: 15px;
-}
-
-.mod-fresh .more{
+.mod-fresh-freshlist .more{
     text-align: center;
+    background: transparent url("../img/hr594.png") no-repeat center;
+    line-height: 1px;
+    margin: 40px 0;
 }
 
-.mod-fresh .more a{
+.mod-fresh-freshlist .more a{
     color: #78d0b5;
     font-size: 12px;
+    background: #fff;
+    padding: 0 20px;
 }
 
-.fresh .loadmore{
+.mod-fresh-freshlist .loadmore{
     text-align: center;
     line-height: 40px;
     color: #9fdca0;
@@ -101,51 +115,87 @@
     margin-top: 20px;
 }
 
-.mod-fresh .posts-more{
+.mod-fresh-freshlist .posts-more{
     display: none;
 }
 
-.mod-self{
-    position: relative;
+/* mod fresh self */
+
+.mod-fresh-self{
+    margin-top: 0;
 }
 
-.mod-self .avatar{
+.mod-fresh-self .avatar{
     width: 65px;
     height: 65px;
-    position: absolute;
     border-radius: 100%;
+    margin-left: 0;
+    margin-top: 0;
 }
 
-.mod-self .userid{
-    font-size: 18px;
-    color: #3c4444;
+.mod-fresh-self .col-main{
     margin-left: 80px;
+}
+
+.mod-fresh-self .userid{
+    font-size: 18px;
     padding-top: 20px;
 }    
 
-.mod-self .score{
+.mod-fresh-self .score{
     font-size: 12px;
-    color: #c5d4d4;
-    margin-left: 80px;
 }
 
-.mod-self .detail{
+.mod-fresh-self .detail{
     margin-top: 20px;
 }
 
-.mod-self .detail span{
+.mod-fresh-self .detail span{
     font-size: 12px;
-    color: #c5d4d4;
-    width: 65px;
+    width: 60px;
+    display: inline-block;;
     border-right: 1px solid #ccc;
-    margin-right: 8px;;
+    margin-right: 8px;
+    text-align: center;
 }    
 
-.mod-self .detail em{
-    color: #3c4444;
+.mod-fresh-self .detail em{
     margin: 0 8px;
 }
 
-.mod-self .detail .last{
+.mod-fresh-self .detail .last{
     border-right: 0;
+    margin-right: -2px;
 }
+
+/* mod fresh topten */
+
+.mod-fresh-topten .outer{
+    margin-top: 25px;;
+    display: table;
+}
+
+.mod-fresh-topten .inner{
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    height: 32px;
+}
+
+.mod-fresh-topten img{
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+.mod-fresh-topten a{
+    padding-left: 45px;
+    display: inline-block;
+    max-height : 30px;
+    overflow: hidden;
+    line-height: 15px;
+    word-break : break-all;
+}
+    
+    
+    

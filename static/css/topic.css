@@ -1,0 +1,47 @@
+.page-topic .single{
+    margin: 0 84px;
+    position: relative;
+}
+
+.mod-topic-replys{
+    margin: 0 42px 42px;
+}
+
+.mod-topic-lz .header{
+    padding: 45px 0 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.mod-topic-lz .username{
+    position: relative;
+    line-height: 30px;
+    margin: 15px 0;    
+}
+
+.mod-topic-lz .avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    vertical-align: middle;
+}
+
+.mod-topic-lz .owner{
+    margin: 0 5px;
+}        
+
+.mod-topic-lz h3{
+    font-size: 55px;
+    line-height: 75px;
+}
+
+.mod-topic-lz .content{
+    font-size: 14px;
+}
+
+.mod-topic-lz .typo{
+    margin: 20px 0 40px;
+}
+
+.mod-topic-lz .row{
+    margin: 10px 0;
+}

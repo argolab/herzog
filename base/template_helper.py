@@ -11,7 +11,7 @@ def nicetime(dt):
     return str(dt)
 
 @app.template_filter()
-def post_html(text):
+def postHtml(text):
     return text.replace('\n', '<br>')
 
 @app.template_global('url_for_avatar')

@@ -9,16 +9,13 @@
     <link href="{{url_for('static', filename='css/footer.css')}}" rel="stylesheet" />
     <link href="{{url_for('static', filename='css/board.css')}}" rel="stylesheet" />
     <link href="{{url_for('static', filename='css/fresh.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static', filename='css/topic.css')}}" rel="stylesheet" />
     {% block header %}{% endblock %}
   </head>
-  <body class="fly{% block bodycls %}{% endblock %}">
-    <div class="doc">
-      {% include "include/topbar.html" %}
-      <div class="clr">
-        {% block container %}{% endblock %}
-      </div>
-      {% include "include/footer.html" %}
-    </div>
+  <body class="{% block bodycls %}{% endblock %}">
+    {% include "include/topbar.html" %}
+    {% block container %}{% endblock %}
+    {% include "include/footer.html" %}
     {% block tail %}{% endblock %}
   </body>
 </html>

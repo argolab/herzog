@@ -1,25 +1,36 @@
-.boards .primary{
-    width: 720px;
+.page-boards .primary{
+    width: 756px;
 }
 
-.boards .aside{
-    width: 200px;
-    margin-left: 40px;
+.page-boards .aside{
+    width: 210px;
+    margin-left: 42px;
 }
 
-.board-header{
+.page-boards .primary{
+    margin: -100px -19px 0 -19px;
+    background-color: #fff;
+    background-image: url('../img/boardshadow.png') no-repeat;
+    border-top: 4px solid #68b38c;
+}
+
+/* mod board header */
+
+.mod-board-header{
     background-position: center 0;
-    /* background-repeat: no-repeat; */
+    height: 390px;
+    width: 100%;
 }
     
-.board-header .title{
+.mod-board-header .title{
     height: 390px;
-    margin: 0 auto;
+    left: 0;
+    right: 0;
     text-align: center;
     background: rgba(0,0,0,.2);
 }
 
-.board-header h2{
+.mod-board-header h2{
     padding-top: 120px;
     color: #f0f0f0;
     color: rgba(255, 255, 255, .8);
@@ -27,193 +38,113 @@
     text-shadow: 0 0 1px #aaa;
 }
 
-.board-header small{
+.mod-board-header small{
     color: rgba(255, 255, 255, .5);
     font-size: 20px;
 }
 
-.btn{
-    display: inline-block;
-    text-decoration: none;
-    border: 1px solid #9fdca0;
-    font-size: 13px;
-    border-radius: 15px;
-    padding: 3px 18px 2px;
-}
+/* mod board postlist */
 
-.btn:hover{
-    text-decoration:none;
-}
-
-.btn-reverse{
-    border: 1px solid transparent;
-    background-color: #9fdca0;
-    background-color: rgba(159, 220, 160, .8);
-    color: #fff;
-}
-
-.boards .primary{
-    margin-top: -100px;
-    background: #fff;
-    border-top: 4px solid #68b38c;
-    box-shadow: 0 1px 5px #ccc;
-}
-
-.board-bar{
-    margin: 30px 40px 15px;
-}
-
-.board-bar li{
-    float: left;
+.mod-board-postlist .board-actions li{
     margin-right : 15px;
 }
 
-.board-bar .btn{
-    float: left;
-}
-
-.board-bar .tabs{
+.mod-board-postlist .tabs{
     margin-left: 40px;
-    float: left;
 }
 
-.board-bar .tabs a{
-    font-size: 16px;
-    color: #c5d4d4;
-    display: block;
-    float: left;
-    padding-top: 2px;
-}
-
-.board-bar .tabs .sep{
-    border-right : 1px solid #c5d4d4;
-    height: 12px;
-    margin-top: 9px;
-}
-
-.board-bar .tabs a.active,
-.board-bar .tabs a:hover{
-    color: #78d0b5;
-    text-decoration: none;
-}
-
-.board-bar .active{
-    cursor: default;
-}
-
-.boards .topic{
-    position: relative;
-}
-
-.boards .topic .avatar{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    position: absolute;
-    left: 40px;
-    top: 5px;
-}
-
-.boards .r1,
-.boards .r2{
+.mod-board-postlist .col-main{
     margin-left: 100px;
 }
     
-.boards .r1{
-    font-size: 14px;
-    color: #c5d4d4;
-    padding-top: 8px;
+.mod-board-postlist .r1{
+    margin-top: 8px;
     line-height: 32px;
+    position: relative;
 }
 
-.boards .r1 a{
-    color: #78d0b5;
-}
-
-.boards .r2 a{
-    font-size: 16px;
-    color: #465555;
+.mod-board-postlist .r2 a{
     line-height: 40px;
 }
 
-.icon-ci0{
-    display: inline-block;
-    font-size: 16px;
-    content: "";
-    width: 10px;
-    height: 10px;
-    margin-right: 6px;
-    border: 1px solid #ccc;
-    border-radius: 100%;
-    vertical-align: middle;
+.mod-board-postlist .time{
+    right: 40px;
 }
 
-.boards hr{
-    margin-left: 40px;
-    margin-right: 40px;
+.mod-board-postlist hr{
+    background-image: url("../img/hr756.png");
+    background-color: transparent;
 }
 
-.board-pager{
+.mod-board-postlist .board-pager{
     margin: 30px 40px 40px;
 }
 
-.aside .mod-info{
+/* mod board info */
+
+.mod-board-info{
     margin-bottom: 30px;
 }
 
-.mod-info img{
+.mod-board-info img{
     width: 60px;
     height: 60px;
-    position: absolute;
     border-radius: 50%;
 }
 
-.mod-info .inner{
+.mod-board-info .col-main{
     margin-left: 80px;
 }
 
-.mod-info .boardtxt{
+.mod-board-info .boardtxt{
     font-size: 18px;
 }
 
-.mod-info .boardname{
-    font-size: 14px;
-    color: #c5d4d4;
-}
-
-.mod-info .bm{
-    color: #c5d4d4;
-    font-size: 13px;
+.mod-board-info .bm{
     margin-top: 10px;
 }
 
-.mod-info a{
-    color: #78d0b5;
-}    
+/* mod board note */
 
-.mod-note{
-    margin-bottom: 40px;
+.widgets .mod-board-note{
+    margin-bottom: 40px;;
 }
 
-.mod-starit{
-    margin-bottom: 30px;
+/* mod board star-it */
+
+.widgets .mod-board-starit{
+    margin-bottom: 10px;
 }
 
-.mod-starit .btns{
+.mod-board-starit .btns{
     text-align: center;
     margin: 15px 0;;
 }
 
-.mod-ann{
+/* mod board ann */
+
+.mod-board-ann{
     background: #eaf5ea;
     font-size: 13px;
-    padding: 20px 1em;
+    padding: 20px 0;
+    text-align: center;
 }
 
-.mod-ann em{
+.mod-board-ann em{
     font-size: 18px;
     margin: 0 5px;
 }
     
-.mod-ann a{
+.mod-board-ann a{
     color: #61af75;
+}
+
+/* hr */
+
+
+.page-boards .aside hr{
+    background-image: url("../img/hr210.png");
+    background-color: transparent;
+    margin: 30px 0;
+}    
+    
