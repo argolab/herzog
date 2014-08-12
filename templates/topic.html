@@ -4,60 +4,51 @@
 
 {% block bodycls %} page-topic{% endblock %}
 
+{% block header %}
+  <script id="seajsnode" src="{{url_for('static', filename='js/seajs/sea.js')}}"></script>
+  <script src="{{url_for('static', filename='js/herzog.config.js')}}"></script>
+{% endblock %}
+
+{% block tail %}
+  <script>
+   seajs.use("page/topic");
+  </script>
+{% endblock %}
+
 {% block container %}
 
-  <div class="mod mod-topic-lz">
-    <div class="header">
-      <div class="container">
-        <div class="single">
-          <h3>{{-topic.title-}}</h3>
-          <div class="username">
-            <img class="avatar" title="{{topic.owner}}"
-                 src="{{url_for_avatar(topic.owner)}}"/>
-            <a class="owner text-iter" href="{{topic.owner}}"
-               title="点击到 {{topic.owner}} 的个人资料页面">
-              {{-topic.owner-}}
-            </a>
-            <span class="time text-alt">在 {{topic.lastupdate}} 贴出</span>
-          </div>
+  <div class="container">
+    <div class="primary">
+      <div class="mod-topic-lz">
+        <div class="col-left">
+          <img class="avatar" title="{{topic.owner}}"
+               src="{{url_for_avatar(topic.owner)}}"/>
         </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="single">
-        <div class="content">
+        <div class="col-main">
+          <div class="header">
+            <h3>{{-topic.title-}}</h3>
+            <div class="username">
+              <a class="owner text-iter" href="{{topic.owner}}"
+                 title="点击到 {{topic.owner}} 的个人资料页面">
+                {{-topic.owner-}}
+              </a>
+              <span class="time text-alt">{{topic.lastupdate}}</span>
+            </div>
+          </div>
           <div class="typo">
             {{topic.content|postHtml|safe}}
           </div>
           <div class="row">
-            <span class="text-alt">{{ topic.replynum }} 个回复</span>
-            {% if topic.pusher %}
-              <div class="list">
-                {% for u in topic.pusher %}
-                  <a class="text" href="{{url_for('user', userid=u)}}">{{u}}</a>
-                  {% if not loop.last %}、{% endif %}
-                {% endfor %}
-                <span class="text-alt">等 {{topic.pushernum}} 人觉得值得一读</span>
-              </div>
-            {% endif %}
-          </div>            
-          <div class="row">
-            <ul class="list actions">
-              <li><a href="#">值得一读</a></li>
-              <li><a href="#">感谢</a></li>
-              <li><a href="#">举报</a></li>
+            <ul class="list">
+              <li><a href="#">{{topic.replynum}}</a></li>
+              <li><a href="#">关注</a></li>
+              <li><a href="#">分享</a></li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  {% if replys %}
-  <div class="container">
-    <div class="single">
-      <div class="mod-topic-replys">
-
+      {% if replys %}
         {% for r in replys %}
           <div class="mod-topic-reply">
             <div class="col-left">
@@ -70,57 +61,81 @@
                    title="点击到 {{r.owner}} 的个人资料页面">
                   {{-r.owner-}}
                 </a>
-                <span class="time text-alt">在 {{r.time}} 说：</span>
+                <span class="time text-alt">{{r.lastupdate}}</span>
               </div>
               <div class="post-content">
                 {{r.content|postHtml|safe}}
               </div>
-              {% if topic.pusher %}
-                <div class="post-pusher">
-                  {% for u in topic.pusher %}
-                    <a href="{{url_for('user', userid=u)}}">{{u}}</a>
-                    {% if not loop.last %}、{% endif %}
-                  {% endfor %}
-                  等 {{topic.pushernum}} 人觉得值得一读
-                </div>
-              {% endif %}
-              <ul class="post-actions">
-                <li><a href="#">值得一读</a></li>
-                <li><a href="#">感谢</a></li>
-                <li><a href="#">举报</a></li>
-              </ul>
+              <div class="row">
+                <ul class="post-actions">
+                  <li><a href="#">值得一读</a></li>
+                  <li><a href="#">感谢</a></li>
+                  <li><a href="#">举报</a></li>
+                </ul>
+              </div>
               {% if r.comments %}
                 <div class="mod-topic-comments">
                   {% for c in r.comments %}
                     <div class="comment">
-                      <a class="owner" href="{{c.owner}}"
-                         title="点击到 {{c.owner}} 的个人资料页面">
-                        {{-c.owner-}}
-                      </a>
-                      <span class="content">{{c.content|postHtml|safe}}</span>
-                      <span class="post-time text-alt">{{c.time}}</span>
+                      <div class="r1">
+                        <a class="owner" href="{{c.owner}}"
+                           title="点击到 {{c.owner}} 的个人资料页面">
+                          {{-c.owner-}}
+                        </a>
+                        <span class="time text-alt">{{r.lastupdate}}</span>
+                      </div>
+                      <div class="content row">
+                        {{c.content|postHtml|safe}}
+                        <div class="row">
+                          <ul class="comment-actions">
+                            <li><a href="#">回复</a></li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   {% endfor %}
                 </div>
               {% endif %}
-              <input>回复他点啥</input>
             </div>
+            <hr/>
           </div>
         {% endfor %}
+      {% endif %}
+
+      <div id="editor-reply">
+        <div class="editarea" contenteditable>回复他
+          吵死他，跟他打嘴炮
+          嘻嘻嘻</div>
+        <div class="btn btn-reverse submit">
+          提交
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="aside">
+      <div class="widgets">
+        <div class="mod-topic-fromboard">
+          来自
+          <em>女孩子<small>Girls</small></em>
+        </div>
+
+        <div class="mod-topic-guess">
+          <div class="mod-title">
+            <h3>本版话题推荐...</h3>
+          </div>
+          {% for p in relative %}
+            <div class="outer">
+              <div class="inner">
+                <img class="custom" src="{{url_for_avatar(p.owner)}}" title="{{p.title}}"/>
+                <a class="text text-small" href="{{url_for('topic', tid=p.tid)}}" title="{{p.title}}">{{p.title}}</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
-  {% endif %}
 
-  <div class="container">
-    <div class="single">
-      <textarea>
-        回复他
-        吵死他，跟他打嘴炮
-        嘻嘻嘻
-      </textarea>
-    </div>
   </div>
-  
-    </div>  
 
 {% endblock %}

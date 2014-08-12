@@ -1,0 +1,72 @@
+{% extends "solo.html" %}
+
+{% block title %} ACMS - {{config.SITE_NAME}} {% endblock %}
+
+{% block bodycls %} acms-boards{% endblock %}
+
+{% block container %}
+  <div class="container">
+    <br>
+    <div>
+      <strong>操作有风险，修改务必谨慎！</strong>
+    </div>
+    <br>
+    <div class="mod-acms-pagelist">
+      <h3>所有页面</h3>
+      <table class="full-table">
+        <tr>
+          <th class="c1">pid</th>
+          <th class="c2">路径</th>
+          <th class="c3">页面名称</th>
+          <th class="c4">最后更新时间</th>
+          <th class="c5">最后操作者</th>
+          <th class="c6">&nbsp;</th>
+        </tr>
+        {% for r in pages %}
+          <tr>
+            <td>{{r.pid}}</td>
+            <td>{{r.pagepath}}</td>
+            <td>{{r.pagename}}</td>
+            <td>{{r.lastupdate}}</td>
+            <td>{{r.lastuserid}}</td>
+            <td>
+              <a href="javascript:;">修改</a> |
+              <a href="#">删除</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+      <div>
+        <a href="#">添加</a>
+      </div>
+    </div>
+    <br>
+    <div class="mod-acms-reslist">
+      <h3>所有资源位</h3>
+      <table class="full-table">
+        <tr>
+          <th class="c1">rid</th>
+          <th class="c2">资源名称</th>
+          <th class="c3">最后更新时间</th>
+          <th class="c4">最后操作者</th>
+          <th class="c5">&nbsp;</th>
+        </tr>
+        {% for r in res %}
+          <tr>
+            <td>{{r.rid}}</td>
+            <td>{{r.resname}}</td>
+            <td>{{r.lastupdate}}</td>
+            <td>{{r.lastuserid}}</td>
+            <td>
+              <a href="#">修改</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+      <div>
+        <a href="#">添加</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

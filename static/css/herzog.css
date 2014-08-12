@@ -217,3 +217,45 @@ a.text-iter2, .text-iter2{
     padding-top: 12px;
     background: url('../img/hr210.png') no-repeat bottom;
 }
+
+/* editor */
+
+.editor-inline{
+    background: #fcfcfc;
+    padding: 1em;
+    max-width: 560px;
+}
+
+.editor-inline .btn{
+    float: right;
+    margin: 10px;
+}    
+
+.editor-inline:after{
+    display: table;
+    content: "";
+    clear: both;
+}
+
+.editarea{
+    font-size: 14px;
+    background: #fff;
+    padding: 10px;
+    line-height: 22px;
+    min-height: 22px;
+    white-space: pre-wrap;
+    cursor: text;
+    border: #f4f4f4;
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgba(0,0,0,.1) inset;
+    background-color: #fff;
+    outline: 0;
+}
+
+.full-table{
+    width: 100%;
+}
+
+.full-table th{
+    font-weight: bold;
+}

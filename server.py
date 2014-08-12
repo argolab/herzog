@@ -9,6 +9,7 @@ import herzog.mod.firebird
 import herzog.views.board
 import herzog.views.user
 import herzog.views.fresh
+import herzog.views.cms
 
 # from app import app
 
