@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 
 import re
+from flask import escape
 
 from herzog.base.app import jsonify
 from herzog.base.jstore import hzd

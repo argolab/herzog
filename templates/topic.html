@@ -40,84 +40,87 @@
           </div>
           <div class="row">
             <ul class="list">
-              <li><a href="#">{{topic.replynum}}</a></li>
-              <li><a href="#">关注</a></li>
-              <li><a href="#">分享</a></li>
+              <li><a class="btn" href="#">赞 {{topic.replynum}}</a></li>
+              <li><a class="text-iter2" href="#">关注</a></li>
+              <li><a class="text-iter2" href="#">分享</a></li>
             </ul>
           </div>
         </div>
+        <hr>
       </div>
 
-      {% if replys %}
-        {% for r in replys %}
-          <div class="mod-topic-reply">
-            <div class="col-left">
-              <img class="avatar" title="{{r.owner}}"
-                   src="{{url_for_avatar(r.owner)}}" />
-            </div>
-            <div class="col-main">
-              <div>
-                <a class="owner text-iter" href="{{r.owner}}"
-                   title="点击到 {{r.owner}} 的个人资料页面">
-                  {{-r.owner-}}
-                </a>
-                <span class="time text-alt">{{r.lastupdate}}</span>
+      <div id="replys">
+        {% if replys %}
+          {% for r in replys %}
+            <div class="row mod-topic-reply">
+              <div class="col-left">
+                <img class="avatar" title="{{r.owner}}"
+                     src="{{url_for_avatar(r.owner)}}" />
               </div>
-              <div class="post-content">
-                {{r.content|postHtml|safe}}
-              </div>
-              <div class="row">
-                <ul class="post-actions">
-                  <li><a href="#">值得一读</a></li>
-                  <li><a href="#">感谢</a></li>
-                  <li><a href="#">举报</a></li>
-                </ul>
-              </div>
-              {% if r.comments %}
-                <div class="mod-topic-comments">
-                  {% for c in r.comments %}
-                    <div class="comment">
-                      <div class="r1">
-                        <a class="owner" href="{{c.owner}}"
-                           title="点击到 {{c.owner}} 的个人资料页面">
-                          {{-c.owner-}}
-                        </a>
-                        <span class="time text-alt">{{r.lastupdate}}</span>
-                      </div>
-                      <div class="content row">
-                        {{c.content|postHtml|safe}}
-                        <div class="row">
-                          <ul class="comment-actions">
-                            <li><a href="#">回复</a></li>
-                          </ul>
+              <div class="col-main">
+                <div class="header">
+                  <a class="owner text-iter" href="{{r.owner}}"
+                     title="点击到 {{r.owner}} 的个人资料页面">
+                    {{-r.owner-}}
+                  </a>
+                  <span class="time text-alt">{{r.lastupdate}}</span>
+                </div>
+                <div class="post-content">
+                  {{r.content|postHtml|safe}}
+                </div>
+                <div class="row">
+                  <ul class="list reply-action">
+                    <li><a class="text-iter2" href="#">值得一读</a></li>
+                    <li><a class="text-iter2" href="#">感谢</a></li>
+                    <li><a class="text-iter2" href="#">举报</a></li>
+                  </ul>
+                </div>
+                {% if r.comments %}
+                  <div class="mod-topic-comments">
+                    {% for c in r.comments %}
+                      <div class="comment">
+                        <div class="r1">
+                          <a class="owner" href="{{c.owner}}"
+                             title="点击到 {{c.owner}} 的个人资料页面">
+                            {{-c.owner-}}
+                          </a>
+                          <span class="time text-alt">{{r.lastupdate}}</span>
+                        </div>
+                        <div class="content row">
+                          {{c.content|postHtml|safe}}
+                          <div class="row">
+                            <ul class="list comment-actions">
+                              <li><a href="#">回复</a></li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  {% endfor %}
-                </div>
-              {% endif %}
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+              <hr/>
             </div>
-            <hr/>
-          </div>
-        {% endfor %}
-      {% endif %}
-
-      <div id="editor-reply">
-        <div class="editarea" contenteditable>回复他
-          吵死他，跟他打嘴炮
-          嘻嘻嘻</div>
-        <div class="btn btn-reverse submit">
-          提交
-        </div>
+          {% endfor %}
+        {% endif %}
       </div>
-      
+
+      <div class="mod-topic-editor-reply" id="editor-reply" data-tid="{{topic.tid}}" data-action="{{url_for('ajax_reply')}}" data-fetch="{{url_for('ajax_get_reply')}}">
+        <div id="editarea-reply" class="editarea" contenteditable></div>
+        <div class="row">
+          <a class="text-alt reset" href="javascript:;" id="reset-reply">取消</a>
+          <div class="btn btn-reverse submit">
+            提交
+          </div>
+        </div>
+      </div>      
     </div>
 
     <div class="aside">
       <div class="widgets">
-        <div class="mod-topic-fromboard">
+        <div class="mod-topic-fromboard text-alt">
           来自
-          <em>女孩子<small>Girls</small></em>
+          <em class="text-iter">女孩子<small class="text-alt">Girls</small></em>
         </div>
 
         <div class="mod-topic-guess">
@@ -138,4 +141,33 @@
 
   </div>
 
+  <script id="tpl-reply" type="text/html">
+    <div class="row mod-topic-reply">
+      <div class="col-left">
+        <img class="avatar" title="<%=reply.owner%>"
+             src="<%=reply.owner_avatar%>" />
+      </div>
+      <div class="col-main">
+        <div>
+          <a class="owner text-iter" href="<%=reply.owner%>"
+             title="点击到 <%=reply.owner%> 的个人资料页面">
+            <%=reply.owner%>
+          </a>
+          <span class="time text-alt"><%=reply.lastupdate%></span>
+        </div>
+        <div class="post-content">
+          <%=#reply.html_content%>
+        </div>
+        <div class="row">
+          <ul class="post-actions">
+            <li><a href="#">值得一读</a></li>
+            <li><a href="#">感谢</a></li>
+            <li><a href="#">举报</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr/>
+    </div>
+  </script>
+    
 {% endblock %}

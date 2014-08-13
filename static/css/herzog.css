@@ -71,7 +71,8 @@ a.text-iter, .text-iter{
 }
 
 a.text-iter2, .text-iter2{
-    color: #9fdca0;
+    /* color: #9fdca0; */
+    color: #89b5de;
 }
 
 .text-normal{
@@ -120,6 +121,7 @@ a.text-iter2, .text-iter2{
     font-size: 13px;
     border-radius: 15px;
     padding: 3px 18px 2px;
+    cursor: pointer;
 }
 
 .btn:hover{

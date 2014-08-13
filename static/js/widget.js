@@ -6,28 +6,44 @@ define(function(require, exports, module){
     function BaseWidget(){}
 
     BaseWidget.prototype = {
+        beforeBuild : null,
+        afterBuild : null,
         buildElement : function(options){
+            if(this.beforeBuild){
+                this.beforeBuild(options);
+            }
             this._options = options;
             if(options._container){
                 this.el = (this.render == "function") ?
                     this.render(options, options._container) :
-                    $((options._tpl ?
+                    jQuery((options._tpl ?
                        template(options._tpl, options) :
                        template.render(this.render, options))) ;
-                this.el.appendTo($(options._container));                        
+                this.el.appendTo(jQuery(options._container));                        
             }else{
-                this.el = $(options.el);
+                this.el = jQuery(options.el);
             }
             this.listen_event();
+            if(this.afterBuild){
+                this.afterBuild();
+            }
         },
         render : '',
-        listen_event : function(){
+        _setupFromOptions : function(arr){
+            for(var i=0; i<arr.length; ++i){
+                if(this._options.hasOwnProperty(arr[i])){
+                    this[arr[i]] = this._options[arr[i]];
+                }
+            }
+        },
+        listen_event : function(base){
             var e = this._options._events || this._events;
             var self = this;
+            var base = base || this.el;
             if(e){
                 for(var k in e){
                     if(e.hasOwnProperty(k)){
-                        var d = this.el.find(k);
+                        var d = base.find(k);
                         var es = e[k];
                         for(var n in es){
                             if(es.hasOwnProperty(n)){
@@ -38,7 +54,7 @@ define(function(require, exports, module){
                                     });
                                 })();
                             }
-                        }
+                        }                    
                     }
                 }
             }
@@ -52,7 +68,7 @@ define(function(require, exports, module){
         }
         Widget.prototype = new BaseWidget;
         Widget.prototype.constructor = Widget;
-        $.extend(Widget.prototype, new_methods);
+        jQuery.extend(Widget.prototype, new_methods);
         return Widget;
     }
 
