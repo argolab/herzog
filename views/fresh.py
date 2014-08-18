@@ -21,6 +21,7 @@ def fresh():
                       "   lastreply, replynum, partnum, upvote, fromapp,"
                       "   flag, content, boardname FROM herzog_topic"
                       "  ORDER BY score DESC LIMIT 20")
+    # Filter the topics use a whitelist
     fresh = groupup(topics)
     print fresh
     # TODO : topics may be NONE

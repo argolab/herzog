@@ -9,9 +9,21 @@ def topic(tid):
                    "   flag, content FROM herzog_topic WHERE tid=%s", tid)
     if not topic :
         abort(404)
-    replys = db.query(u"SELECT rid, brid, replyid, owner, lastupdate,"
-                      "  fromapp, flag, content FROM herzog_reply"
-                      "  WHERE tid=%s ORDER BY brid LIMIT 100", tid)
+    replys0 = db.query(u"SELECT rid, brid, replyid, owner, lastupdate,"
+                       "  fromapp, flag, content FROM herzog_reply"
+                       "  WHERE tid=%s ORDER BY brid LIMIT 100", tid)
+    lastbranch = None
+    lastcomments = None
+    replys = []
+    for r in replys0 :
+        if lastbranch is None or r.brid != lastbranch.brid :
+            lastcomments = r['comments'] = []
+            lastbranch = r
+            replys.append(r)
+        else :
+            lastcomments.append(r)
+
+        
     return render_template('topic.html', topic=topic, replys=replys)
 
 @app.route('/ajax/reply')

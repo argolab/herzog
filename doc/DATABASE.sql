@@ -123,3 +123,18 @@ CREATE TABLE `herzog_notification` (
       KEY (userid, t, s)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
        
+CREATE TABLE `herzog_user` (
+       `uid` int(11) unsigned NOT NULL auto_increment,
+       `userid` varchar(20) NOT NULL,
+       `username` varchar(80) NOT NULL,
+       `newnum` int(11) unsigned NOT NULL default 0,
+       `replynum` int(11) unsigned NOT default 0,
+       `starnum` int(11) unsigned NOT default 0,
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
+
+CREATE TABLE `herzog_user_boardship` (
+       `ubid` int(11) unsigned NOT NULL auto_increment,
+       `userid` varchar(20) NOT NULL,
+       `boardname` varchar(40) NOT NULL,
+       `flag` int(11) unsigned NOT NULL default 0
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
