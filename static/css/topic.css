@@ -126,6 +126,10 @@
     background: #eaf5ea;
 }
 
+.mod-topic-fromboard a{
+    text-decoration: none;
+}
+
 .mod-topic-fromboard .row1{
     padding-top: 20px;
     line-height: 20px;

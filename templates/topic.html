@@ -1,6 +1,6 @@
 {% extends "solo.html" %}
 
-{% block title %} {{topic.title}} - {{config.SITE_NAME}} {% endblock %}
+{% block title %} {{topic.title}} - {{site.SITENAME}} {% endblock %}
 
 {% block bodycls %}page-topic{% endblock %}
 
@@ -131,7 +131,7 @@
         <div class="mod mod-topic-fromboard">
           <div class="row1 text-alt">来自</div>
           <div class="row2">
-            <em class="text-iter">女孩子<small class="text-alt">Girls</small></em>
+            <a class="text-iter" href="{{url_for('board', boardname=topic.boardname)}}"><em>女孩子<small class="text-alt">{{topic.boardname}}</small></a>
           </div>
         </div>
 

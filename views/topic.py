@@ -38,7 +38,7 @@ def topic(tid):
     if userid :
         topic = db.get(u"SELECT herzog_topic.tid, owner, title, score, v,"
                        "  lastupdate, lastreply, replynum, partnum, upvote,"
-                       "  fromapp, herzog_topic.flag, content, upvote,"
+                       "  fromapp, herzog_topic.flag, content, upvote, boardname,"
                        "  herzog_topicship.flag as tsflag FROM herzog_topic"
                        " LEFT JOIN herzog_topicship"
                        " ON herzog_topicship.tid=herzog_topic.tid"
@@ -47,7 +47,7 @@ def topic(tid):
     else :
         topic = db.get(u"SELECT tid, owner, title, score, v, lastupdate,"
                        "   lastreply, replynum, partnum, upvote, fromapp,"
-                       "   flag, content, upvote FROM herzog_topic"
+                       "   flag, content, upvote, boardname FROM herzog_topic"
                        " WHERE tid=%s", tid)        
     if not topic :
         abort(404)
