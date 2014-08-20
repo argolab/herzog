@@ -1,8 +1,10 @@
 from herzog.base import (
     app, render_template, request, authed, getfields,
     ajax_fields_error, json_success, FormValidError,
-    request, getconn
+    request, getconn, abort, json_success, escape
 )
+
+from herzog.base.template_helper import postHtml, url_for_avatar
 
 from herzog.base.misc import issysop
 
@@ -29,33 +31,42 @@ from herzog.actions.update import (
     update_reply as a_updatereply
 )
 
-@app.route('/test')
-def index():
-    return render_template('test.html')
-
-def ktable(k) :
-    if k.startswith('from') :
-        k = '|' + k
-    elif k.startswith('last') :
-        k = '{' + k
-    if k.find('id') > 0 :
-        return '-' + str(k.find('id')) + k
-    else :
-        return k
-
-@app.route('/sql')
-def sql() :
-    userid = authed()
-    if not issysop(userid) :
+@app.route('/t/<int:tid>')
+def topic(tid):
+    db = getconn()
+    topic = db.get(u"SELECT tid, owner, title, score, v, lastupdate,"
+                   "   lastreply, replynum, partnum, upvote, fromapp,"
+                   "   flag, content FROM herzog_topic WHERE tid=%s", tid)
+    if not topic :
         abort(404)
-    if not request.args.get('sql', '').startswith("SELECT") :
-        abort(404)
-    ret = getconn().query(request.args['sql'])
-    if ret :
-        keys = ret[0].keys()
-        keys.sort(key=ktable)
-    return render_template('sql.html', sql=request.args['sql'],
-                           keys=keys, rows=ret)
+    replys0 = db.query(u"SELECT rid, brid, replyid, owner, lastupdate,"
+                       "  fromapp, flag, content FROM herzog_reply"
+                       "  WHERE tid=%s ORDER BY brid LIMIT 100", tid)
+    lastbranch = None
+    lastcomments = None
+    replys = []
+    for r in replys0 :
+        if lastbranch is None or r.brid != lastbranch.brid :
+            lastcomments = r['comments'] = []
+            lastbranch = r
+            replys.append(r)
+        else :
+            lastcomments.append(r)
+
+        
+    return render_template('topic.html', topic=topic, replys=replys)
+
+@app.route('/ajax/reply')
+@ajax_fields_error
+def ajax_get_reply():
+    form = getfields(_require=('rid',), _form=request.args)
+    db = getconn()
+    reply = db.get(u"SELECT rid, brid, replyid, owner, lastupdate,"
+                   "  fromapp, flag, content FROM herzog_reply"
+                   "  WHERE rid=%s", form['rid'])
+    reply['html_content'] = postHtml(reply['content'])
+    reply['owner_avatar'] = url_for_avatar(reply['owner'])
+    return json_success(reply=reply)
 
 @app.route('/ajax/post/update', methods=["POST"])
 @ajax_fields_error
@@ -152,5 +163,3 @@ def ajax_setvpost():
     userid = authed()
     form = getfields(_require=("tid", "v"))
     return json_success(**a_setv(userid, form.get('tid'), form.get('v')))
-
-

@@ -2,7 +2,7 @@
 
 {% block title %} {{topic.title}} - {{config.SITE_NAME}} {% endblock %}
 
-{% block bodycls %} page-topic{% endblock %}
+{% block bodycls %}page-topic{% endblock %}
 
 {% block header %}
   <script id="seajsnode" src="{{url_for('static', filename='js/seajs/sea.js')}}"></script>
@@ -17,9 +17,9 @@
 
 {% block container %}
 
-  <div class="container">
+  <div class="container layout-simple row">
     <div class="primary">
-      <div class="mod-topic-lz">
+      <div class="mod-topic-lz mod">
         <div class="col-left">
           <img class="avatar" title="{{topic.owner}}"
                src="{{url_for_avatar(topic.owner)}}"/>
@@ -38,10 +38,20 @@
           <div class="typo">
             {{topic.content|postHtml|safe}}
           </div>
-          <div class="row">
-            <ul class="list">
-              <li><a class="btn" href="#">赞 {{topic.replynum}}</a></li>
-              <li><a class="text-iter2" href="#">关注</a></li>
+          <div class="row footer">
+            <ul class="inline-list">
+              {% if authed() %}
+                {% if topic.tsflag and FLAG.has_upvote(topic.tsflag) %}
+                  <li><a class="btn ungood" data-tid="{{topic.tid}}" data-do="ungood" href="javascript:;"><span class="t">已赞</span> <span class="n">{{topic.upvote}}</span></a></li>
+                {% else %}
+                  <li><a class="btn good" data-tid="{{topic.tid}}" data-do="good" href="javascript:;"><span class="t">赞</span> <span class="n">{{topic.upvote}}</span></a></li>
+                {% endif %}
+                {% if topic.tsflag and FLAG.has_star(topic.tsflag) %}
+                  <li><a class="btn" data-tid="{{topic.tid}}" data-do="unstar" href="javascript:;"><span class="t">已关注</span></a></li>
+                {% else %}
+                  <li><a class="btn" data-tid="{{topic.tid}}" data-do="star" href="javascript:;"><span class="t">关注</span></a></li>
+                {% endif %}
+              {% endif %}
               <li><a class="text-iter2" href="#">分享</a></li>
             </ul>
           </div>
@@ -52,7 +62,7 @@
       <div id="replys">
         {% if replys %}
           {% for r in replys %}
-            <div id="reply-{{r.rid}}" class="row mod-topic-reply">
+            <div id="reply-{{r.rid}}" class="mod mod-topic-reply">
               <div class="col-left">
                 <img class="avatar" title="{{r.owner}}"
                      src="{{url_for_avatar(r.owner)}}" />
@@ -65,28 +75,32 @@
                   </a>
                   <span class="time text-alt">{{r.lastupdate}}</span>
                 </div>
-                <div class="post-content">
+                <div class="typo content">
                   {{r.content|postHtml|safe}}
                 </div>
-                <div class="row">
-                  <ul class="list reply-action">
-                    <li><a data-rid="{{r.rid}}" data-do="good" class="text-iter2" href="javascript:;">赞</a></li>
+                <div class="row footer">
+                  <ul class="inline-list right">
+                    {% if r.rsflag and FLAG.has_upvote(r.rsflag) %}
+                      <li><a data-rid="{{r.rid}}" class="text-alt" data-do="ungood" href="javascript:;"><span class="t text-iter2">已赞</span>(<span class="n">{{r.upvote}}</span>)</a></li>
+                    {% else %}
+                      <li><a data-rid="{{r.rid}}" class="text-alt" data-do="good" href="javascript:;"><span class="t text-iter2">赞</span>(<span class="n">{{r.upvote}}</span>)</a></li>
+                    {% endif %}
                     <li><a data-rid="{{r.rid}}" data-do="comment" class="text-iter2" href="javascript:;">回复</a></li>
                   </ul>
                 </div>
-                <div class="mod-topic-comments{% if not r.comments %} empty{% endif %}">
+                <div class="comments row {% if not r.comments %} empty{% endif %}">
                   {% for c in r.comments %}
                     <div class="comment">
-                      <div class="r1">
+                      <div class="comment-header">
                         <a class="owner" href="{{c.owner}}"
                            title="点击到 {{c.owner}} 的个人资料页面">
                           {{-c.owner-}}
                         </a>
                         <span class="time text-alt">{{r.lastupdate}}</span>
                       </div>
-                      <div class="content row">
+                      <div class="comment-content row">
                         {{c.content|postHtml|safe}}
-                        <ul class="list comment-actions">
+                        <ul class="inline-list comment-footer">
                           <li><a data-brid="{{r.rid}}" data-rid="{{c.rid}}" data-toreply="{{c.owner}}" data-do="commentComment" class="text-iter2" href="#">回复</a></li>
                         </ul>
                       </div>
@@ -101,94 +115,100 @@
       </div>
 
       <div class="mod-topic-editor-reply" id="editor-reply" data-tid="{{topic.tid}}" data-action="{{url_for('ajax_reply')}}" data-fetch="{{url_for('ajax_get_reply')}}">
-        <div id="editarea-reply" tabindex="0" class="editarea" contentEditable="true"></div>
-        <div class="row">
-          <a class="text-alt reset" href="javascript:;" id="reset-reply">取消</a>
-          <div class="btn btn-reverse submit">
-            提交
-          </div>
+        <div data-placeholder="说点啥..." id="editarea-reply" tabindex="0" class="editarea" contentEditable="true"></div>
+        <div class="row footer">
+          <ul class="inline-list right">
+            <li><a class="text-alt reset" href="javascript:;" id="reset-reply">取消</a></li>
+            <li><div class="btn btn-reverse submit">提交</div></li>
+          </ul>
         </div>
       </div>      
     </div>
 
     <div class="aside">
       <div class="widgets">
-        <div class="mod-topic-fromboard text-alt">
-          来自
-          <em class="text-iter">女孩子<small class="text-alt">Girls</small></em>
+
+        <div class="mod mod-topic-fromboard">
+          <div class="row1 text-alt">来自</div>
+          <div class="row2">
+            <em class="text-iter">女孩子<small class="text-alt">Girls</small></em>
+          </div>
         </div>
 
-        <div class="mod-topic-guess">
-          <div class="mod-title">
-            <h3>本版话题推荐...</h3>
-          </div>
-          {% for p in relative %}
-            <div class="outer">
-              <div class="inner">
-                <img class="custom" src="{{url_for_avatar(p.owner)}}" title="{{p.title}}"/>
-                <a class="text text-small" href="{{url_for('topic', tid=p.tid)}}" title="{{p.title}}">{{p.title}}</a>
-              </div>
+        {% if relative %}
+          <div class="mod title-mod mod-topic-guess">
+            <div class="mod-title">
+              <h3>本版话题推荐...</h3>
             </div>
-          {% endfor %}
-        </div>
+            <div class="topic-list">
+              {% for p in relative %}
+                <div class="outer">
+                  <div class="inner">
+                    <img class="custom" src="{{url_for_avatar(p.owner)}}" title="{{p.title}}"/>
+                    <a class="text text-small" href="{{url_for('topic', tid=p.tid)}}" title="{{p.title}}">{{p.title}}</a>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
       </div>
     </div>
 
   </div>
 
   <script id="tpl-reply" type="text/html">
-    <div id="reply-<%=reply.rid%>" class="row mod-topic-reply">
+    <div id="reply-<%=reply.rid%>" class="mod mod-topic-reply">
       <div class="col-left">
         <img class="avatar" title="<%=reply.owner%>"
              src="<%=reply.owner_avatar%>" />
       </div>
       <div class="col-main">
-        <div>
+        <div class="header">
           <a class="owner text-iter" href="<%=reply.owner%>"
-             title="点击到 <%=reply.owner%> 的个人资料页面">
-            <%=reply.owner%>
-          </a>
+             title="点击到 <%=reply.owner%> 的个人资料页面"><%=reply.owner%></a>
           <span class="time text-alt"><%=reply.lastupdate%></span>
         </div>
-        <div class="post-content">
+        <div class="typo content">
           <%=#reply.html_content%>
         </div>
-        <div class="row">
-          <ul class="list reply-action">
-            <li><a data-rid="<%=reply.rid%>" data-action="good" class="text-iter2" href="javascript:;">赞</a></li>
+        <div class="row footer">
+          <ul class="inline-list right">
+            <li><a data-rid="<%=reply.rid%>" data-action="good" class="text-iter2" href="javascript:;"><span class="t text-iter2">赞</span>(0)</a></li>
             <li><a data-rid="<%=reply.rid%>" data-action="comment" class="text-iter2" href="javascript:;">回复</a></li>
           </ul>
         </div>
-        <div class="mod-topic-comments empty">
+        <div class="comments empty">
         </div>
       </div>
       <hr/>
     </div>
   </script>
 
-  <script type="text/html" id="tpl-comment-editor" >
-    <div class="mod-topic-editor-comment" data-replyid="<%=rid%>" data-action="{{url_for('ajax_reply')}}" data-fetch="{{url_for('ajax_get_reply')}}">
-      <div class="editarea" tabindex="-1" contentEditable="true"><% if(toreply){ %>@<%=toreply%> <% }; %></div>
-      <div class="row">
-        <a data-do="cancelComment" data-rid="<%=rid%>" href="javascript:;" class="text-alt">取消</a>
-        <div data-do="postComment" data-rid="<%=rid%>" class="submit btn btn-reverse">
-          回复
-        </div>
-      </div>
-    </div>
-  </script>
-
   <script type="text/html" id="tpl-comment">
     <div class="comment">
-      <div class="r1">
+      <div class="comment-header">
         <a class="owner" href="<%=reply.owner%>"
            title="点击到 <%=reply.owner%> 的个人资料页面"><%=reply.owner%></a>
         <span class="time text-alt"><%=reply.lastupdate%></span>
       </div>
-      <div class="content row">
+      <div class="comment-content row">
         <%=#reply.html_content%>
-        <ul class="list comment-actions">
+        <ul class="inline-list comment-footer">
           <li><a data-brid="<%=reply.brid%>" data-rid="<%=reply.rid%>" data-toreply="<%=reply.owner%>" data-do="commentComment" class="text-iter2" href="#">回复</a></li>
+        </ul>
+      </div>
+    </div>
+  </script>
+  
+  <script type="text/html" id="tpl-comment-editor" >
+    <div class="editor-comment" data-replyid="<%=rid%>" data-action="{{url_for('ajax_reply')}}" data-fetch="{{url_for('ajax_get_reply')}}">
+      <div class="editarea" tabindex="-1" contentEditable="true"><% if(toreply){ %>@<%=toreply%>&nbsp;<% }; %></div>
+      <div class="row">
+        <ul class="inline-list right">
+          <li><a data-do="cancelComment" data-rid="<%=rid%>" href="javascript:;" class="text-alt">取消</a></li>
+          <li><div data-do="postComment" data-rid="<%=rid%>" class="submit btn btn-reverse">回复</div></li>
         </ul>
       </div>
     </div>

@@ -11,3 +11,6 @@ SPEAK      = OWNER | REPLY | COMMENT
 
 not_any = lambda a, b : (a | b) == 0
 set_flag = lambda a, b : a | b
+
+has_star = lambda a : a & STAR > 0
+has_upvote = lambda a : a & UPVOTE > 0

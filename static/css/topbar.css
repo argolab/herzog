@@ -25,14 +25,14 @@
     background: #f4f4f4;
 }
 
-.topbar .list > li > a{
+.topbar .list1 > li > a{
     color: #bbe8d7;
     line-height: 1;
     padding: 18px 15px 16px;
     text-decoration: none;
 }
 
-.topbar .list > li > a:hover{
+.topbar .list1 > li > a:hover{
     color: #fff;
 }
     

@@ -28,7 +28,7 @@ audio, canvas, video{
 
 /* 要注意表单元素并不继承父级 font 的问题 */
 body, button, input, select, textarea{
-  font:400 1em/1.8 Avenir, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+  font:400 14px/25px Avenir, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
 }
 
 /* 去除 IE6 input/button 多余的空白 */
@@ -186,7 +186,7 @@ pre{
 /* 一致化 horizontal rule */
 hr{
   border:none;
-  margin:10px 0;
+  margin:0;
   *color:pink; *filter:chroma(color=pink);
   height:1px;
   background-color: #cfcfcf;
@@ -234,7 +234,7 @@ h1, h2, h3, h4, h5, h6{
 .typo h1, .typo h2, .typo h3, .typo h4, .typo h5, .typo h6,
 .typo-h1, .typo-h2, .typo-h3, .typo-h4, .typo-h5, .typo-h6{
   margin-bottom:0.4em;
-  line-height:1.5;
+  line-height:1.8;
 }
 
 .typo h1, .typo-h1{
@@ -305,12 +305,12 @@ h1, h2, h3, h4, h5, h6{
 
 /* 高亮选中 */
 ::-moz-selection{
-  background:#08c;
+  background:#8c0;
   color:#fff;
 }
 
 ::selection{
-  background:#08c;
+  background:#8c0;
   color:#fff;
 }
 

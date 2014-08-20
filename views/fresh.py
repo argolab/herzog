@@ -15,7 +15,7 @@ def groupup(topics) :
     return d
 
 @app.route('/')
-def fresh():
+def index():
     db = getconn()
     topics = db.query(u"SELECT tid, owner, title, score, v, lastupdate,"
                       "   lastreply, replynum, partnum, upvote, fromapp,"

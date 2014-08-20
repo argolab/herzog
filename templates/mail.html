@@ -1,17 +1,49 @@
-{% for m in mails %}
-<div>
-  time: {{m.date}} <br/>
-  sender: {{m.sender}} <br/>
-  filename: {{m.filename}} <br/>
-  num: {{m.num}} <br/>
-  title : {{m.title}} <br/>
-  <br/>
-</div>
-{% endfor %}
-nonext: {{ nonext }} <br/>
-noprev: {{ noprev }} <br/>
-page : {{ page }} <br/>
-perpage : {{ perpage }} <br/>
-pgtotal : {{ pgtotal }} <br/>
-total : {{ total }} <br/>
+{% extends "solo.html" %}
 
+{% block title %}信箱 - {{config.SITE_NAME}}{% endblock %}
+
+{% block bodycls %} page-mails{% endblock %}
+
+{% block container %}
+
+  {{data}}
+  
+  <div class="container">
+    <div class="primary">
+      <div class="mod mod-mailbox">
+        <div class="row">
+          <div class="col1">
+            <strong>{{authed()}}</strong> 的收件箱
+          </div>
+        </div>
+        <table class="full-table">
+          <tr>
+            <th>&nbsp;</th>
+            <th>发信人</th>
+            <th>标题</th>
+            <th>时间</th>
+          </tr>
+          {% for m in mails %}
+            <tr class="mail" data-filenum="{{m.filenum}}" data-filename="{{m.filename}}">
+              <td>{%if m.mflag %} m {% endif %}{%if m.nflag %} n {% endif %}{%if m.rflag %} r {% endif %}</td>
+              <td>{{m.sender}}</td>
+              <td><a href="javascript:;">{{m.title}}</a></td>
+              <td>{{m.date}}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+      {% if offset > limit %}
+        <a href="{{url_for('mail')}}?offset={{offset-limit}}">前一页</a>
+      {% else %}
+        前一页
+      {% endif %}
+      {% if nonext %}
+        下一页
+      {% else %}
+        <a href="{{url_for('mail')}}?offset={{next}}">下一页</a>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}

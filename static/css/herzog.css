@@ -3,33 +3,52 @@ body{
     font-size: 14px;
 }
 
-.primary, .aside{
-    float: left;
+.container{
+    width: 1008px;
+    margin: 0 auto;
 }
 
-.container:before, .row:before, .item:before,
-.mod:before, .custom:before, .mods:before,
-.container:after, .row:after, .item:after,
-.mod:after, .custom:after, .mods:after{
+/* page */
+
+.layout-simple{
+    margin-top: 40px;
+}
+
+.layout-simple .primary{
+    width: 714px;
+    margin-right: 42px;
+}
+
+.layout-simple .aside{
+    width: 210px;
+}
+
+.layout-simple .primary hr{
+    background: transparent url('../img/hr714.png') no-repeat bottom;
+}
+
+.layout-simple .aside hr{
+    background: transparent url("../img/hr210.png") no-repeat bottom;
+    margin: 30px 0;
+}
+
+/* row and col */
+
+.row:before, .row:after{
     display: table;
     content: "";
 }
 
-.container:after, .row:after, .item:after,
-.mod:after, .custom:after, .mods:after{
+.row:after{
     clear: both;
 }
 
-.container, .row, .item, .mod, .custom, .mods{
+.row{
     zoom: 1;
 }
 
-.container, .row, .item, .mod, .mods{
-    position: relative;
-}
-
-.custom{
-    position: absolute;
+.primary, .aside, .col1, .col2, .col3{
+    float: left;
 }
 
 .col1, .col2, .col3{
@@ -43,20 +62,46 @@ body{
 .col-left, .col-right{
     position: absolute;
     top: 0;
-}
-
-.col-left{
     left: 0;
 }
 
 .col-right{
     right: 0;
-    top: 0;
 }
+
+.col-main{
+    margin-left: 40px;
+}
+
+/* mod base */
+
+.mod{
+    position: relative;
+}
+
+
+.title-mod .mod-title h3{
+    margin: 10px 0;
+    line-height: 15px;
+}
+
+.title-mod .mod-title{
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 1px solid #9fdca0;    
+}
+
+.custom{
+    position: absolute;
+}
+
+/* form */
 
 input{
     color: #c5d4d4;
 }
+
+/* inline */
 
 a.text, .text a{
     color: #465555;
@@ -71,7 +116,6 @@ a.text-iter, .text-iter{
 }
 
 a.text-iter2, .text-iter2{
-    /* color: #9fdca0; */
     color: #89b5de;
 }
 
@@ -87,32 +131,57 @@ a.text-iter2, .text-iter2{
     font-size: 16px;
 }
 
-.container{
-    width: 1008px;
-    margin: 0 auto;
-}
+/* list */
 
-.list{
+.inline-list{
     list-style-type: none;
     margin: 0;
     padding: 0;
     float: left;
 }
 
-.list li{
+.inline-list li{
     float: left;
+    margin-right: 20px;
 }
 
-.list li a{
+.inline-list li a{
     display: block;
     float: left;
 }
+
+.inline-list.right{
+    float: right;
+    /* margin-right: -20px;; */
+}
+
+.topic-list{
+    display: table;
+}
+
+.topic-list .outer{
+    display: table-row;
+    padding-bottom: 25px;
+}
+
+.topic-list .inner{
+    display: table-cell;
+    text-align: center;
+    line-height: 18px;
+}
+
+
+    
+    
+
+/* dropdown */
 
 .dropdown ul{
     display: hidden;
     list-style-type: none;
 }
 
+/* btn */
 
 .btn{
     display: inline-block;
@@ -120,7 +189,8 @@ a.text-iter2, .text-iter2{
     border: 1px solid #9fdca0;
     font-size: 13px;
     border-radius: 15px;
-    padding: 3px 18px 2px;
+    padding: 4px 18px;
+    line-height: 20px;
     cursor: pointer;
 }
 
@@ -135,9 +205,7 @@ a.text-iter2, .text-iter2{
     color: #fff;
 }
 
-.bar{
-    margin: 30px 40px 15px;
-}
+/* tabs */
 
 .tabs{
     float: left;
@@ -174,85 +242,102 @@ a.text-iter2, .text-iter2{
     margin-top: 9px;
 }
 
-.col-left .avatar{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: 40px;
-    margin-top: 5px;
-}
+/* .col-left .avatar{ */
+/*     width: 40px; */
+/*     height: 40px; */
+/*     border-radius: 50%; */
+/*     margin-left: 40px; */
+/*     margin-top: 5px; */
+/* } */
 
-.icon-ci0{
-    display: inline-block;
-    font-size: 16px;
-    content: "";
-    width: 10px;
-    height: 10px;
-    margin-right: 6px;
-    border: 1px solid #ccc;
-    border-radius: 100%;
-    vertical-align: middle;
-}
+/* .icon-ci0{ */
+/*     display: inline-block; */
+/*     font-size: 16px; */
+/*     content: ""; */
+/*     width: 10px; */
+/*     height: 10px; */
+/*     margin-right: 6px; */
+/*     border: 1px solid #ccc; */
+/*     border-radius: 100%; */
+/*     vertical-align: middle; */
+/* } */
     
-.widgets .mod{
-    margin: 20px 0;
-}
+/* .widgets .mod{ */
+/*     margin: 20px 0; */
+/* } */
 
-.mod-title{
-    text-align: center;
-    font-size: 16px;
-    color: #36444;
-    border-bottom: 1px solid #9fdca0;
-    margin-bottom : 10px;
-    line-height: 45px;
-}
+/* .mod-title{ */
+/*     text-align: center; */
+/*     font-size: 16px; */
+/*     color: #36444; */
+/*     border-bottom: 1px solid #9fdca0; */
+/*     margin-bottom : 10px; */
+/*     line-height: 45px; */
+/* } */
 
-/* mod link0 */
+/* /\* mod link0 *\/ */
 
-.mod-link0{
-    text-align: center;
-}
+/* .mod-link0{ */
+/*     text-align: center; */
+/* } */
 
-.mod-link0 a{
-    line-height: 36px;
-    display: block;
-    padding-top: 12px;
-    background: url('../img/hr210.png') no-repeat bottom;
-}
+/* .mod-link0 a{ */
+/*     line-height: 36px; */
+/*     display: block; */
+/*     padding-top: 12px; */
+/*     background: url('../img/hr210.png') no-repeat bottom; */
+/* } */
 
 /* editor */
 
-.editor-inline{
-    background: #fcfcfc;
-    padding: 1em;
-    max-width: 560px;
-}
-
-.editor-inline .btn{
-    float: right;
-    margin: 10px;
-}    
-
-.editor-inline:after{
-    display: table;
-    content: "";
-    clear: both;
-}
-
 .editarea{
-    font-size: 14px;
+    line-height: 25px;
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    padding: 7px 1em 6px;
+    outline: none;
+    box-shadow: 0 1px 2px rgba(100,100,100,.1) inset;
     background: #fff;
-    padding: 10px;
-    line-height: 22px;
-    min-height: 22px;
-    white-space: pre-wrap;
-    cursor: text;
-    border: #f4f4f4;
-    border-radius: 3px;
-    box-shadow: 0 0 5px rgba(0,0,0,.2) inset;
-    background-color: #fff;
-    outline: 0;
 }
+
+.editarea:empty:not(:focus):before{
+    content:attr(data-placeholder);
+    color: #ccc;
+}
+
+/* .editor-inline{ */
+/*     background: #fcfcfc; */
+/*     padding: 1em; */
+/*     max-width: 560px; */
+/* } */
+
+/* .editor-inline .btn{ */
+/*     float: right; */
+/*     margin: 10px; */
+/* }     */
+
+/* .editor-inline:after{ */
+/*     display: table; */
+/*     content: ""; */
+/*     clear: both; */
+/* } */
+
+/* .editarea{ */
+/*     font-size: 14px; */
+/*     background: #fff; */
+/*     padding: 10px; */
+/*     line-height: 22px; */
+/*     min-height: 22px; */
+/*     white-space: pre-wrap; */
+/*     cursor: text; */
+/*     border: #f4f4f4; */
+/*     border-radius: 3px; */
+/*     box-shadow: 0 0 5px rgba(0,0,0,.2) inset; */
+/*     background-color: #fff; */
+/*     outline: 0; */
+/* } */
+
+/* table */
 
 .full-table{
     width: 100%;

@@ -2,13 +2,13 @@
 
 import herzog.base
 import herzog.actions
-import herzog.views.test
 import herzog.views.userself
+import herzog.views.fresh
 import herzog.views.topic
+import herzog.views.mail
 import herzog.mod.firebird
 import herzog.views.board
 import herzog.views.user
-import herzog.views.fresh
 import herzog.views.cms
 
 # from app import app

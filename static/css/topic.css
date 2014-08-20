@@ -1,158 +1,284 @@
-.page-topic .primary{
-    width: 714px;
-    margin-right: 42px;
-}
-
-.page-topic .aside{
-    width: 210px;
-}
-
-.mod-topic-editor-reply .editarea{
-    min-height: 110px;
-}
-
-.mod-topic-editor-reply .row{
-    margin-top: 20px;
-    text-align: right;
-}
-
-.mod-topic-editor-reply .btn{
-}
-
-.mod-topic-editor-reply .reset{
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.page-topic .primary hr{
-    background: transparent url('../img/hr714.png') no-repeat bottom;
-}
-
-.page-topic .aside hr{
-    background: transparent url("../img/hr210.png") no-repeat bottom;
-    margin: 30px 0;
-}    
-
-/* css */
-
-.mod-topic-lz{
-    margin-top: 40px;
+.mod-topic-lz .col-main{
+    margin-left: 95px;
 }
 
 .mod-topic-lz .avatar{
     width: 70px;
     height: 70px;
-    margin-left: -10px;
-    margin-top: 45px;
-}
-
-.mod-topic-lz .col-main{
-    margin-left: 84px;
-}
-
-.mod-topic-lz .header{
-    margin-bottom: 45px;
+    border-radius: 100%;
 }
 
 .mod-topic-lz .header h3{
-    font-size: 25px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    line-height: 30px;
+    margin-bottom: 20px;
 }
 
 .mod-topic-lz .username{
-    font-size: 16px;
+    line-height: 15px;
+    margin-bottom: 35px;
 }
 
 .mod-topic-lz .typo{
     margin-bottom: 55px;
 }
 
-.mod-topic-lz .btn{
-    margin-right: 20px;
-}
-
-.mod-topic-lz .row{
-    margin-bottom: 20px;
-}
-
-.mod-topic-lz .text-iter2{
+.mod-topic-lz .footer{
     line-height: 30px;
-    display: inline-block;
-    margin-left: 25px;
+    margin-bottom: 20px;
+}    
+
+/* reply */
+
+.mod-topic-reply{
+    margin-top: 30px;
 }
 
-.mod-topic-reply .col-main{
-    margin-left: 84px;
-}
-
-.mod-topic-reply .avatar{
-    margin-left: 34px;
-    margin-top: 15px;
-}
-
-.mod-topic-reply .header{
-    font-size: 16px;
-    line-height: 40px;
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
-
-.mod-topic-reply .reply-action{
-    float: right;
-    margin-bottom: 10px;
-    margin-right: 20px;
-}
-
-.mod-topic-reply .reply-action li{
-    margin-left: 20px;
-}
-
-.mod-topic-editor-reply{
-    margin-top: 20px;
-}
-
-.mod-topic-editor-comment{
-    padding: 20px 45px 0;
-}
-
-.mod-topic-editor-comment .row{
-    margin-top: 20px;
+.mod-topic-reply .col-left{
+    padding-left: 35px;
     text-align: right;
 }
 
-.mod-topic-editor-comment .row .btn{
-    margin-left: 20px;
+.mod-topic-reply .col-left .avatar{
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
 }
 
-.mod-topic-comments{
-    background-color: #f8fbfc;
-    border-radius: 3px;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
+.mod-topic-reply .col-main{
+    margin-left: 95px;
 }
 
-.mod-topic-comments .comment{
-    padding: 20px 20px 0 45px;
+.mod-topic-reply .header{
+    line-height: 35px;
+    margin-bottom: 10px;
+    vertical-align: bottom;
 }
 
-.mod-topic-comments .comment-actions{
+.mod-topic-reply .footer{
+    line-height: 50px;
+}
+
+.mod-topic-reply .comments{
+    background: #f8fbfc;
+    margin-bottom: 30px;
+}
+
+.mod-topic-reply .has-editor{
+    display: block;
+}
+
+.mod-topic-reply .comment{
+    margin-bottom: 25px;
+}
+
+.mod-topic-reply .comment-content{
+    line-height: 20px;
+    margin-left: 40px;
+}
+
+.mod-topic-reply .comment-header{
+    margin-top: 20px;
+    line-height: 20px;
+    padding-bottom: 10px;
+    vertical-align: bottom;
+    margin-left: 42px;
+}
+
+.mod-topic-reply .comment-footer{
     float: right;
+    margin-right: 1em;
 }
+
+.mod-topic-reply .editor-comment{
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 20px;
+}
+
+.mod-topic-reply .editor-comment .row{
+    line-height: 30px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}    
+
+/* reply comment */
+
+.mod-topic-editor-reply{
+    margin-top: 35px;
+}
+
+.mod-topic-editor-reply .editarea{
+    min-height: 150px;
+}
+
+.mod-topic-editor-reply .footer{
+    margin-top: 25px;
+    line-height: 30px;
+    margin-bottom: 25px;
+}
+
+/* mod-topic-fromboard */
 
 .mod-topic-fromboard{
+    margin-top: 5px;
+    margin-bottom: 50px;
     background: #eaf5ea;
-    padding: 20px;
-    margin-top: 40px;
-    margin-bottom: 40px;
 }
 
-.mod-topic-fromboard em{
+.mod-topic-fromboard .row1{
+    padding-top: 20px;
+    line-height: 20px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+}
+
+.mod-topic-fromboard .row2{
+    line-height: 25px;
+    padding-bottom: 25px;
     text-align: center;
-    display: block;
-    font-size: 20px;
-    padding-bottom: 5px;
+    vertical-align: bottom;
 }
 
-.page-topic .has-editor{
-    display: block;
-}
+
+/* .mod-topic-editor-reply .editarea{ */
+/*     min-height: 110px; */
+/* } */
+
+/* .mod-topic-editor-reply .row{ */
+/*     margin-top: 20px; */
+/*     text-align: right; */
+/* } */
+
+/* .mod-topic-editor-reply .btn{ */
+/* } */
+
+/* .mod-topic-editor-reply .reset{ */
+/*     display: inline-block; */
+/*     margin-right: 10px; */
+/* } */
+
+
+/* /\* css *\/ */
+
+/* .mod-topic-lz{ */
+/*     margin-top: 40px; */
+/* } */
+
+/* .mod-topic-lz .avatar{ */
+/*     width: 70px; */
+/*     height: 70px; */
+/*     margin-left: -10px; */
+/*     margin-top: 45px; */
+/* } */
+
+/* .mod-topic-lz .col-main{ */
+/*     margin-left: 84px; */
+/* } */
+
+/* .mod-topic-lz .header{ */
+/*     margin-bottom: 45px; */
+/* } */
+
+/* .mod-topic-lz .header h3{ */
+/*     font-size: 25px; */
+/*     margin-bottom: 10px; */
+/* } */
+
+/* .mod-topic-lz .username{ */
+/*     font-size: 16px; */
+/* } */
+
+/* .mod-topic-lz .typo{ */
+/*     margin-bottom: 55px; */
+/* } */
+
+/* .mod-topic-lz .btn{ */
+/*     margin-right: 20px; */
+/* } */
+
+/* .mod-topic-lz .row{ */
+/*     margin-bottom: 20px; */
+/* } */
+
+/* .mod-topic-lz .text-iter2{ */
+/*     line-height: 30px; */
+/*     display: inline-block; */
+/*     margin-left: 25px; */
+/* } */
+
+/* .mod-topic-reply .col-main{ */
+/*     margin-left: 84px; */
+/* } */
+
+/* .mod-topic-reply .avatar{ */
+/*     margin-left: 34px; */
+/*     margin-top: 15px; */
+/* } */
+
+/* .mod-topic-reply .header{ */
+/*     font-size: 16px; */
+/*     line-height: 40px; */
+/*     margin-top: 15px; */
+/*     margin-bottom: 10px; */
+/* } */
+
+/* .mod-topic-reply .reply-action{ */
+/*     float: right; */
+/*     margin-bottom: 10px; */
+/*     margin-right: 20px; */
+/* } */
+
+/* .mod-topic-reply .reply-action li{ */
+/*     margin-left: 20px; */
+/* } */
+
+/* .mod-topic-editor-reply{ */
+/*     margin-top: 20px; */
+/* } */
+
+/* .mod-topic-editor-comment{ */
+/*     padding: 20px 45px 0; */
+/* } */
+
+/* .mod-topic-editor-comment .row{ */
+/*     margin-top: 20px; */
+/*     text-align: right; */
+/* } */
+
+/* .mod-topic-editor-comment .row .btn{ */
+/*     margin-left: 20px; */
+/* } */
+
+/* .mod-topic-comments{ */
+/*     background-color: #f8fbfc; */
+/*     border-radius: 3px; */
+/*     margin-bottom: 40px; */
+/*     padding-bottom: 20px; */
+/* } */
+
+/* .mod-topic-comments .comment{ */
+/*     padding: 20px 20px 0 45px; */
+/* } */
+
+/* .mod-topic-comments .comment-actions{ */
+/*     float: right; */
+/* } */
+
+/* .mod-topic-fromboard{ */
+/*     background: #eaf5ea; */
+/*     padding: 20px; */
+/*     margin-top: 40px; */
+/*     margin-bottom: 40px; */
+/* } */
+
+/* .mod-topic-fromboard em{ */
+/*     text-align: center; */
+/*     display: block; */
+/*     font-size: 20px; */
+/*     padding-bottom: 5px; */
+/* } */
+
+/* .page-topic .has-editor{ */
+/*     display: block; */
+/* } */
