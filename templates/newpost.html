@@ -1,0 +1,54 @@
+{% extends "solo.html" %}
+
+{% block title %} {{board.boarddesc}} 发个贴子 (board.boardname) - {{site.SITENAME}} {% endblock %}
+
+{% block bodycls %} page-boards page-boards-newpost{% endblock %}
+{% block header %}
+  <script id="seajsnode" src="{{url_for('static', filename='js/seajs/sea.js')}}"></script>
+  <script src="{{url_for('static', filename='js/herzog.config.js')}}"></script>
+  {% if bsetting.image %}
+    <style> .mod-board-header{ background-image: url("{{bsetting.image}}") } </style>
+  {% endif %}
+{% endblock %}
+
+{% block tail %}
+  <script>
+   seajs.use("page/board");
+  </script>
+{% endblock %}
+
+{% block container %}
+
+  <div class="mod mod-board-header">
+    <div class="custom title">
+    </div>
+  </div>
+
+  <div class="container layout-single row">
+    <div class="primary">
+      <div class="primary-inner">
+        <div class="mod title-mod mod-newpost" data-action="{{url_for('ajax_newtopic')}}" id="editor-newpost">
+          <form method="POST">
+            <input type="hidden" name="boardname" value="{{board.boardname}}"/>
+            <div class="mod-title">
+              <h3>帖个链接</h3>
+            </div>
+            <div class="input-title">
+              <input id="inputer-title" tabindex="0" class="title" name="title" placeholder="在这里输入标题...">
+            </div>
+            <hr/>
+            <div class="input-content">
+              <div class="editarea" tabindex="0" data-placeholder="这里写正文..." contentEditable="true" editarea-content=""></div>
+            </div>
+            <div class="row footer">
+              <div class="inline-list">
+                <li><a tabindex="0" class="btn btn-reverse submit">发表</a></li>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
