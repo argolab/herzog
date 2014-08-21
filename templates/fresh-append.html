@@ -1,0 +1,27 @@
+{% for bs in fresh %}
+  <div class="fresh">
+    <div class="col-left">
+      <span class="boardname">{{bs.boardname}}</span>
+    </div>
+    <div class="col-main posts">
+      {% for p in bs.posts %}
+        {% if loop.index == 4 %}
+          <div class="more"><a href="javascript:;" data-do="more">查看被折叠的话题</a></div>
+          <div class="posts-more">
+        {% endif %}
+        <div class="post">
+          <span></span>
+          <a class="title text" href="{{url_for('topic', tid=p.tid)}}" title="{{p.title}}">{{p.title}}</a>
+          <span class="col-right text-alt time">{{p.lastupdate|nicetime}}</span>
+        </div>
+      {% endfor %}
+      <hr/>
+      {% if bs.posts|length > 3 %}
+          </div>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
+{% if score >= 0 %}
+<a href="javascript:;" data-do="loadmore" data-cursor="{{score}}" class="loadmore">查看较老的话题</a>
+{% endif %}
