@@ -78,7 +78,7 @@ secdatas = [
 ]
 
 @app.route('/b/all')
-def allboard():
+def allboards():
     boards = getboards()
     sections = groupup(boards)
     bs = get_all_bsetting()
