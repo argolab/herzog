@@ -41,11 +41,11 @@ def board(boardname):
                           "  WHERE boardname=%s"
                           "  ORDER BY score DESC LIMIT 16", userid, boardname)
     else :
-        topics = db.get(u"SELECT tid, owner, title, score, v, lastupdate,"
-                        "   lastreply, replynum, partnum, upvote, fromapp,"
-                        "   flag, content, upvote, boardname FROM herzog_topic"
-                        " WHERE boardname=%s ORDER BY score DESC LIMIT 16", boardname)
-    if topics and len(topics) == 16 :
+        topics = db.query(u"SELECT tid, owner, title, score, v, lastupdate,"
+                          "   lastreply, replynum, partnum, upvote, fromapp,"
+                          "   flag, content, upvote, boardname FROM herzog_topic"
+                          " WHERE boardname=%s ORDER BY score DESC LIMIT 16", boardname)
+    if len(topics) == 16 :
         score = topics[-1].score
         del topics[15]
     else :
