@@ -1,5 +1,5 @@
 from herzog.base.app import app, session
-from herzog.base.ctx import authed, getclient, getboards
+from herzog.base.ctx import authed, getclient, getboards, getuserid
 from herzog import config
 from herzog.base import flag
 
@@ -28,3 +28,4 @@ def url_for_ann(boardname):
     return ''
 
 app.template_global()(authed)
+app.template_global()(getuserid)

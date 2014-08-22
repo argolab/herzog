@@ -84,6 +84,8 @@
 
       <div class="widgets">
 
+        {% if getuserid() %}
+
         <div class="mod mod-fresh-self">
           <div class="col-left">
             <img class="avatar" src="{{url_for_avatar(authed())}}" title="{{authed()}}"/>
@@ -99,6 +101,8 @@
           </div>
           <hr/>    
         </div>
+
+        {% endif %}
 
         <div class="mod title-mod mod-fresh-topten">
           <div class="mod-title">
