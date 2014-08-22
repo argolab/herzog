@@ -80,6 +80,8 @@ all_api = [
     'do_edit', #(board, title, file, text)
     'do_man', #(board, mode, boxFILENAME, boxFILENAME, ...)
     'showboard', #(board)
+    'allboards',
+    'getmessage'
 ]
 
 for _api in all_api :

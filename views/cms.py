@@ -1,4 +1,4 @@
-from herzog.base import app, getclient, render_template, abort, getfields, ajax_fields_error, authed, getconn
+from herzog.base import app, getclient, render_template, abort, getfields, ajax_fields_error, authed, getconn, json_success, escape
 import json
 
 @app.route('/page/manage')
@@ -38,6 +38,14 @@ def page_preview() :
                            pagename=form['pagename'],
                            **ds)
 
+@app.route('/ajax/resource/edit/<path:resname>')
+def edit_resource(resname):
+    userid = authed()
+    res = getconn().get(u"SELECT * FROM herzog_cms_resource"
+                        "  WHERE resname=%s", resname)
+    res['ds'] = res['ds']
+    return render_template('edit_resource.html', res=res)
+
 @app.route('/ajax/resource/update', methods=["POST"])
 @ajax_fields_error
 def update_resource():
@@ -48,7 +56,7 @@ def update_resource():
     except ValueError :
         return json_error(3, "Wrong json value")
     db = getconn()
-    rid = db.query(u"SELECT rid FROM herzog_cms_resource"
+    rid = db.get(u"SELECT rid FROM herzog_cms_resource"
                    "  WHERE resname=%s", form['resname'])
     if rid :
         db.execute(u"UPDATE herzog_cms_resource SET"
@@ -57,9 +65,9 @@ def update_resource():
                    form['resname'], form['ds'], userid, rid.rid)
     else :
         db.execute(u"INSERT INTO herzog_cms_resource"
-                   "  resname, ds, lastuserid VALUES"
+                   "  (resname, ds, lastuserid) VALUES"
                    "  (%s, %s, %s)", form['resname'], form['ds'],
-                   form['userid'])
+                   userid)
     return json_success()
 
 @app.route('/ajax/page/update', methods=["POST"])

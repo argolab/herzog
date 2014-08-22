@@ -8,22 +8,35 @@
 }
 
 .page-boards .primary{
-    margin: -100px -19px 0 -19px;
-    background-color: #fff;
-    background-image: url('../img/boardshadow.png') no-repeat;
+    margin: -95px -19px 0 -19px;
+    padding: 0 19px;
+    background-image: url('../img/boardshadow.png');
+    background-repeat: no-repeat;
+}
+
+.page-boards .primary-inner{
+    background: #fff;
+    border: 1px solid #f0f0f0;
     border-top: 4px solid #68b38c;
 }
+
+.layout-single .primary{
+    margin-left: 84px;
+    width: 840px;
+    margin-top: -240px;
+}    
 
 /* mod board header */
 
 .mod-board-header{
     background-position: center 0;
-    height: 390px;
+    height: 365px;
     width: 100%;
+    z-index: -1;
 }
     
 .mod-board-header .title{
-    height: 390px;
+    height: 365px;
     left: 0;
     right: 0;
     text-align: center;
@@ -31,10 +44,13 @@
 }
 
 .mod-board-header h2{
-    padding-top: 120px;
+    margin-top: 145px;
+    margin-bottom: 20px;
     color: #f0f0f0;
     color: rgba(255, 255, 255, .8);
     font-size: 30px;
+    line-height: 30px;
+    vertical-align: bottom;
     text-shadow: 0 0 1px #aaa;
 }
 
@@ -45,26 +61,34 @@
 
 /* mod board postlist */
 
-.mod-board-postlist .board-actions li{
-    margin-right : 15px;
-}
+.mod-board-postlist .header{
+    line-height: 30px;
+    margin: 30px 42px 15px;
+}    
 
-.mod-board-postlist .tabs{
-    margin-left: 40px;
-}
-
-.mod-board-postlist .col-main{
-    margin-left: 100px;
-}
-    
-.mod-board-postlist .r1{
-    margin-top: 8px;
-    line-height: 32px;
+.mod-board-postlist .topic{
     position: relative;
 }
 
-.mod-board-postlist .r2 a{
+.mod-board-postlist .avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin-left: 42px;
+}
+
+.mod-board-postlist .col-main{
+    margin-left: 102px;
+}
+    
+.mod-board-postlist .r1{
+    margin-top: 15px;
     line-height: 40px;
+}
+
+.mod-board-postlist .r2{
+    line-height: 30px;
+    margin-bottom: 15px;
 }
 
 .mod-board-postlist .time{
@@ -77,48 +101,55 @@
 }
 
 .mod-board-postlist .board-pager{
-    margin: 30px 40px 40px;
+    margin: 30px 42px;
 }
 
 /* mod board info */
 
 .mod-board-info{
-    margin-bottom: 30px;
+    margin: 20px 0 30px 0;
 }
 
 .mod-board-info img{
     width: 60px;
     height: 60px;
-    border-radius: 50%;
+    border-radius: 100%;
 }
 
 .mod-board-info .col-main{
     margin-left: 80px;
 }
 
-.mod-board-info .boardtxt{
+.mod-board-info .boarddesc{
     font-size: 18px;
+    margin-top: 10px;
+    line-height: 20px;
+    margin-bottom: 15px;
 }
 
 .mod-board-info .bm{
-    margin-top: 10px;
+    line-height: 30px;
 }
 
 /* mod board note */
 
 .widgets .mod-board-note{
-    margin-bottom: 40px;;
+    margin-bottom: 40px;
+    line-height: 20px;
 }
 
 /* mod board star-it */
 
-.widgets .mod-board-starit{
-    margin-bottom: 10px;
+.mod-board-starit .btns{
+    margin: 15px 0;
+    line-height: 30px;
+    text-align: center;
 }
 
-.mod-board-starit .btns{
+.mod-board-starit .text1{
+    line-height: 20px;
+    margin-bottom: 30px;
     text-align: center;
-    margin: 15px 0;;
 }
 
 /* mod board ann */
@@ -127,12 +158,13 @@
     background: #eaf5ea;
     font-size: 13px;
     padding: 20px 0;
+    line-height: 40px;
     text-align: center;
+    margin-bottom: 35px;
 }
 
 .mod-board-ann em{
     font-size: 18px;
-    margin: 0 5px;
 }
     
 .mod-board-ann a{
@@ -141,10 +173,131 @@
 
 /* hr */
 
-
 .page-boards .aside hr{
     background-image: url("../img/hr210.png");
     background-color: transparent;
     margin: 30px 0;
 }    
+    
+/* mod newpost */
+
+.mod-newpost .mod-title h3{
+    margin-top: 20px;
+    line-height: 15px;
+    margin-bottom: 15px;
+}
+
+.mod-newpost .mod-title{
+    margin-bottom: 35px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.mod-newpost .input-title{
+    margin: 0 82px 30px;
+    border-left: 4px solid #9fdca0;
+    line-height: 40px;
+}
+
+.mod-newpost .input-title .title{
+    margin-bottom: 20px;
+    border: 0;
+    box-shadow: none;
+    outline: none;
+    margin-left: 1em;
+}
+
+.mod-newpost .input-content{
+    margin: 30px 82px 0;
+}
+
+.mod-newpost .editarea{
+    min-height: 420px;
+    margin: 0 1em;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+}
+    
+.mod-newpost .footer{
+    margin: 25px 82px 35px;
+    line-height: 30px;
+}
+
+.mod-board-ad img{
+    width: 100%;
+}
+
+/*============ page section ============ */
+
+.mod-sections-tabs .list1{
+    padding: 0 20px;
+    margin-top: 5px;
+    margin-right: -60px;
+}
+
+.mod-sections-tabs .list1 li{
+    margin-bottom: 35px;
+    line-height: 15px;
+    width: 125px;
+}
+
+.mod-sections-tabs .header{
+    margin: 15px 20px;
+    line-height: 15px;
+}
+
+.mod-sections-tabs hr{
+    margin-bottom: 35px;
+}
+
+.mod-sections-tabs .col1{
+    margin-left: 20px;
+    width: 45px;
+    min-height: 1px;
+    content: "";
+}
+
+.mod-sections-tabs .board{
+    margin-bottom: 60px;
+}
+
+.mod-sections-tabs .board img{
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+}
+
+.mod-sections-tabs .board .col2{
+    width: 160px;
+    margin-right: 35px;
+    text-align: right;
+}
+    
+.mod-sections-tabs .boarddesc{
+    line-height: 15px;
+    margin-bottom: 15px;
+}
+
+.mod-sections-tabs .boardname{
+    line-height: 10px;
+}
+
+.mod-sections-tabs .col3{
+    border-left: 2px solid #9fdca0;
+}
+    
+.mod-sections-tabs .outer{
+    display: table;
+}
+
+.mod-sections-tabs .inner{
+    display: table-cell;
+    line-height: 20px;
+    width: 420px;
+    padding-left: 20px;
+    height: 45px;
+    vertical-align: middle;
+}
+
     

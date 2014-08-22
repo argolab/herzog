@@ -1,80 +1,83 @@
 {% extends "solo.html" %}
 
-{% block title %} {{board.boardtxt}} (board.boardname) - {{site.SITENAME}} {% endblock %}
+{% block title %} {{board.boarddesc}} ({{board.boardname}}) - {{site.SITENAME}} {% endblock %}
 
 {% block bodycls %} page-boards{% endblock %}
 {% block header %}
-  <style> .mod-board-header{ background-image: url("{{bsetting.image}}") } </style>
+  <script id="seajsnode" src="{{url_for('static', filename='js/seajs/sea.js')}}"></script>
+  <script src="{{url_for('static', filename='js/herzog.config.js')}}"></script>
+  {% if bsetting and bsetting.info.img %}
+    <style> .mod-board-header{ background-image: url("{{bsetting.info.img}}") } </style>
+  {% endif %}
+{% endblock %}
+
+{% block tail %}
+  <script>
+   seajs.use("page/board");
+  </script>
 {% endblock %}
 
 {% block container %}
 
   <div class="mod mod-board-header">
     <div class="custom title">
-      <h2>{{board.boardtxt}} <small>{{board.boardname}}</small></h2>
-      <a href="#" title="点击收藏这个看版" class="btn btn-reverse"">收藏这个看版</a>
+      <h2>{{board.boarddesc}} <small>{{board.boardname}}</small></h2>
+      <a href="javascript:;" data-do="star" title="点击收藏这个看版" class="btn btn-reverse"">收藏这个看版</a>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container row">
     
     <div class="primary">
 
-      <div class="mod-board-postlist mod">
-        
-        <div class="row bar">
+      <div class="primary-inner row">
 
-          <ul class="board-actions list col1">
-            <li><a class="btn" href="#" title="点击发帖">说点啥</a></li>
-            <li><a class="btn" href="#" title="分享与讨论">分享与讨论</a></li>
-          </ul>
+        <div class="mod-board-postlist mod">
           
-          <ul class="tabs col2">
-            <li><a class="active" href="#" title="新鲜发言">新鲜发言</a></li>
-            <li class="sep"></li>
-            <li><a href="#" title="精选文摘">精选文摘</a></li>
-            </li>
-          </ul>
-        </div>
+          <div class="row header">
+            <ul class="inline-list">
+              <li><a class="btn" target="_blank" href="{{url_for('newpost', boardname=board.boardname)}}" title="点击发帖">说点啥</a></li>
+              <li><a class="btn" target="_blank" href="{{url_for('newpost', boardname=board.boardname)}}?tpl=share" title="分享与讨论">分享与讨论</a></li>
+            </ul>
+          </div>
 
-        <hr/>
-        
-        <div class="postlist row">
-          {% for p in topics %}
-            <div class="topic item" id="t{{p.tid}}">
-              <div class="col-left">
-                <img class="avatar" src="{{url_for_avatar(p.owner)}}" title="{{p.owner}}"/>
-              </div>
-              <div class="col-main">
-                <div class="text r1">
-                  由 <a class="text-iter" href="{{url_for('user', userid=p.owner)}}" title="{{p.owner}}">{{p.owner}}</a> 发起{% if p.replynum > 0 %}， 收到 {{p.replynum}} 个回复{% endif %}{% if p.upvote > 0 %}， {{p.upvote}} 个值得一读{% endif %}
-                  <span class="col-right time">{{p.lastupdate|nicetime}}</span>
+          <hr/>
+          
+          <div class="postlist row">
+            {% for p in topics %}
+              <div class="topic" id="t{{p.tid}}">
+                <div class="col-left">
+                  <img class="avatar" src="{{url_for_avatar(p.owner)}}" title="{{p.owner}}"/>
                 </div>
-                <div class="text">
-                  <span class="icon-ci{% if p.read %}r{% elif p.partnum > 100 %}2{% elif p.partnum > 50 %}1{% else %}0{% endif %}"></span>
-                  <a class="text-strong" href="{{url_for('topic', tid=p.tid)}}" title="{{ p.title }}">
-                    {{p.title}}
-                  </a>
+                <div class="col-main">
+                  <div class="text r1">
+                    由 <a class="text-iter" href="{{url_for('user', userid=p.owner)}}" title="{{p.owner}}">{{p.owner}}</a> 发起{% if p.replynum > 0 %}， 收到 {{p.replynum}} 个回复{% endif %}{% if p.upvote > 0 %}， {{p.upvote}} 个赞{% endif %}
+                    <span class="col-right time">{{p.lastupdate|nicetime}}</span>
+                  </div>
+                  <div class="text r2">
+                    <span class="icon-ci{% if p.readtime and (p.readtime >= p.lastupdate) %}r{% elif p.partnum > 100 %}2{% elif p.partnum > 50 %}1{% else %}0{% endif %}"></span>
+                    <a class="text-strong" href="{{url_for('topic', tid=p.tid)}}" title="{{ p.title }}">{{p.title}}</a>
+                  </div>
                 </div>
+                <hr/>
               </div>
-              <hr/>
+            {% endfor %}
+            <div class="board-pager">
+              <a title="点击查看之前的话题" href="javascript:;" data-do="loadmore" data-cursor="{{score}}" class="btn">之前的</a>
             </div>
-          {% endfor %}
-          <div class="board-pager">
-            <a title="点击查看之前的话题" href="#" class="btn">之前的</a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="aside right">
+    <div class="aside">
       <div class="widgets">
         <div class="mod mod-board-info">
           <div class="col-left">
-            <img src="{{bsetting.avatar}}{{url_for_avatar('ltaoist')}}" title="{{board.boardname}}" />
+            <img src="{{bsetting and bsetting.avatar.img}}" title="{{board.boardname}}" />
           </div>
           <div class="col-main">
-            <span class="boardtxt">{{board.boardtxt}}</span><span class="text-alt text-normal">{{board.boardname}}</span>
+            <span class="boarddesc">{{board.boarddesc}}</span><span class="text-alt text-normal">{{board.boardname}}</span>
             <div class="bm">
               <span class="text-alt">版主：</span>
               <ul class="text-inter text-small">
@@ -87,17 +90,14 @@
         </div>
 
         <div class="mod mod-board-note text-small">
-          呵呵，这里就是版主要说的话了。。。
-          吃饭要吃鱼肚子
-          和蛋
-          {{bsetting.note}}
+          {{bsetting and bsetting.info.text}}
         </div>
 
         <div class="mod mod-board-starit">
-          快和 {{bsetting.starnum}}1102 个小伙伴一起
           <div class="btns">
             <a class="btn" href="#">收藏这个看版</a>
           </div>
+          <div class="text-alt text-small text1">收藏本版后可在全部看版中找到</div>
         </div>
 
         <hr>
@@ -106,20 +106,21 @@
           去 <em><a title="进入精华区 href="{{url_for_ann(board.boardname)}}">精华区</a></em> 挖掘宝藏！
         </div>
 
-        {% if bsetting.adhref %}
+        {% if bsetting and bseting.ad.href %}
           <div class="mod mod-board-ad">
-            <a title="广告" href="{{bsetting.adhref}}">
-              <img src="{{ bsetting.adimg }}"/>
+            <a title="广告" href="{{bsetting.ad.href}}">
+              <img src="{{ bsetting.ad.img }}"/>
             </a>
           </div>
         {% endif %}
 
-        <div class="mod mod-link0 text-iter">
-          <ul>
+        <div class="mod">
+          <ul class="misc-list">
             <li><a title="求助" href="#">我要求助</a></li>
             <li><a title="投诉" href="#">我要投诉</a></li>
           </ul>
         </div>
+
       </div>
 
     </div>

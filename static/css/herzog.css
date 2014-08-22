@@ -59,13 +59,15 @@ body{
     float: right;
 }
 
-.col-left, .col-right{
+.col-left{
     position: absolute;
     top: 0;
     left: 0;
 }
 
 .col-right{
+    position: absolute;
+    top: 0;
     right: 0;
 }
 
@@ -98,12 +100,12 @@ body{
 /* form */
 
 input{
-    color: #c5d4d4;
+    color: #333;
 }
 
 /* inline */
 
-a.text, .text a{
+a.text, .text a, em.text{
     color: #465555;
 }
 
@@ -157,22 +159,34 @@ a.text-iter2, .text-iter2{
 
 .topic-list{
     display: table;
+    width: 100%;
 }
 
 .topic-list .outer{
-    display: table-row;
-    padding-bottom: 25px;
+    display: table;
+    margin-bottom: 25px;
 }
 
 .topic-list .inner{
     display: table-cell;
-    text-align: center;
     line-height: 18px;
+    height: 35px;
+    vertical-align: middle;
 }
 
+.topic-list .avatar{
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    vertical-align: middle;
+    margin-right: 1em;
+}
 
-    
-    
+.topic-list a{
+    max-height: 35px;
+    overflow: hidden;
+    word-break: break-all;
+}
 
 /* dropdown */
 
@@ -277,16 +291,17 @@ a.text-iter2, .text-iter2{
 
 /* /\* mod link0 *\/ */
 
-/* .mod-link0{ */
-/*     text-align: center; */
-/* } */
+.misc-list{
+    text-align: center;
+}
 
-/* .mod-link0 a{ */
-/*     line-height: 36px; */
-/*     display: block; */
-/*     padding-top: 12px; */
-/*     background: url('../img/hr210.png') no-repeat bottom; */
-/* } */
+.misc-list a{
+    line-height: 15px;
+    display: block;
+    padding-top: 25px;
+    padding-bottom: 10px;
+    background: url('../img/hr210.png') no-repeat bottom;
+}
 
 /* editor */
 

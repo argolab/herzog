@@ -1,0 +1,73 @@
+{% extends "solo.html" %}
+
+{% block bodycls %} page-index{% endblock %}
+
+
+{% block header %}
+  <script id="seajsnode" src="{{url_for('static', filename='js/seajs/sea.js')}}"></script>
+  <script src="{{url_for('static', filename='js/herzog.config.js')}}"></script>
+    <style>
+     .title{
+       margin: 40px 0 20px;
+     }
+   .part{
+     position: relative;
+   }
+   .partname {
+     position: absolute;
+     width : 100px;
+     padding: 10px;
+     line-height: 25px;
+   }
+   .fields{
+     padding-left: 100px;
+   }
+   .field{
+     padding: 10px;
+     display: inline-block;
+   }
+   .field-text{
+     vertical-align: top;
+   }
+   .field-list, .field-text{
+     display: block;
+   }
+   .field-list{
+   }
+   .list-inputer{
+     padding: 10px;
+     padding: 10px 0;
+     border-left: 4px solid #f0f0f0;
+   }
+   .item-wrapper{
+     border-bottom: 1px solid #f0f0f0;
+     padding-bottom: 10px;
+     padding-bottom: 10px;
+   }
+   .item-add, .item-remove{
+     padding-left: 10px;
+   }
+   .desc{
+     color: #ccc;
+   }
+  </style>
+
+{% endblock %}
+
+{% block tail %}
+  <script>
+   INIT_DATA = ({{res.ds|safe}});
+   seajs.use("page/edit_resource");
+  </script>
+{% endblock %}
+
+{% block container %}
+  <div class="container row">
+    <div id="box" data-action="{{url_for('update_resource')}}">
+      <input type="hidden" name="resname" value="{{res.resname}}" />
+      <pre class="title">{{res.resname}}</pre>
+      <div id="re"></div>
+      <div class="btn submit">更新</div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,5 +1,9 @@
 define(function(require, exports, module){
+
     require('jquery');
+
+    var ResourceEditor = require('ResourceEditor');
+
     var Form = require('form');
     var handler = {
         more : function(data, t){
@@ -21,19 +25,24 @@ define(function(require, exports, module){
     });
     $(function(){
         new Form({
-            el : '#editor-newpost',
+            el : '#add-resource',
             cookParams : function(params){
-                params.content = this.el.find('div.editarea').html();
+                try{
+                    ResourceEditor.verify($.parseJSON(params.ds));
+                }catch(e){
+                    alert(JSON.stringify(e));
+                    throw e;
+                };
             },
             onsuccess : function(data){
-                location.href = "/t/" + data.tid;
+                alert('添加成功！');
+                location.reload(true);
             },
             onfail : function(data){
                 console.log(data);
                 alert(data.msg);
             }
         });
-        $('#inputer-title').focus();
     });
-});
 
+});

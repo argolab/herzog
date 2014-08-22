@@ -1,30 +1,34 @@
-.page-fresh .primary{
+.page-index .primary{
     width: 714px;
     margin-top: 40px;
 }
 
-.page-fresh .aside{
+.page-index .aside{
     width: 210px;
     margin-top: 40px;
     margin-left: 84px;
 }
 
-.page-fresh .primary hr{
+.page-index .primary hr{
     background: transparent url('../img/hr714.png') no-repeat bottom;
 }
 
-.page-fresh .aside hr{
+.page-index .aside hr{
     background: transparent url("../img/hr210.png") no-repeat bottom;
-    margin: 30px 0;
+    margin: 15px 0;
 }    
     
+.page-index .primary,
+.page-index .aside{
+    margin-top: 40px;
+}
 
 /* mod fresh pageheader */
 
 .mod-fresh-pageheader{
-    max-height: 200px;
+    max-height: 250px;
     overflow: hidden;
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 }
 
 .mod-fresh-pageheader img{
@@ -36,9 +40,10 @@
 }    
 
 .mod-fresh-pageheader span{
-    bottom: 10px;
+    bottom: 0;
     right: 10px;
     color: #ccc;
+    line-height: 40px;
     text-shadow: 0 0 2px #333;
 }
 
@@ -48,8 +53,12 @@
     margin-bottom: 50px;
 }
 
+.mod-fresh-goods .list1{
+    margin: 0 42px;
+}
+
 .mod-fresh-goods li{
-    width: 120px;
+    width: 84px;
 }
 
 .mod-fresh-goods .list a{
@@ -61,46 +70,52 @@
 .mod-fresh-goods .more{
     float: right;
     color: #78d0b5;
-    line-height: 40px;
+    line-height: 30px;
+    margin-bottom: 20px;
 }
 
 /* mod fresh freshlist */
 
-.mod-fresh-freshlist .boardname{
-    width: 80px;
+.mod-fresh-freshlist .col-left{
+    width: 84px;
     text-align: right;
     font-size: 14px;
-    margin-top: 10px;
     display: inline-block;
 }
 
+.mod-fresh-freshlist .fresh{
+    position: relative;
+}
+
 .mod-fresh-freshlist .posts{
-    margin-left: 120px;
+    margin-left: 126px;
 }
 
 .mod-fresh-freshlist hr{
     background: transparent url("../img/hr594.png") no-repeat bottom;
-    margin: 25px 0;
+    margin: 15px 0;
 }    
 
 .mod-fresh-freshlist .post{
-    margin-bottom: 20px;
-    margin-top: 10px;
+    position: relative;
+    margin: 15px 0;
+    line-height: 20px;
 }
 
 .mod-fresh-freshlist .time{
     margin-right: 10px;
+    float: right;
 }
 
 .mod-fresh-freshlist .more{
     text-align: center;
     background: transparent url("../img/hr594.png") no-repeat center;
     line-height: 1px;
-    margin: 40px 0;
+    margin: 25px 0;
 }
 
 .mod-fresh-freshlist .more a{
-    color: #78d0b5;
+    color: #89b5de;
     font-size: 12px;
     background: #fff;
     padding: 0 20px;
@@ -112,38 +127,42 @@
     color: #9fdca0;
     border: 1px solid #9fdca0;
     display: block;
-    margin-top: 20px;
+    margin-top: 25px;;
+    margin-bottom: 65px;
 }
 
 .mod-fresh-freshlist .posts-more{
     display: none;
 }
 
+.fresh .open .posts-more{
+    display: block;
+}
+
 /* mod fresh self */
 
 .mod-fresh-self{
-    margin-top: 0;
+    margin-bottom: 40px;
 }
 
 .mod-fresh-self .avatar{
-    width: 65px;
-    height: 65px;
+    width: 60px;
+    height: 60px;
     border-radius: 100%;
-    margin-left: 0;
-    margin-top: 0;
 }
 
 .mod-fresh-self .col-main{
-    margin-left: 80px;
+    margin-left: 75px;
 }
 
 .mod-fresh-self .userid{
+    line-height: 30px;
     font-size: 18px;
-    padding-top: 20px;
 }    
 
 .mod-fresh-self .score{
     font-size: 12px;
+    line-height: 25px;
 }
 
 .mod-fresh-self .detail{
@@ -153,7 +172,8 @@
 .mod-fresh-self .detail span{
     font-size: 12px;
     width: 60px;
-    display: inline-block;;
+    display: inline-block;
+    line-height: 10px;
     border-right: 1px solid #ccc;
     margin-right: 8px;
     text-align: center;
@@ -170,32 +190,7 @@
 
 /* mod fresh topten */
 
-.mod-fresh-topten .outer{
-    margin-top: 25px;;
-    display: table;
+.page-index .mod-fresh-topten hr{
+    margin-top: 5px;
+    margin-bottom: 50px;
 }
-
-.mod-fresh-topten .inner{
-    position: relative;
-    display: table-cell;
-    vertical-align: middle;
-    height: 32px;
-}
-
-.mod-fresh-topten img{
-    width: 32px;
-    height: 32px;
-    border-radius: 100%;
-}
-
-.mod-fresh-topten a{
-    padding-left: 45px;
-    display: inline-block;
-    max-height : 30px;
-    overflow: hidden;
-    line-height: 15px;
-    word-break : break-all;
-}
-    
-    
-    

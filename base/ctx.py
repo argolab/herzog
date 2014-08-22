@@ -25,4 +25,14 @@ def authed():
     except KeyError :
         raise FormValidError("Please login first")
 
+def getuserid():
+    return session.get('utmpuserid') or None
 
+def getboards():
+    if not session.has_key('boards_can_read') :
+        data = getclient().allboards()['boards']
+        bs = {}
+        for board in data :
+            bs[board['boardname']] = board
+        session['boards_can_read'] = bs
+    return session['boards_can_read']

@@ -1,11 +1,15 @@
-from herzog.base.app import app
-from herzog.base.ctx import authed
+from herzog.base.app import app, session
+from herzog.base.ctx import authed, getclient, getboards
 from herzog import config
 from herzog.base import flag
 
 @app.context_processor
 def inject_site_config():
     return dict(site=config.SITE, FLAG=flag)
+
+@app.template_filter(name='read_board_perm')
+def read_board_perm(boardname):
+    return boardname in getboards()
 
 @app.template_filter(name='nicetime')
 def nicetime(dt):

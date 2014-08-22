@@ -1,0 +1,97 @@
+{% extends "solo.html" %}
+
+{% block title %} 全部看版 - {{site.SITENAME}} {% endblock %}
+
+{% block bodycls %} page-sections{% endblock %}
+{% block header %}
+  <script id="seajsnode" src="{{url_for('static', filename='js/seajs/sea.js')}}"></script>
+  <script src="{{url_for('static', filename='js/herzog.config.js')}}"></script>
+{% endblock %}
+
+{% block tail %}
+  <script>
+   seajs.use("page/sections");
+  </script>
+{% endblock %}
+
+{% block container %}
+
+  <div class="container layout-simple row">
+    <div class="primary">
+      <div class="mod-sections-tabs title-mod">
+        <div class="mod-title">
+          <h3>全部看版</h3>
+        </div>
+        <div class="row">
+          <ul class="inline-list list1">
+            {% for secname in secdatas %}
+              <li><a href="javascript:;" data-do="go-tab" data-secnum="{{loop.index0}}">[{{loop.index0}}] {{secname}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="tabs-content">
+          {% for secname in secdatas %}
+            <div class="tab{% if loop.index0 == 0 %} open{% endif %}">
+              <div class="header">
+                {{loop.index0}}区 {{secname}}
+              </div>
+              <hr>
+              <div class="content">
+                {% for board in sections[loop.index0] %}
+                  <div class="board row">
+                    <div class="col1">
+                      {% if bs[board.boardname] %}
+                        <img src="{{bs[board.boardname].avatar.img}}" title="{{board.boarddesc}}"/>
+                      {% endif %}
+                    </div>
+                    <div class="col2">
+                      <div class="boarddesc">{{board.boarddesc}}</div>
+                      <div class="boardname text-alt">{{board.boardname}}</div>
+                    </div>
+                    <div class="col3">
+                      <div class="outer">
+                        <div class="inner">
+                          {% if bs[board.boardname] %}
+                            {{bs[board.boardname].info.text}}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>                  
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="aside">
+
+      <div class="widgets">
+        {% if msg and msg.fav %}
+          <div class="mod title-mod mod-sections-fav">
+            <div class="mod-title">
+              <h3>收藏夹</h3>
+            </div>
+            <ul class="list1">
+              {% for b,n in msg.fav.items() %}
+                <li><a href="{{url_for('board', boardname=b)}}">{{boards[b].boarddesc}}</a></li>
+              {% endfor %}
+            </ul>            
+          </div>
+        {% endif %}
+
+        <div class="mod">
+          <ul class="misc-list">
+            <li><a title="求助" href="#">全站精华区</a></li>
+            <li><a title="申请版主" href="#">我要做版主</a></li>
+            <li><a title="开设新看版" href="#">我要开新版</a></li>
+          </ul>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+
+{% endblock %}

@@ -3,10 +3,12 @@ define(function(require, exports, module){
     var WidgetClass = require('widget');
 
     var Form = WidgetClass({
+        validator : {
+        },
         _events : {
             '[name]' : {
                 'change' : function(e, target){
-                    var name = e.attr('name');
+                    var name = $(target).attr('name');
                     if(this.validator.hasOwnProperty(name)){
                         if(!this.validator[name].apply(this, target)){
                             this.disableSubmit();
@@ -20,7 +22,7 @@ define(function(require, exports, module){
                     this.submit();
                 }
             },
-            'div.submit' : {
+            '.submit' : {
                 'click' : function(e, target){
                     e.preventDefault();
                     this.submit();
@@ -35,14 +37,11 @@ define(function(require, exports, module){
         enableSubmit : function(){
         },
         dumpField : function(d){
+            console.log(d);
             if(typeof d == 'string'){
                 d = this.el[0].getElementsByName(d);
             }
-            if(d.tagName == 'TEXTAREA'){
-                return d.innerHTML;
-            }else{
-                return d.value;
-            }
+            return d.value;
         },
         submit : function(){
             var action = this.el.data('action') || this._options.action
@@ -53,7 +52,7 @@ define(function(require, exports, module){
             var params = {};
             var self = this;
             self.el.find('[name]').each(function(index, element){
-                params[element.attr('name')] = self.dumpField(element);
+                params[$(element).attr('name')] = self.dumpField(element);
             });
             if(self.cookParams){
                 params = self.cookParams.call(this, params) || params;

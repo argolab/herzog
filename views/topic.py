@@ -1,7 +1,8 @@
 from herzog.base import (
     app, render_template, request, authed, getfields,
     ajax_fields_error, json_success, FormValidError,
-    request, getconn, abort, json_success, escape
+    request, getconn, abort, json_success, escape,
+    getboards
 )
 
 from herzog.base.template_helper import postHtml, url_for_avatar
@@ -36,10 +37,10 @@ def topic(tid):
     db = getconn()
     userid = authed()
     if userid :
-        topic = db.get(u"SELECT herzog_topic.tid, owner, title, score, v,"
+        topic = db.get(u"SELECT herzog_topic.tid as tid, owner, title, score, v,"
                        "  lastupdate, lastreply, replynum, partnum, upvote,"
                        "  fromapp, herzog_topic.flag, content, upvote, boardname,"
-                       "  herzog_topicship.flag as tsflag FROM herzog_topic"
+                       "  herzog_topicship.flag as tsflag, readtime FROM herzog_topic"
                        " LEFT JOIN herzog_topicship"
                        " ON herzog_topicship.tid=herzog_topic.tid"
                        "     AND herzog_topicship.userid=%s"
@@ -77,9 +78,20 @@ def topic(tid):
             replys.append(r)
         else :
             lastcomments.append(r)
-
-        
+    topic['boarddesc'] = getboards()[topic['boardname']]['boarddesc']
     return render_template('topic.html', topic=topic, replys=replys)
+
+@app.route('/newpost/<boardname>')
+def newpost(boardname):
+    boards = getboards()
+    if boardname not in boards :
+        abort(404)
+    bsetting = {
+        "image" : "/static/img/85.jpg"
+    }
+    tpl = request.form.get('template', None)
+    return render_template('newpost.html', bsetting=bsetting,
+                           board=boards[boardname])
 
 @app.route('/ajax/reply')
 @ajax_fields_error
