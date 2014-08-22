@@ -16,6 +16,10 @@ def groupup(topics) :
         d[ind[t.boardname]]['posts'].append(t)
     return d
 
+@app.route('/!')
+def testpage():
+    return render_template('test.html')
+
 @app.route('/')
 def index():
     db = getconn()
