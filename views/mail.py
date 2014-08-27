@@ -13,7 +13,7 @@ def mail():
     offset = request.args.get('offset', 1)
     mails = getclient().listmails(offset=offset, limit=20)
     if 'error' in mails :
-        return render_template('mailstatus.html', **ret)
+        return render_template('mailstatus.html', **mails)
     mails['offset'] = int(offset)
     return render_template('mail.html', limit=20, userid=userid, **mails)
 

@@ -15,34 +15,36 @@ RE_AT = re.compile(r'(?:^| )@(\w{2,20})')
 
 @reply.after
 def send_reply_notification(ret, userid, tid, *args, **kwargs) :
+    print 1
     db = getconn()
-    touserid = db.get(u"SELECT userid, title FROM herzog_topic"
+    touserid = db.get(u"SELECT owner, title FROM herzog_topic"
                       "  WHERE tid=%s", tid)
     params = '%s\n%s\n%s\n%s' % (touserid.title.replace('\n', ' '),
-                                 authed(), tid, ret['rid'])
+                                 userid, tid, ret['rid'])
     now = getnow()
     db.execute(u"INSERT INTO herzog_notification"
                "  (userid, t, params, s, lastupdate)"
                " VALUES (%s, %s, %s, %s, %s)",
-               touserid.userid, TYPE_REPLY, params, tid, now)
+               touserid.owner, TYPE_REPLY, params, tid, now)
     
 @topic.after
 @reply.after
 @comment.after
 def send_at_notification(ret, *args, **kwargs) :
     db = getconn()
-    if 'tid' in ret :
+    print ret, kwargs
+    if not 'rid' in ret :
         tid = ret['tid']
         title = kwargs['title']
         rid = 0
     else :
-        tid = kwargs['tid']
+        tid = ret.get('tid') or kwargs['tid']
         rid = ret['rid']
         title = db.get(u"SELECT title FROM herzog_topic"
                        "  WHERE tid=%s", tid)
         title = title['title']
     params = '%s\n%s\n%s\n%s' % (title.replace('\n', ' '),
-                                 authed(), tid, rid)
+                                 kwargs['userid'], tid, rid)
     touserids = RE_AT.findall(kwargs['content'])[:5]
     cli = getclient()
     now = getnow()
@@ -54,7 +56,7 @@ def send_at_notification(ret, *args, **kwargs) :
             continue
         db.execute(u"INSERT INTO herzog_notification"
                    "  (userid, t, params, s, lastupdate)"
-                   " VALUES (%s, %s, %s, %s, now)",
+                   " VALUES (%s, %s, %s, %s, %s)",
                    touserid, TYPE_AT, params, tid, now)
 
 @upvote.after
@@ -75,7 +77,7 @@ def send_upvote_notification(ret, userid, tid=None, rid=None, *args, **kwargs) :
         touserid = title['owner']
         title = title['title']
     params = '%s\n%s\n%s\n%s' % (title.replace('\n', ' '),
-                                 authed(), tid, rid)
+                                 kwargs['userid'], tid, rid)
     cli = getclient()
     touserid = cli.userexists(userid=touserid)
     now = getnow()
@@ -116,19 +118,24 @@ def notification():
                    " VALUES (%s, %s, %s)",
                    userid, now, now)
     
-    return json_success(notification=notification, touch=touch)
+    return render_template('notification.html', notification=notification,
+                           touch=touch)
 
 @app.route('/starpost')
 def starpost():
+    try :
+        offset = int(request.args.get('offset', 0))
+    except:
+        offset = 0    
     userid = authed()
     db = getconn()
     starpost = db.query(u"SELECT herzog_topic.tid,title"
                         " FROM herzog_topic INNER JOIN herzog_topicship"
                         " ON herzog_topic.tid = herzog_topicship.tid"
-                        " WHERE herzog_topicship.userid=%s AND"
+                        " WHERE herzog_topicship.userid=%%s AND"
                         "   herzog_topicship.flag & 8"
                         " ORDER BY herzog_topic.lastreply DESC"
-                        " LIMIT 15", userid)
+                        " LIMIT %s, 15" % offset, userid)
 
     # update touch time
     touch = db.get(u"SELECT touch_starpost FROM herzog_userdata"
@@ -143,7 +150,7 @@ def starpost():
                    "  (userid, touch_notification, touch_starpost)"
                    " VALUES (%s, %s, %s)", userid, now, now)
 
-    return json_success(starpost=starpost, touch=touch)
+    return render_template('starpost.html', starpost=starpost, touch=touch)
 
 @app.route('/ajax/message')
 def message():

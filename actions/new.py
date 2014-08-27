@@ -37,7 +37,7 @@ def reply(userid, tid, content, fromaddr, time=None, fromapp='', *ps) :
     db.execute(u"UPDATE herzog_topic SET lastreply=%s WHERE tid=%s",
                time, tid)
 
-    return dict(rid=rid)
+    return dict(rid=rid, tid=tid)
 
 @action
 def comment(userid, replyid, content, fromaddr, time=None, fromapp='', *ps) :

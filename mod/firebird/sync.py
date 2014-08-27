@@ -6,6 +6,10 @@ from herzog.actions.new import (
     reply as reply0,
     comment as comment0
 )
+from herzog.mod.notification import (
+    send_reply_notification,
+    send_at_notification,
+)
 from herzog.actions.delete import (
     deltopic as deltopic0,
     delreply as delreply0
@@ -26,14 +30,18 @@ logger = getlogger(__name__)
 topic = topic0.prototype()
 topic.after(flag_newtopic)
 topic.after(update_filename_topic)
+topic.after(send_at_notification)
 
 reply = reply0.prototype()
 reply.after(flag_reply)
 reply.after(update_filename_reply)
+reply.after(send_reply_notification)
+reply.after(send_at_notification)
 
 comment = comment0.prototype()
 comment.after(flag_comment)
 comment.after(update_filename_reply)
+comment.after(send_at_notification)
 
 deltopic = deltopic0.prototype()
 delreply = delreply0.prototype()
@@ -72,13 +80,13 @@ def query_postid(b, f) :
 def sync_newtopic(b, f, h):
     a, c, q, t = getfspost(b, f)
     g._filename = f
-    topic(a['owner'], b, a['title'].decode('gbk', 'ignore'),
-          c.decode('gbk', 'ignore'), h)
+    topic(userid=a['owner'], boardname=b,
+          title=a['title'].decode('gbk', 'ignore'),
+          content=c.decode('gbk', 'ignore'), fromaddr=h)
 
 @app.route("/_hfb/post/reply", methods=["POST"])
 @syncor
 def sync_reply(b, f, f0, h):
-    print b, f
     a, c, q, t = getfspost(b, f)
     post = query_postid(b, f0)
     g._filename = f
@@ -87,9 +95,9 @@ def sync_reply(b, f, f0, h):
                      b, f0, h)
         return
     elif post.has_key('tid') :
-        reply(a['owner'], post.tid, c.decode('gbk', 'ignore'), h)
+        reply(userid=a['owner'], tid=post.tid, content=c.decode('gbk', 'ignore'), fromaddr=h)
     elif post.has_key('rid') :
-        comment(a['owner'], post.rid, c.decode('gbk', 'ignore'), h)
+        comment(userid=a['owner'], replyid=post.rid, content=c.decode('gbk', 'ignore'), fromaddr=h)
 
 @app.route("/_hfb/post/cross", methods=["POST"])
 @syncor

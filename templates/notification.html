@@ -1,0 +1,37 @@
+{% extends "solo.html" %}
+
+{% block title %} 我的通知 - {{site.SITENAME}} {% endblock %}
+
+{% block container %}
+  <div class="container layout-simple row">
+    <div class="primary">
+      <div class="mod mod-notification">
+        <div class="header row">
+            <ul class="inline-list">
+              <li><span class="text-iter">我的通知</span></li>
+              <li><a class="text-alt" href="{{url_for('starpost')}}" title="我关注的">我关注的</a></li>
+            </ul>
+        </div>
+      </div>
+      <ul class="list1">
+        {% for n in notification %}
+        <li>
+          {% set params = n.params.split('\n') %}
+          {% if n.t == 1  %}
+            <a title="{{params[1]}}" href="{{url_for('user', userid=params[1])}}">{{params[1]}}</a> 回复了你的贴子 <a href="{{url_for('topic', tid=params[2])}}?focus={{params[3]}}" title="{{params[0]}}">{{params[0]}}</a>
+            <span class="text-alt time">{{n.lastupdate}}</span>
+          {% elif n.t == 2  %}
+            <a title="{{params[1]}}" href="{{url_for('user', userid=params[1])}}">{{params[1]}}</a> 在 <a href="{{url_for('topic', tid=params[2])}}?focus={{params[3]}}" title="{{params[0]}}">{{params[0]}}</a> 中提到了你
+            <span class="text-alt time">{{n.lastupdate}}</span>
+          {% elif n.t == 3  %}
+            <a title="{{params[1]}}" href="{{url_for('user', userid=params[1])}}">{{params[1]}}</a> 在 <a href="{{url_for('topic', tid=params[2])}}?focus={{params[3]}}" title="{{params[0]}}">{{params[0]}}</a> 中为你点了赞
+            <span class="text-alt time">{{n.lastupdate}}</span>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="aside">
+    </div>
+  </div>
+{% endblock %}

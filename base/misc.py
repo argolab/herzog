@@ -75,8 +75,8 @@ def filter_ansi(text) :
     return re_ansi.sub('', text)
 
 def getfspost(boardname, oldfilename):
-    text = filter_ansi(getbbsfile(
-        "boards/%s/%s" % (boardname, oldfilename)).read())
+    text = filter_ansi(open(getbbsfile(
+        "boards/%s/%s" % (boardname, oldfilename))).read())
     # try :
     #     text = filter_ansi(getbbsfile(
     #         "boards/%s/%s" % (boardname, oldfilename)).read())
