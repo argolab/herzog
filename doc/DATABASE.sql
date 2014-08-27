@@ -103,16 +103,17 @@ CREATE TABLE `herzog_replyship` (
 
 CREATE TABLE `herzog_userdata` (
        `userid` varchar(20) NOT NULL,
-       `seenotification` timestamp NOT NULL,
+       `touch_starpost` timestamp NOT NULL,
+       `touch_notification` timestamp NOT NULL,
        PRIMARY KEY (userid)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8 ;
 
 CREATE TABLE `herzog_notification` (
       `nid` int(11) unsigned NOT NULL auto_increment,
       `userid` varchar(20) NOT NULL,
-      `t` int(11) unsigned NOT NULL,
-      `params` varchar(100) NOT NULL,
-      `s` int(11) unsigned NOT NULL,
+      `t` int(11) unsigned NOT NULL,  -- type
+      `params` varchar(100) NOT NULL, -- sep by \n
+      `s` int(11) unsigned NOT NULL,  -- search deps data
       `lastupdate` timestamp NOT NULL,
       
       PRIMARY KEY (nid),

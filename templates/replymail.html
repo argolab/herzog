@@ -1,0 +1,33 @@
+{% extends "solo.html" %}
+
+{% block title %} 写信 - {{site.SITENAME}}{% endblock %}
+
+{% block bodycls %} page-newmail{% endblock %}
+
+{% block container %}
+
+  <div class="container layout-single row">    
+    <div class="mod title-mod">
+      {{mail}}
+      <br>
+      <form method="POST" class="form">
+        <div class="mod-title">
+          <h3>回复信件</h3>
+        </div>
+        <input type="hidden" class="input title" name="filenum" value="{{index}}"/>
+        <input type="hidden" class="input userid" name="userid" value="{{mail.userid}}"/>
+        <div class="inputer">
+          <input type="text" class="input title" name="title" placeholder="信件标题..." value="{{title}}">
+        </div>
+        <hr/>
+        <div class="inputer">
+          <textarea class="textarea context" name="text" placeholder="这里写正文..." contentEditable="true"></textarea>
+        </div>
+        <div class="row footer">
+          <input type="submit" class="btn btn-reverse submit" value="寄出去"/>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

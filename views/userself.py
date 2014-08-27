@@ -25,6 +25,10 @@ def logout():
         return json_success()
     return json_error(4, ret['emsg'])
 
+@app.route('/ajax/updateself', methods=['POST'])
+def updateself():
+    pass
+
 # @app.route('/ajax/setting', methods=["POST"])
 # def setting():
 #     if not session.get('utmpuserid') :

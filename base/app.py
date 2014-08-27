@@ -1,6 +1,7 @@
 from flask import (
     Flask, g, request, session, url_for,
-    abort, render_template, session, jsonify
+    abort, render_template, session, jsonify,
+    redirect
 )
 import herzog.config as config
 

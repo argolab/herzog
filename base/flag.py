@@ -14,3 +14,4 @@ set_flag = lambda a, b : a | b
 
 has_star = lambda a : a & STAR > 0
 has_upvote = lambda a : a & UPVOTE > 0
+

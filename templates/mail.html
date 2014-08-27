@@ -6,43 +6,54 @@
 
 {% block container %}
 
-  {{data}}
-  
-  <div class="container">
+  <div class="container layout-simple row">
     <div class="primary">
-      <div class="mod mod-mailbox">
-        <div class="row">
-          <div class="col1">
-            <strong>{{authed()}}</strong> 的收件箱
-          </div>
+      <div class="mod title-mod mod-mailbox">
+        <div class="mod-title">
+          <h3>信箱</h3>
         </div>
+        <ul class="inline-list list0 custom">
+          <li><a title="写信" class="btn" href="{{url_for('sendmail')}}">写信</a></li>
+        </ul>
         <table class="full-table">
-          <tr>
-            <th>&nbsp;</th>
-            <th>发信人</th>
-            <th>标题</th>
-            <th>时间</th>
-          </tr>
-          {% for m in mails %}
-            <tr class="mail" data-filenum="{{m.filenum}}" data-filename="{{m.filename}}">
-              <td>{%if m.mflag %} m {% endif %}{%if m.nflag %} n {% endif %}{%if m.rflag %} r {% endif %}</td>
-              <td>{{m.sender}}</td>
-              <td><a href="javascript:;">{{m.title}}</a></td>
-              <td>{{m.date}}</td>
+          {% for m in mails %}            
+            <tr class="mail{% if m.sender == userid %} selfsend{% endif %}" data-num="{{m.num}}" data-filename="{{m.filename}}">
+              {% if m.sender == userid %}
+                <td class="t1">&nbsp;</td>
+                <td class="t2"><span class="text-alt">我自己</span></td>
+                <td class="t3"><a href="{{url_for('readmail', filename=m.filename)}}?index={{m.num}}">{{m.title}}</a></td>
+                <td class="t4">&nbsp;</td>
+                <td class="t5"><span class="time text-alt">{{m.date}}</span></td>
+              {% else %}
+                <td class="t1"><img class="avatar" alt="{{m.sender}}" src="{{url_for_avatar(m.sender)}}"/></td>
+                <td class="t2">{{m.sender}}</td>
+                <td class="t3"><a href="{{url_for('readmail', filename=m.filename)}}?index={{m.num}}">{{m.title}}</a></td>
+                <td class="t4">{%if m.mflag %} m {% endif %}{%if m.nflag %} n {% endif %}{%if m.rflag %} r {% endif %}</td>
+                <td class="t5"><span class="time text-alt">{{m.date}}</span></td>
+              {% endif %}
             </tr>
           {% endfor %}
         </table>
+        <div class="footer">
+          {% if offset > limit %}
+            <a class="btn" href="{{url_for('mail')}}?offset={{offset-limit}}">前一页</a>
+          {% else %}
+            <span class="btn disabled">前一页</span>
+          {% endif %}
+          {% if nonext %}
+            <span class="btn disabled">下一页</span>
+          {% else %}
+            <a class="btn" href="{{url_for('mail')}}?offset={{next}}">下一页</a>
+          {% endif %}
+        </div>
       </div>
-      {% if offset > limit %}
-        <a href="{{url_for('mail')}}?offset={{offset-limit}}">前一页</a>
-      {% else %}
-        前一页
-      {% endif %}
-      {% if nonext %}
-        下一页
-      {% else %}
-        <a href="{{url_for('mail')}}?offset={{next}}">下一页</a>
-      {% endif %}
+    </div>
+    <div class="aside">
+      <div class="widgets">
+        <div class="mod mod1">
+          <span class="text-alt">暂不支持发信箱功能，但你发的邮件会自动备份到信箱</span>
+        </div>
+      </div>
     </div>
   </div>
 

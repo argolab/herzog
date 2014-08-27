@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+
 from json import loads as json_parse
 from urllib import urlencode, urlopen
 from herzog.base.log import getlogger
@@ -81,7 +83,8 @@ all_api = [
     'do_man', #(board, mode, boxFILENAME, boxFILENAME, ...)
     'showboard', #(board)
     'allboards',
-    'getmessage'
+    'getmessage',
+    'userexists'
 ]
 
 for _api in all_api :

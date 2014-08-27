@@ -1,0 +1,15 @@
+{% extends "solo.html" %}
+
+{% block container %}
+  <div class="container row layout-simple">
+    <div class="primary">
+      {% if error %}
+        <p>{{emsg}}</p> <br/>
+        <a title="返回刚才的页面" href="javascript: history.go(-1)">返回</a>
+      {% else %}
+        <p>成功！</p>
+        <a title="返回信箱" href="{{url_for('mail')}}">返回</a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

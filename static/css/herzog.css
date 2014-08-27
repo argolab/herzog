@@ -219,6 +219,11 @@ a.text-iter2, .text-iter2{
     color: #fff;
 }
 
+.btn.disabled{
+    border-color: transparent;
+    cursor: default;
+}
+
 /* tabs */
 
 .tabs{

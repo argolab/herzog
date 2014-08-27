@@ -25,14 +25,14 @@
         <div class="row">
           <ul class="inline-list list1">
             {% for secname in secdatas %}
-              <li><a href="javascript:;" data-do="go-tab" data-secnum="{{loop.index0}}">[{{loop.index0}}] {{secname}}</a></li>
+              <li><a id="tb-{{loop.index0}}" class="text" href="javascript:;" data-do="go-tab" data-secnum="{{loop.index0}}">[{{loop.index0}}] {{secname}}</a></li>
             {% endfor %}
           </ul>
         </div>
         <div class="tabs-content">
           {% for secname in secdatas %}
-            <div class="tab{% if loop.index0 == 0 %} open{% endif %}">
-              <div class="header">
+            <div id="tab-{{loop.index0}}" class="tab">
+              <div class="header text-iter">
                 {{loop.index0}}区 {{secname}}
               </div>
               <hr>
@@ -45,7 +45,7 @@
                       {% endif %}
                     </div>
                     <div class="col2">
-                      <div class="boarddesc">{{board.boarddesc}}</div>
+                      <div class="boarddesc"><a class="text" title="{{board.boarddesc}}" target="_blank" href="{{url_for('board', boardname=board.boardname)}}">{{board.boarddesc}}</a></div>
                       <div class="boardname text-alt">{{board.boardname}}</div>
                     </div>
                     <div class="col3">
@@ -75,9 +75,10 @@
             </div>
             <ul class="list1">
               {% for b,n in msg.fav.items() %}
-                <li><a href="{{url_for('board', boardname=b)}}">{{boards[b].boarddesc}}</a></li>
+                <li><a target="_blank" href="{{url_for('board', boardname=b)}}">{{boards[b].boarddesc}}</a></li>
               {% endfor %}
             </ul>            
+            <hr class="fav-hr">
           </div>
         {% endif %}
 

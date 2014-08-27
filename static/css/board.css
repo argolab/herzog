@@ -302,4 +302,24 @@
     vertical-align: middle;
 }
 
+.mod-sections-tabs .tab{
+    display: none;
+}
+
+.mod-sections-tabs .open{
+    display: block;
+}
+
+.mod-sections-fav .list1 li{
+    margin: 35px 0 40px;
+    line-height: 15px;
+}
+
+.mod-sections-fav a{
+    color: #666;
+}
     
+.aside .mod-sections-fav  .fav-hr{
+    margin-top: 50px;
+    margin-bottom: 35px;
+}

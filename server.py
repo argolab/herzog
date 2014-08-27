@@ -6,6 +6,7 @@ import herzog.views.userself
 import herzog.views.fresh
 import herzog.views.topic
 import herzog.views.mail
+import herzog.mod.notification
 import herzog.mod.firebird
 import herzog.views.board
 import herzog.views.user

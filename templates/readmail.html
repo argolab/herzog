@@ -1,0 +1,15 @@
+{% extends "solo.html" %}
+
+{% block container %}
+  <div class="container row layout-simple">
+    <div>
+      <a href="{{url_for('mail')}}" title="返回信箱"> < 返回信箱</a>
+    </div>
+    <br>
+    <pre>{{mail.content}}</pre>
+    <br>
+    <div class="row">
+      <a title="回复此邮件" href="{{url_for('replymail', filename=mail.filename)}}?num={{index}}" class="btn">回复</a>
+    </div>
+  </div>
+{% endblock %}
